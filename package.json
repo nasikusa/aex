@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "build": "webpack --optimize-minimize",
+    "watch": "webpack -w"
+  },
+  "devDependencies": {
+    "ts-loader": "^5.4.3",
+    "typescript": "^3.4.4",
+    "webpack": "^4.30.0",
+    "webpack-cli": "^3.3.1"
+  },
+  "private": true,
+  "dependencies": {
+    "@types/node": "^12.12.11",
+    "es6-promise": "^4.2.8"
+  }
+}
