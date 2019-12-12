@@ -1,18 +1,14 @@
-// import CreateLayer from './createLayer';
+import CreateLayer from './createLayer';
+import OpenWeb from './component/OpenWeb';
+import CreateWindow from './UI/CreateWindow';
 
 // const createLayer = new CreateLayer();
 
-require('es6-promise').polyfill();
+// const ow = new OpenWeb();
+// ow.setUrls([
+//   "http://nasikusa.net/blend-monitoring",
+// ]);
+// ow.urls.push('https://www.youtube.com/watch?v=v0b7TUVz6lY');
+// ow.open();
 
-function waitFor3Seconds(){
-  return new Promise((resolve)=>{
-    setTimeout(resolve, 3000);
-  });
-}
-
-async function main(){
-  await waitFor3Seconds();
-  console.log('done!');
-}
-
-main();
+const cw = new CreateWindow();
