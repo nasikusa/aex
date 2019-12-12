@@ -91,15 +91,26 @@
 "use strict";
 
 exports.__esModule = true;
-var CreateWindow_1 = __webpack_require__(2);
+var BaseInfo_1 = __webpack_require__(1);
+var LoadFootage_1 = __webpack_require__(2);
 // const createLayer = new CreateLayer();
 // const ow = new OpenWeb();
+// ow.setBlendMonitoring();
+// ow.setUrl(URLs.unsplash);
+// ow.open();
 // ow.setUrls([
 //   "http://nasikusa.net/blend-monitoring",
 // ]);
 // ow.urls.push('https://www.youtube.com/watch?v=v0b7TUVz6lY');
 // ow.open();
-var cw = new CreateWindow_1["default"]();
+// const cw = new CreateWindow();
+// const cf: CreateFolder = new CreateFolder();
+// cf.make();
+// const loadTemplate = new LoadTemplate();
+// loadTemplate.load();
+var baseInfo = new BaseInfo_1["default"]();
+// baseInfo.showData();
+var lf = new LoadFootage_1["default"]();
 
 
 /***/ }),
@@ -109,44 +120,25 @@ var cw = new CreateWindow_1["default"]();
 "use strict";
 
 exports.__esModule = true;
-var OpenWeb = /** @class */ (function () {
-    function OpenWeb() {
-        // alert('test');
-        this.urls = [];
+var BaseInfo = /** @class */ (function () {
+    function BaseInfo() {
+        this.encoding = $.appEncoding;
+        this.version = app.version;
+        this.lang = app.isoLanguage;
+        this.locale = $.locale;
+        this.os = $.os;
+        this.screen = $.screens;
     }
-    OpenWeb.prototype.setUrl = function (url) {
-        this.urls.push(url);
+    BaseInfo.prototype.showData = function () {
+        alert("version: " + this.version + "\n" +
+            "lang: " + this.lang + "\n" +
+            "os: " + this.os + "\n" +
+            "locale: " + this.locale + "\n" +
+            "encoding: " + this.encoding);
     };
-    OpenWeb.prototype.setUrls = function (urlArray) {
-        for (var _i = 0, urlArray_1 = urlArray; _i < urlArray_1.length; _i++) {
-            var url = urlArray_1[_i];
-            this.urls.push(url);
-        }
-    };
-    OpenWeb.prototype.setBlendMonitoring = function () {
-        this.urls.push("http://nasikusa.net/blend-monitoring");
-    };
-    OpenWeb.prototype.getUrl = function (order) {
-        if (this.urls[order] != null) {
-            return this.urls[order];
-        }
-    };
-    OpenWeb.prototype.getUrls = function () {
-        return this.urls;
-    };
-    OpenWeb.prototype.removeAllUrl = function () {
-        this.urls = [];
-    };
-    OpenWeb.prototype.open = function () {
-        if (this.urls.length !== 0) {
-            for (var i = 0; i < this.urls.length; i++) {
-                system.callSystem("cmd.exe /c \"start " + this.urls[i] + " /t\"");
-            }
-        }
-    };
-    return OpenWeb;
+    return BaseInfo;
 }());
-exports["default"] = OpenWeb;
+exports["default"] = BaseInfo;
 
 
 /***/ }),
@@ -156,26 +148,17 @@ exports["default"] = OpenWeb;
 "use strict";
 
 exports.__esModule = true;
-var OpenWeb_1 = __webpack_require__(1);
-var CreateWindow = /** @class */ (function () {
-    function CreateWindow() {
-        var wnd = new Window("palette", "Test Window", [0, 0, 250, 150]);
-        var okBtn = wnd.add("button", [55, 100, 140, 135], "OK");
-        var cancelBtn = wnd.add("button", [155, 100, 240, 135], "Cancel");
-        wnd.center();
-        wnd.show();
-        okBtn.onClick = function () {
-            var ow = new OpenWeb_1["default"]();
-            ow.setUrl("https://www.youtube.com/watch?v=v0b7TUVz6lY");
-            ow.open();
-        };
-        cancelBtn.onClick = function () {
-            wnd.close();
-        };
+var LoadFootage = /** @class */ (function () {
+    function LoadFootage() {
+        this.option = new ImportOptions();
+        this.option.file = new File("D:/googledrive/render/temp/shadow/Image0001.png");
     }
-    return CreateWindow;
+    LoadFootage.prototype.load = function () {
+        app.project.importFile(this.option);
+    };
+    return LoadFootage;
 }());
-exports["default"] = CreateWindow;
+exports["default"] = LoadFootage;
 
 
 /***/ })

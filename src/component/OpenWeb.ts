@@ -1,3 +1,6 @@
+import {URLs} from '../data/URLs';
+import CallCommand from '../base/CallCommand';
+
 export default class OpenWeb {
 
   public urls: string[];
@@ -18,7 +21,8 @@ export default class OpenWeb {
   }
 
   setBlendMonitoring(): void{
-    this.urls.push("http://nasikusa.net/blend-monitoring");
+    // this.urls.push("http://nasikusa.net/blend-monitoring");
+    this.urls.push(URLs.blend);
   }
   
   getUrl(order: number): string{
@@ -39,11 +43,13 @@ export default class OpenWeb {
   open(): void{
     if( this.urls.length !== 0 ){
       for( let i = 0 ; i < this.urls.length ; i++ ){
-        system.callSystem(`cmd.exe /c \"start ${this.urls[i]} /t\"`); 
+        const callCommand = new CallCommand(`start ${this.urls[i]}`);
+        callCommand.exec();
+        // system.callSystem(`cmd.exe /c \"start  /t\"`); 
       }
     }
   }
 
-  
+
 
 }
