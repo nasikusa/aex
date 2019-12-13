@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
       "target": "es3",
+      "skipDefaultLibCheck": true,
   },
   "files": [
       "typings/aftereffects/ae.d.ts"

@@ -1,9 +1,9 @@
 const path = require('path');
 const webpack = require("webpack");
+const TerserPlugin = require('terser-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  // モード値を production に設定すると最適化された状態で、
-  // development に設定するとソースマップ有効でJSファイルが出力される
   mode: "production",
 
   // メインとなるJavaScriptファイル（エントリーポイント）
@@ -30,5 +30,18 @@ module.exports = {
   // import 文で .ts ファイルを解決するため
   resolve: {
     extensions: [".ts"]
-  }
+  },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin({
+    terserOptions: {
+      ecma: 6,
+      compress: true,
+      output: {
+        comments: false,
+        beautify: false
+      }
+    }
+  })]
+}
 };

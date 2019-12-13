@@ -90,9 +90,21 @@
 
 "use strict";
 
+// import Polyfill from './base/Polyfill';
+// import BaseInfo from './base/BaseInfo';
+// import _ from './base/_';
+// import CreateLayer from './createLayer';
+// import OpenWeb from './component/OpenWeb';
+// import CreateWindow from './UI/CreateWindow';
+// import CreateFolder from './component/CreateFolder';
+// import LoadTemplate from './component/LoadTemplate';
+// import LoadFootage from './component/LoadFootage';
+// import {URLs} from './data/URLs';
 exports.__esModule = true;
-var BaseInfo_1 = __webpack_require__(1);
-var LoadFootage_1 = __webpack_require__(2);
+var OpenFolder_1 = __webpack_require__(2);
+var opf = new OpenFolder_1["default"]();
+opf.addFolderByName("material-water");
+opf.open();
 // const createLayer = new CreateLayer();
 // const ow = new OpenWeb();
 // ow.setBlendMonitoring();
@@ -108,9 +120,31 @@ var LoadFootage_1 = __webpack_require__(2);
 // cf.make();
 // const loadTemplate = new LoadTemplate();
 // loadTemplate.load();
-var baseInfo = new BaseInfo_1["default"]();
+// const polyfill = new Polyfill();
+// _.addAdj();
+// var color = [1,1,1];
+// var  name = "調整レイヤー";
+// // @ts-ignore
+// var n =  app.project.item(1).layers.addSolid(color,name,100,100,1,1);
+// var comp = n.containingComp;
+// n.outPoint = comp.duration;
+// n.adjustmentLayer = true;
+// n.source.width = comp.width;
+// n.source.height = comp.height;
+// n.source.pixelAspect = comp.pixelAspect;
+// var color = [1,1,1];
+// var  name = "調整レイヤー";
+// app.project.item(1).addSolid(color,name,100,100,1,1);
+// var proj = app.project;
+// var comp = proj.items.addComp("name", 1920, 1080, 1.0, 30.0, 29.97);
+// var distortionLayer = comp.layers.addSolid([0, 0, 0], 'Distortion', 1920, 1080, 1.0);
+// const baseInfo = new BaseInfo();
 // baseInfo.showData();
-var lf = new LoadFootage_1["default"]();
+// const lf = new LoadFootage();
+// var myComp = app.project.item(1);
+// var mySolid = myComp.layers.addSolid([1.0,1.0,0], "my square", 50, 50, 1);
+// var a = app.project.activeItem.selectedLayers;
+// alert(a);
 
 
 /***/ }),
@@ -120,25 +154,16 @@ var lf = new LoadFootage_1["default"]();
 "use strict";
 
 exports.__esModule = true;
-var BaseInfo = /** @class */ (function () {
-    function BaseInfo() {
-        this.encoding = $.appEncoding;
-        this.version = app.version;
-        this.lang = app.isoLanguage;
-        this.locale = $.locale;
-        this.os = $.os;
-        this.screen = $.screens;
+var CallCommand = /** @class */ (function () {
+    function CallCommand(str) {
+        this.commandStr = str;
     }
-    BaseInfo.prototype.showData = function () {
-        alert("version: " + this.version + "\n" +
-            "lang: " + this.lang + "\n" +
-            "os: " + this.os + "\n" +
-            "locale: " + this.locale + "\n" +
-            "encoding: " + this.encoding);
+    CallCommand.prototype.exec = function () {
+        system.callSystem("cmd.exe /c \"" + this.commandStr + " /t\"");
     };
-    return BaseInfo;
+    return CallCommand;
 }());
-exports["default"] = BaseInfo;
+exports["default"] = CallCommand;
 
 
 /***/ }),
@@ -148,17 +173,51 @@ exports["default"] = BaseInfo;
 "use strict";
 
 exports.__esModule = true;
-var LoadFootage = /** @class */ (function () {
-    function LoadFootage() {
-        this.option = new ImportOptions();
-        this.option.file = new File("D:/googledrive/render/temp/shadow/Image0001.png");
+var CallCommand_1 = __webpack_require__(1);
+var Folders_1 = __webpack_require__(3);
+var OpenFolder = /** @class */ (function () {
+    function OpenFolder() {
+        this.paths = [];
     }
-    LoadFootage.prototype.load = function () {
-        app.project.importFile(this.option);
+    OpenFolder.prototype.addFolderByName = function (folderName) {
+        if (Folders_1.Folders[folderName] != null) {
+            this.paths.push(Folders_1.Folders[folderName].path);
+            return Folders_1.Folders[folderName].path;
+        }
+        return false;
     };
-    return LoadFootage;
+    OpenFolder.prototype.open = function () {
+        for (var _i = 0, _a = this.paths; _i < _a.length; _i++) {
+            var path = _a[_i];
+            this.callCommand = new CallCommand_1["default"]("start " + path);
+            this.callCommand.exec();
+            return true;
+        }
+        return false;
+    };
+    return OpenFolder;
 }());
-exports["default"] = LoadFootage;
+exports["default"] = OpenFolder;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+exports.Folders = {
+    "material-water": {
+        path: "D:/googledrive/material/water_color/",
+    },
+    "material": {
+        path: "D:/googledrive/material/",
+    },
+    "mateiral-gradation": {
+        path: "D:/googledrive/material/gradation/"
+    },
+};
 
 
 /***/ })

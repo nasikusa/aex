@@ -1,5 +1,5 @@
 export default class CallCommand {
-  private commandStr: string;
+  public commandStr: string;
   constructor(str: string){
     this.commandStr = str;
   }
