@@ -60,6 +60,19 @@ export const Effects = {
     ja: "チャンネルコンバイナー",
     match: "ADBE Channel Combiner",
     type: "channel",
+    props: {
+      "source": { en: "" , ja: "ソースオプション" , match: "ADBE Channel Combiner-0001" },
+      "second": { en: "" , ja: "2つめのレイヤーを使用" , match: "ADBE Channel Combiner-0002" },
+      "layer1": { en: "" , ja: "ソースレイヤー" , match: "ADBE Channel Combiner-0003" },
+      "layer2": { en: "" , ja: "ソースレイヤー" , match: "ADBE Channel Combiner-0004" },
+      "changeOption": { en: "" , ja: "変更オプション" , match: "ADBE Channel Combiner-0005" },
+      "target": { en: "" , ja: "ターゲット" , match: "ADBE Channel Combiner-0006" },
+      "invert": { en: "" , ja: "反転" , match: "ADBE Channel Combiner-0007" },
+      "alpha": { en: "" , ja: "不透明アルファ" , match: "ADBE Channel Combiner-0008" },
+      "compOption": { en: "" , ja: "コンポジットオプション" , match: "	ADBE Effect Built In Params" },
+      "mask": { en: "" , ja: "マスク" , match: "	ADBE Effect Mask Parade" },
+      "opacity": { en: "" , ja: "エフェクトの不透明度" , match: "ADBE Effect Mask Opacity" },
+    }
   },
   "dis_transform": {
     q: "t",
