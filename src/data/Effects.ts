@@ -3,7 +3,7 @@ export const Effects = {
     q: "gb",
     en: "Gaussian Blur",
     ja: "ブラー(ガウス)",
-    match: "	ADBE Gaussian Blur",
+    match: "ADBE Gaussian Blur",
     type: "blur",
   },
   "cha_minmax": {
@@ -13,7 +13,7 @@ export const Effects = {
     match: "ADBE Minimax",
   },
   "tim_pos_time": {
-    q: "qt",
+    q: "pt",
     en: "Posterize Time",
     ja: "ポスタリゼーション時間",
     match: "ADBE Posterize Time",
