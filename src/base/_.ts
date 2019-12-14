@@ -35,6 +35,12 @@ export default class _ extends Utils{
     // @ts-ignore
     return app.project.activeItem.selectedLayers;
   }
+
+  static getSelectedProps(){
+    // @ts-ignore
+    return _.getSelectedLayers().selectedProperties;
+  }
+
   /**
    * アクティブなコンポジションのレイヤーをすべて取得する
    */
@@ -42,6 +48,11 @@ export default class _ extends Utils{
     
     // @ts-ignore
     return app.project.activeItem.layers;
+  }
+
+  static getContianer(item: CompItem){
+    // @ts-ignore
+    return item.containingComp;
   }
   
   /**
@@ -57,6 +68,8 @@ export default class _ extends Utils{
   static historyEnd(){
     app.endUndoGroup();
   }
+
+
 
   /**
    * プロジェクトを開く
@@ -84,6 +97,15 @@ export default class _ extends Utils{
     return n;
   }
 
+  static getCompInfo(comp: CompItem): {[key: string]: string} {
+    const infoObject:any = {};
+    infoObject.duration = comp.duration;
+    infoObject.width = comp.width;
+    infoObject.height = comp.height;
+    infoObject.pixelAspect = comp.pixelAspect;
+
+    return infoObject;
+  }
 
   static changeFrameRate( framerate:number ,  item:any = _.getActiveItem() ): number{
     item.frameRate = framerate;
