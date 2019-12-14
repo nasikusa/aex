@@ -2,20 +2,37 @@
 import Utils from './Utils';
 
 export default class _ extends Utils{
-  static getProject(){
+  /**
+   * プロジェクトを取得する
+   */
+  static getProject(): Project | null{
     return app.project;
   }
-  static getItems(){
+  /**
+   * プロジェクトのアイテムをすべて取得する
+   */
+  static getItems(): ItemCollection | null{
     return app.project.items;
   }
-  static getActiveItem(){
-    return app.project.activeItem;
+  /**
+   * アクティブなプロジェクトのアイテムを取得する
+   */
+  static getActiveItem(): Item | null{
+    const res = app.project.activeItem;
+    return res;
   }
-  static getSelectedLayers(){
+  /**
+   * 選択しているレイヤーをすべて取得する
+   */
+  static getSelectedLayers(): CompItem | null{
     // @ts-ignore
     return app.project.activeItem.selectedLayers;
   }
-  static getActiveItemLayers(){
+  /**
+   * アクティブなコンポジションのレイヤーをすべて取得する
+   */
+  static getActiveItemLayers(): LayerCollection | null{
+    
     // @ts-ignore
     return app.project.activeItem.layers;
   }
@@ -24,15 +41,16 @@ export default class _ extends Utils{
    * historyを開始する
    * @param name 
    */
-  static startUndoGroup(name: string = "action"){
+  static historyStart(name: string = "action"){
     app.beginUndoGroup(name);
   }
   /**
    * historyを終了する
    */
-  static endUndoGroup(){
+  static historyEnd(){
     app.endUndoGroup();
   }
+
   /**
    * プロジェクトを開く
    * @param name 
@@ -59,21 +77,9 @@ export default class _ extends Utils{
     return n;
   }
 
+
   static changeFrameRate( framerate:number ,  item:any = _.getActiveItem() ){
     item.frameRate = framerate;
   }
 
 }
-
-
-// CompItem.addAdjustment = function(){
-//   var color = [1,1,1];
-//   var  name = "調整レイヤー";
-//   var width = this.width;
-//   var height = this.height;
-//   var pixelAspect = this.pixelAspect;
-//   var duration = this.duration;
-//   var n = this.layers.addSolid(color,name,width,height,pixelAspect,duration);
-//   n.adjustmentLayer = true;
-//   return n;
-// }
