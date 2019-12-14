@@ -6,8 +6,6 @@ export default class LoadFootage{
 
   constructor() {
 
-
-
   }
 
   /**
@@ -24,27 +22,43 @@ export default class LoadFootage{
     this.options.push( option );
   }
 
+  /**
+   * プロジェクトの名前から連番画像を取得します
+   * @param projectName プロジェクトの名前
+   */
   setSequenceByProject(projectName: string): boolean {
     const projectData = ProjectPath[projectName];
     if( !projectData ) return false;
     const folders = projectData.assetsFolders;
     const fileName = projectData.baseRenderName;
+    let FolderNamesArray = folders.map(function(val){
+      return val.name;
+    });
 
-    let path: string = "";
-    
-    for( let item of folders ){
-      path += `${projectData.renderRoot}`;
-      if( item.isSequence ){
-        path += `${item.name}/${fileName}`;
-        this.setItem(path, true);
-      } else {
-
-      }
-      path = "";
-    }
+    this.setSequenceByFolder(
+      projectData.renderRoot,
+      FolderNamesArray,
+      fileName,
+    );
 
     return true;
 
+  }
+
+  /**
+   * 連番画像を取得する
+   * @param basePath ベースとなるパス
+   * @param folders 取得したい連番画像のあるフォルダ
+   * @param baseRenderName 連番画像のファイル名（１つのみ）
+   */
+  setSequenceByFolder(basePath: string, folders: string[], baseRenderName: string){
+    
+    for( let folder of folders ){
+      let path: string = "";
+      path += basePath;
+      path += `${folder}/${baseRenderName}`;
+      this.setItem(path, true);
+    }
   }
 
   /**
