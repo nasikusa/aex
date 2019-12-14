@@ -1,6 +1,13 @@
+import _ from '../base/_';
 export default class SetProperty{
-  constructor() {
 
+  protected selectedLayers: CompItem | null = _.getSelectedLayers();
+
+  constructor() {
+  }
+
+  updateSelected(){
+    this.selectedLayers = _.getSelectedLayers();
   }
 
 

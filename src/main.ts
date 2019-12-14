@@ -11,13 +11,27 @@ import LoadFootage from './component/LoadFootage';
 import {URLs} from './data/URLs';
 import CallCommand from './base/CallCommand';
 import OpenFolder from './component/OpenFolder';
+import CreateLayer from './component/CreateLayer';
+import SetEffects from './component/SetEffects';
+import EF from './component/effect/EF';
+
+// alert(EF.byQ("l"));
+
+const se = new SetEffects();
+// se.dropBlack();
+se.setColorPreset();
 
 // const openWeb = new OpenWeb();
 // openWeb.searchReference("manta");
 // const loadFootage = new LoadFootage();
 // loadFootage.load();
 
+// const active = _.getActiveItem();
+// //@ts-ignore
+// active.layers.addNull();
 
+// const createlayer = new CreateLayer();
+// createlayer.createAdjustment();
 
 // const loadfootage = new LoadFootage();
 // loadfootage.setSequenceByProject('fish1');
