@@ -14,6 +14,13 @@ export default class _ extends Utils{
   static getItems(): ItemCollection | null{
     return app.project.items;
   }
+
+  // static getComps(): CompItem | null | boolean {
+  //   const items: ItemCollection | null = _.getItems();
+  //   if( items.length === 0 || items === null ) return false;;
+  //   const result: CompItem[] = [];
+  // }
+
   /**
    * アクティブなプロジェクトのアイテムを取得する
    */
@@ -78,8 +85,29 @@ export default class _ extends Utils{
   }
 
 
-  static changeFrameRate( framerate:number ,  item:any = _.getActiveItem() ){
+  static changeFrameRate( framerate:number ,  item:any = _.getActiveItem() ): number{
     item.frameRate = framerate;
+    return item.frameRate;
+  }
+
+  static getFrameRate(item:any = _.getActiveItem()){
+    return item.frameRate;
+  }
+
+  static changeCompDuration( duration ,  item: Item | null = _.getActiveItem() ): number | undefined{
+    if( _.getType(item) === "CompItem" ){
+      // @ts-ignore
+      item.duration = duration;
+      // @ts-ignore
+      return item.duration;
+    }
+  }
+
+  static getCompDuration(item: Item | null = _.getActiveItem() ) : number | undefined{
+    if( _.getType(item) === "CompItem" ){
+      // @ts-ignore
+      return item.duration;
+    }
   }
 
 }
