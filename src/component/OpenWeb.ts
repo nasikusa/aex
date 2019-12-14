@@ -1,4 +1,4 @@
-import {URLs} from '../data/URLs';
+import {URLs, SeachUrls} from '../data/URLs';
 import _ from '../base/_';
 import CallCommand from '../base/CallCommand';
 
@@ -52,6 +52,36 @@ export default class OpenWeb {
   }
 
   searchReference(searchStr: string){
+
+    this.removeAllUrl();
+
+    for( let key of Object.keys(SeachUrls) ){
+      let url: string = `${SeachUrls[key]["url"]}`;
+      const seachType = SeachUrls[key]["seachType"];
+
+      if( seachType === "query" ){
+        const baseQuery = SeachUrls[key]["baseQuery"];
+        const seachQuery = SeachUrls[key]["searchQuery"];
+
+        url += "?";
+
+        if( baseQuery ){
+          url += `${baseQuery}&`;
+        }
+        url += `${seachQuery}=${searchStr}`; 
+
+        url = url.replace("&", "^&");
+
+      } else if( seachType === "url" ){
+        url += searchStr;
+      }
+
+
+      this.setUrl(url);
+
+    }
+
+    this.open();
 
   }
 

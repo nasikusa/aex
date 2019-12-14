@@ -45,7 +45,7 @@ export default class _ extends Utils{
     }
   }
 
-  static addAdj() {
+  static addAdjustmentLayer() {
     var color = [1,1,1];
     var  name = "調整レイヤー";
     // @ts-ignore
@@ -57,6 +57,10 @@ export default class _ extends Utils{
     n.source.height = comp.height;
     n.source.pixelAspect = comp.pixelAspect;
     return n;
+  }
+
+  static changeFrameRate( framerate:number ,  item:any = _.getActiveItem() ){
+    item.frameRate = framerate;
   }
 
 }

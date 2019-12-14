@@ -6,9 +6,11 @@ export default class CallCommand {
   protected result: string = "";
   private info: BaseInfo = new BaseInfo();
 
-  constructor(str: string | string[]){
-    this.setCommand(str);
-    this.setResult();
+  constructor(str: string | string[] | null = null){
+    if( str !== null ){
+      this.setCommand(str);
+      this.setResult();
+    }
   }
 
   getResult( isUpdate: boolean = true ): string{
@@ -29,7 +31,7 @@ export default class CallCommand {
     }
   }
 
-  setCommand(str: string | string[]){
+  setCommand(str: string | string[] , isUpdateResult: boolean = true){
     this.command = [];
     if( _.getType(str) === "string" ){
       // @ts-ignore
@@ -38,6 +40,11 @@ export default class CallCommand {
       // @ts-ignore
       this.command = str;
     }
+
+    if(isUpdateResult){
+      this.setResult();
+    }
+
   }
 
   exec(): string{

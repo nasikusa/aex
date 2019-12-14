@@ -13,10 +13,26 @@ import {URLs} from './data/URLs';
 import CallCommand from './base/CallCommand';
 import OpenFolder from './component/OpenFolder';
 
+// const loadFootage = new LoadFootage();
+// loadFootage.load();
+
+// const cm = new CallCommand();
+
+// cm.setCommand("dir");
+// const res = cm.exec();
+// alert(res);
+
 // const opf = new OpenFolder();
 // opf.addFolderByName("material-water");
 // opf.open();
 
-const callCommand = new OpenWeb(["https://sketchfab.com/feed",
-"https://codepen.io/pen/"]);
-callCommand.open();
+// const callCommand = new OpenWeb();
+// callCommand.searchReference("sunbeams");
+
+// _.addAdj();
+// callCommand.open();
+
+// @ts-ignore
+// const options = new ImportOptions(new File("D:/googledrive/render/temp/solid/Image0001.png"));
+// // options.sequence = true;
+// app.project.importFile(options);  
