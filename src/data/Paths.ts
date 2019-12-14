@@ -1,3 +1,18 @@
+import {UserData} from '../UserData';
+
+interface ProjectObject {
+  renderRoot: string;
+  baseRenderName: string;
+  assetsFolders: AssetsFoldersObject[];
+}
+
+interface AssetsFoldersObject {
+  name: string;
+  isSequence: boolean;
+  renderName: string;
+  description: string;
+}
+
 export const AppPath: {[key: string]: string} = {
   "blender": "C:/Program Files/Blender Foundation/Blender 2.81/blender.exe",
   "blender2.79": "D:/googledrive/blender/blender-2.79b-windows64/blender.exe",
@@ -5,8 +20,31 @@ export const AppPath: {[key: string]: string} = {
   "AfterFX": "C:/Program Files/Adobe After Effects 2020/Support Files/AfterFX.exe",
 };
 
-export const ProjectPath: {[key: string]: string} = {
-  "RenderRoot": "D:/googledrive/render/",
+export const ProjectPath: {[key: string]: ProjectObject} = {
+  "fish1": {
+    "renderRoot": "D:/googledrive/render/fish1/",
+    "baseRenderName": "Image0001.png",
+    "assetsFolders": [
+      {
+        name: "solid",
+        isSequence: true,
+        renderName: "",
+        description: "",
+      },
+      {
+        name: "shadow",
+        isSequence: true,
+        renderName: "",
+        description: "",
+      },
+      {
+        name: "line",
+        isSequence: true,
+        renderName: "",
+        description: "",
+      },
+    ],
+  }
 }
 
 
