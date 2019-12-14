@@ -1,11 +1,11 @@
 export default class CallCommand {
-  public commandStr: string;
+  public command: string;
   constructor(str: string){
-    this.commandStr = str;
+    this.command = str;
   }
 
   exec(): void {
-    system.callSystem(`cmd.exe /c \"${this.commandStr} /t\"`); 
+    system.callSystem(`cmd.exe /c \"${this.command} /t\"`); 
   }
 
 }

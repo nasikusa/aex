@@ -1,21 +1,23 @@
 
 
-// import Polyfill from './base/Polyfill';
-// import BaseInfo from './base/BaseInfo';
-// import _ from './base/_';
-// import CreateLayer from './createLayer';
-// import OpenWeb from './component/OpenWeb';
-// import CreateWindow from './UI/CreateWindow';
-// import CreateFolder from './component/CreateFolder';
-// import LoadTemplate from './component/LoadTemplate';
-// import LoadFootage from './component/LoadFootage';
-// import {URLs} from './data/URLs';
+import Polyfill from './base/Polyfill';
+import BaseInfo from './base/BaseInfo';
+import _ from './base/_';
+import CreateLayer from './createLayer';
+import OpenWeb from './component/OpenWeb';
+import CreateWindow from './UI/CreateWindow';
+import CreateFolder from './component/CreateFolder';
+import LoadTemplate from './component/LoadTemplate';
+import LoadFootage from './component/LoadFootage';
+import {URLs} from './data/URLs';
 
 import OpenFolder from './component/OpenFolder';
 
 const opf = new OpenFolder();
 opf.addFolderByName("material-water");
 opf.open();
+
+// alert(_.getActiveItem());
 
 // const createLayer = new CreateLayer();
 
@@ -43,7 +45,6 @@ opf.open();
 
 // var color = [1,1,1];
 // var  name = "調整レイヤー";
-// // @ts-ignore
 // var n =  app.project.item(1).layers.addSolid(color,name,100,100,1,1);
 // var comp = n.containingComp;
 // n.outPoint = comp.duration;

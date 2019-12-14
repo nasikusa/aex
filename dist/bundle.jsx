@@ -90,21 +90,12 @@
 
 "use strict";
 
-// import Polyfill from './base/Polyfill';
-// import BaseInfo from './base/BaseInfo';
-// import _ from './base/_';
-// import CreateLayer from './createLayer';
-// import OpenWeb from './component/OpenWeb';
-// import CreateWindow from './UI/CreateWindow';
-// import CreateFolder from './component/CreateFolder';
-// import LoadTemplate from './component/LoadTemplate';
-// import LoadFootage from './component/LoadFootage';
-// import {URLs} from './data/URLs';
 exports.__esModule = true;
-var OpenFolder_1 = __webpack_require__(2);
+var OpenFolder_1 = __webpack_require__(1);
 var opf = new OpenFolder_1["default"]();
 opf.addFolderByName("material-water");
 opf.open();
+// alert(_.getActiveItem());
 // const createLayer = new CreateLayer();
 // const ow = new OpenWeb();
 // ow.setBlendMonitoring();
@@ -124,7 +115,6 @@ opf.open();
 // _.addAdj();
 // var color = [1,1,1];
 // var  name = "調整レイヤー";
-// // @ts-ignore
 // var n =  app.project.item(1).layers.addSolid(color,name,100,100,1,1);
 // var comp = n.containingComp;
 // n.outPoint = comp.duration;
@@ -154,26 +144,7 @@ opf.open();
 "use strict";
 
 exports.__esModule = true;
-var CallCommand = /** @class */ (function () {
-    function CallCommand(str) {
-        this.commandStr = str;
-    }
-    CallCommand.prototype.exec = function () {
-        system.callSystem("cmd.exe /c \"" + this.commandStr + " /t\"");
-    };
-    return CallCommand;
-}());
-exports["default"] = CallCommand;
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var CallCommand_1 = __webpack_require__(1);
+var CallCommand_1 = __webpack_require__(2);
 var Folders_1 = __webpack_require__(3);
 var OpenFolder = /** @class */ (function () {
     function OpenFolder() {
@@ -198,6 +169,25 @@ var OpenFolder = /** @class */ (function () {
     return OpenFolder;
 }());
 exports["default"] = OpenFolder;
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var CallCommand = /** @class */ (function () {
+    function CallCommand(str) {
+        this.commandStr = str;
+    }
+    CallCommand.prototype.exec = function () {
+        system.callSystem("cmd.exe /c \"" + this.commandStr + " /t\"");
+    };
+    return CallCommand;
+}());
+exports["default"] = CallCommand;
 
 
 /***/ }),

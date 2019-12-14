@@ -10,7 +10,6 @@ export default class _{
     return app.project.activeItem;
   }
   // static getSelectedLayers(){
-  //   // @ts-ignore
   //   return app.project.activeItem.selectedLayers;
   // }
   // static getActiveItemLayers(){
@@ -43,19 +42,18 @@ export default class _{
     }
   }
 
-  static addAdj() {
-    var color = [1,1,1];
-    var  name = "調整レイヤー";
-    // @ts-ignore
-    var n =  app.project.item(1).layers.addSolid(color,name,100,100,1,1);
-    var comp = n.containingComp;
-    n.outPoint = comp.duration;
-    n.adjustmentLayer = true;
-    n.source.width = comp.width;
-    n.source.height = comp.height;
-    n.source.pixelAspect = comp.pixelAspect;
-    return n;
-  }
+  // static addAdj() {
+  //   var color = [1,1,1];
+  //   var  name = "調整レイヤー";
+  //   var n =  app.project.item(1).layers.addSolid(color,name,100,100,1,1);
+  //   var comp = n.containingComp;
+  //   n.outPoint = comp.duration;
+  //   n.adjustmentLayer = true;
+  //   n.source.width = comp.width;
+  //   n.source.height = comp.height;
+  //   n.source.pixelAspect = comp.pixelAspect;
+  //   return n;
+  // }
 
 }
 
