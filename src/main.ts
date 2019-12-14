@@ -17,12 +17,15 @@ import OpenFolder from './component/OpenFolder';
 // const loadFootage = new LoadFootage();
 // loadFootage.load();
 
-const loadfootage = new LoadFootage();
-loadfootage.setSequenceByProject('fish1');
-// loadfootage.setItem("D:/googledrive/render/fish1/line/Image0001.png" , true);
-// loadfootage.setItem("D:/googledrive/render/fish1/solid/Image0001.png" , true);
-// loadfootage.setItem("D:/googledrive/render/fish1/shadow/Image0001.png" , true);
-loadfootage.load();
+
+
+// const loadfootage = new LoadFootage();
+// loadfootage.setSequenceByProject('fish1');
+// // loadfootage.setSequenceByFolder("D:/googledrive/render/fish1/", ["solid","shadow","line"], "Image0001.png");
+// // loadfootage.setItem("D:/googledrive/render/fish1/line/Image0001.png" , true);
+// // loadfootage.setItem("D:/googledrive/render/fish1/solid/Image0001.png" , true);
+// // loadfootage.setItem("D:/googledrive/render/fish1/shadow/Image0001.png" , true);
+// loadfootage.load();
 
 // const cm = new CallCommand();
 
