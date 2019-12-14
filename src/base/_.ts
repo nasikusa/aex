@@ -1,5 +1,7 @@
 
-export default class _{
+import Utils from './Utils';
+
+export default class _ extends Utils{
   static getProject(){
     return app.project;
   }
@@ -9,13 +11,14 @@ export default class _{
   static getActiveItem(){
     return app.project.activeItem;
   }
-  // static getSelectedLayers(){
-  //   return app.project.activeItem.selectedLayers;
-  // }
-  // static getActiveItemLayers(){
-  //   // @ts-ignore
-  //   return app.project.activeItem.layers;
-  // }
+  static getSelectedLayers(){
+    // @ts-ignore
+    return app.project.activeItem.selectedLayers;
+  }
+  static getActiveItemLayers(){
+    // @ts-ignore
+    return app.project.activeItem.layers;
+  }
   
   /**
    * historyを開始する
@@ -42,18 +45,19 @@ export default class _{
     }
   }
 
-  // static addAdj() {
-  //   var color = [1,1,1];
-  //   var  name = "調整レイヤー";
-  //   var n =  app.project.item(1).layers.addSolid(color,name,100,100,1,1);
-  //   var comp = n.containingComp;
-  //   n.outPoint = comp.duration;
-  //   n.adjustmentLayer = true;
-  //   n.source.width = comp.width;
-  //   n.source.height = comp.height;
-  //   n.source.pixelAspect = comp.pixelAspect;
-  //   return n;
-  // }
+  static addAdj() {
+    var color = [1,1,1];
+    var  name = "調整レイヤー";
+    // @ts-ignore
+    var n =  app.project.item(1).layers.addSolid(color,name,100,100,1,1);
+    var comp = n.containingComp;
+    n.outPoint = comp.duration;
+    n.adjustmentLayer = true;
+    n.source.width = comp.width;
+    n.source.height = comp.height;
+    n.source.pixelAspect = comp.pixelAspect;
+    return n;
+  }
 
 }
 

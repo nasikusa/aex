@@ -1,3 +1,5 @@
+import "extendscript-es5-shim-ts";
+
 export default class BaseInfo{
   public encoding: string;
   public version: string;
@@ -5,22 +7,43 @@ export default class BaseInfo{
   public os: string;
   public locale: string;
   public screen: any;
+  public info: {[key:string]: string};
 
   constructor(){
     this.encoding = $.appEncoding;
     this.version = app.version;
     this.lang = app.isoLanguage;
-    this.locale = $.locale;
     this.os = $.os;
     this.screen = $.screens ;
+
+    this.info = {
+      "Encoding": this.encoding,
+      "Version": this.version,
+      "Language": this.lang,
+      "OS": this.os,
+    };
   }
 
-  showData() {
-    alert("version: " + this.version + "\n" + 
-          "lang: " + this.lang + "\n" +
-          "os: " + this.os + "\n" + 
-          "locale: " + this.locale  + "\n" + 
-          "encoding: " + this.encoding 
-    );
+  /**
+   * alertで情報を表示させます。
+   * @todo スクリーン情報
+   */
+  showData(): void {
+    let alertText: string = "";
+
+    for( let key of Object.keys(this.info) ){
+      alertText += `${key}: ${this.info[key]} \n`;
+    }
+    alert(alertText);
+  }
+
+  /**
+   * OSがWindowsであるかどうか判定する
+   */
+  isWindows(): boolean {
+    if( this.os ){
+      return this.os.toLowerCase().indexOf("windows") !== -1;
+    }
+    return false;
   }
 }

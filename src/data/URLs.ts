@@ -9,3 +9,25 @@ export const URLs = {
   "googleImage": "https://www.google.com/search?hl=ja&tbm=isch", // &q=xxx でキーワード検索
 };
 
+export const SeachUrls = {
+  "googleImage": {
+    type: 'image',
+    url: "https://www.google.com/search?hl=ja&tbm=isch&q=",
+    baseQuery: "",
+    searchQuery: "q",
+    expectedLang: "all",
+  },
+  "youtube": {
+    type: "video",
+    url: "https://www.youtube.com/results?search_query",
+    baseQuery: "",
+    searchQuery: "search_query",
+    expectedLang: "all",
+  },
+  "sketchfab": {
+    type: "3d",
+    url: "",
+    baseQuery: "",
+    searchQuery: "",
+  },
+};

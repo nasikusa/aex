@@ -2,8 +2,13 @@
   "compilerOptions": {
       "target": "es3",
       "skipDefaultLibCheck": true,
+      "strictNullChecks": true,
+      "noLib": true,
   },
   "files": [
       "typings/aftereffects/ae.d.ts"
+  ],
+  "types": [
+    "chroma-js",
   ]
 }
