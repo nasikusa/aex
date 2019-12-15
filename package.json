@@ -1,4 +1,7 @@
 {
+  "name": "aex",
+  "version": "0.1.0",
+  "description": "Small scripts for Adobe After Effecrts",
   "scripts": {
     "build": "webpack --optimize-minimize",
     "watch": "webpack -w"
@@ -19,5 +22,19 @@
     "es6-promise": "^4.2.8",
     "extendscript-es5-shim-ts": "0.0.1",
     "types-for-adobe": "^1.5.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nasikusa/aex.git"
+  },
+  "keywords": [
+    "AE",
+    "AfterEffects",
+    "Adobe",
+    "AdobeAfterEffects",
+    "ExtendScript",
+    "TypeScript"
+  ],
+  "author": "youkan",
+  "license": "MIT"
 }
