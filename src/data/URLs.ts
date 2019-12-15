@@ -1,3 +1,12 @@
+interface SeachUrlsContent {
+  type: string;
+  searchType: string;
+  url: string;
+  baseQuery: string;
+  searchQuery: string;
+  expectedLang: string;
+};
+
 export const URLs = {
   "blend": "http://nasikusa.net/blend-monitoring",
   "colorSelector": "http://nasikusa.net/practice/p39.html",
@@ -6,13 +15,12 @@ export const URLs = {
   "twitter": "https://twitter.com/",
   "aex": "https://github.com/nasikusa/aex",
   "googleDrive": "https://drive.google.com/drive/my-drive",
-  "googleImage": "https://www.google.com/search?hl=ja&tbm=isch", // &q=xxx でキーワード検索
 };
 
-export const SeachUrls = {
+export const SeachUrls: {[key: string]: SeachUrlsContent} = {
   "googleImage": {
     type: 'image',
-    seachType: "query",
+    searchType: "query",
     url: "https://www.google.com/search",
     baseQuery: "tbm=isch",
     searchQuery: "q",
@@ -20,7 +28,7 @@ export const SeachUrls = {
   },
   "youtube": {
     type: "video",
-    seachType: "query",
+    searchType: "query",
     url: "https://www.youtube.com/results",
     baseQuery: "",
     searchQuery: "search_query",
@@ -28,7 +36,7 @@ export const SeachUrls = {
   },
   "vimeo": {
     type: "video",
-    seachType: "query",
+    searchType: "query",
     url: "https://vimeo.com/search",
     baseQuery: "",
     searchQuery: "q",
@@ -36,16 +44,26 @@ export const SeachUrls = {
   },
   "sketchfab": {
     type: "3d",
-    seachType: "query",
+    searchType: "query",
     url: "https://sketchfab.com/search",
     baseQuery: "",
     searchQuery: "q",
-    expectedLang: "",
+    expectedLang: "english",
   },
   "unsplash": {
     type: "image",
-    seachType: "url",
+    searchType: "url",
     url: "https://unsplash.com/s/photos/",
-    expectedLang: "",
+    baseQuery: "",
+    searchQuery: "",
+    expectedLang: "english",
   },
+  "PAKUTASO": {
+    type: "image",
+    searchType: "query",
+    url: "https://www.pakutaso.com/search.html",
+    baseQuery: "offset=0&limit=20",
+    searchQuery: "search",
+    expectedLang: "japanese",
+  }
 };
