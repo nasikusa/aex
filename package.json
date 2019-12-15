@@ -9,7 +9,6 @@
   "devDependencies": {
     "terser-webpack-plugin": "^2.3.0",
     "ts-loader": "^5.4.3",
-    "tslint": "^5.20.1",
     "typescript": "^3.7.3",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.30.0",
