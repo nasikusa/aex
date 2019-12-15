@@ -1,4 +1,17 @@
-export const Effects = {
+interface EffectsContent {
+  q: string;
+  en: string;
+  ja: string;
+  match: string;
+  type?: string;
+  props?: {
+    [key:string]: {
+      [key:string]:string
+    }
+  };
+};
+
+export const Effects: {[key:string]: EffectsContent} = {
   "blu_gauss_blur": {
     q: "gb",
     en: "Gaussian Blur",
