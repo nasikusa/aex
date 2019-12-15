@@ -4,12 +4,12 @@
       "skipDefaultLibCheck": true,
       "strictNullChecks": true,
       "noLib": true,
+      "removeComments": true,
   },
   "files": [
       "typings/aftereffects/ae.d.ts"
   ],
   "types": [
-    "chroma-js",
     "types-for-adobe"
   ]
 }

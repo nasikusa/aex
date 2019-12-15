@@ -67,7 +67,7 @@ export default class OpenWeb {
   /**
    * リファレンス用のサイトをブラウザで開く
    * @param searchStr 検索したい文字
-   * @todo 多言語化、UTF8対応、タイプごとの絞り込み、継承して別クラスにしたほうがいい？、Fileでsettingファイルを保存できると楽？（どこだけ開くとか）、サジェスチョン
+   * @todo 多言語化、UTF8対応、タイプごとの絞り込み、継承して別クラスにしたほうがいい？、Fileでsettingファイルを保存できると楽？（どこだけ開くとか）、サジェスチョン、URLエンコードするとgoogleで検索できなくなる
    */
   searchReference(searchStr: string){
 
@@ -101,6 +101,8 @@ export default class OpenWeb {
       } else if( searchType === "url" ){
         url += searchStr;
       }
+
+      url = encodeURI(url);
 
       this.setUrl(url);
 

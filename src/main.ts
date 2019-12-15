@@ -17,12 +17,18 @@ import EF from './component/effect/EF';
 
 // alert(EF.byQ("l"));
 
-const se = new SetEffects();
-// se.dropBlack();
-se.setColorPreset();
+// const se = new SetEffects();
+// // se.dropBlack();
+// se.setColorPreset();
 
-// const openWeb = new OpenWeb();
-// openWeb.searchReference("manta");
+// const cw = new CreateWindow();
+// cw.exmaple();
+
+
+
+
+const openWeb = new OpenWeb();
+openWeb.searchReference("マンタ");
 // const loadFootage = new LoadFootage();
 // loadFootage.load();
 
