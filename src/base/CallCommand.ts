@@ -1,18 +1,59 @@
 import _ from '../base/_';
 import BaseInfo from '../base/BaseInfo';
 
+/**
+ * AEからコマンドラインにコマンドを実行させるためのクラス
+ *
+ * @export
+ * @class CallCommand
+ */
 export default class CallCommand {
-  public command: string[] = [];
+
+  /**
+   * 実行するコマンド文章を入れる配列
+   *
+   * @type {string[]}
+   * @memberof CallCommand
+   */
+  protected command: string[] = [];
+
+  /**
+   * 複数のコマンドを実行する際は & でつなげるため、最終的なコマンドをここに入れます。
+   *
+   * @protected
+   * @type {string}
+   * @memberof CallCommand
+   */
   protected result: string = "";
+
+  /**
+   * OS情報などwin,mac対応のためにベースとなる基礎情報を取得します。
+   *
+   * @private
+   * @type {BaseInfo}
+   * @memberof CallCommand
+   */
   private info: BaseInfo = new BaseInfo();
 
-  constructor(str: string | string[] | null = null){
-    if( str !== null ){
-      this.setCommand(str);
+  /**
+   * 生成時に引数にコマンドがセットされていれば入れる。なければそのまま。
+   * @param {(string | string[] | null)} [str=null] コマンド文章
+   * @memberof CallCommand
+   */
+  constructor(inputComandStr: string | string[] | null = null){
+    if( inputComandStr != null ){
+      this.setCommand(inputComandStr);
       this.setResult();
     }
   }
 
+  /**
+   * 最終的に実行されるコマンドを取得する
+   *
+   * @param {boolean} [isUpdate=true]
+   * @returns {string}
+   * @memberof CallCommand
+   */
   getResult( isUpdate: boolean = true ): string{
     if( isUpdate ){
       this.setResult();
@@ -20,7 +61,13 @@ export default class CallCommand {
     return this.result;
   }
 
-  setResult(): void{
+  /**
+   * 最終的に実行されるコマンド文章を組み立てる。主に複数のコマンドがある場合に有効。
+   *
+   * @memberof CallCommand
+   * @return {boolean} 成功すればtrue , 失敗すればfalse
+   */
+  setResult(): boolean{
     this.result = "";
     for( let i = 0 ; i < this.command.length; i++ ){
       if( i === this.command.length - 1 ){
@@ -29,15 +76,26 @@ export default class CallCommand {
         this.result += `${this.command[i]} & `;
       }
     }
+
+    if( this.result != null && this.result === "" ){
+      return true;
+    }
+    return false;
   }
 
-  setCommand(str: string | string[] , isUpdateResult: boolean = true){
+  /**
+   * コマンド文章をセットする
+   *
+   * @param {(string | string[])} str
+   * @param {boolean} [isUpdateResult=true]
+   * @returns {string[]}
+   * @memberof CallCommand
+   */
+  setCommand(str: string | string[] , isUpdateResult: boolean = true): string[]{
     this.command = [];
-    if( _.getType(str) === "string" ){
-      // @ts-ignore
-      this.command[0] = str;
-    } else {
-      // @ts-ignore
+    if( _.getType(str) === "string" && typeof str === "string" ){
+      this.command.push(str);
+    } else if(  _.getType(str) === "array" && typeof str === "object" ) {
       this.command = str;
     }
 
@@ -45,14 +103,34 @@ export default class CallCommand {
       this.setResult();
     }
 
+    return this.command;
+
   }
 
-  exec(): string{
+  /**
+   * コマンドを実行する関数
+   *
+   * @param {boolean} isReturnOnlyBoolean コマンドラインの実行結果を返すのではなく、成否のboolのみを返すか
+   * @returns {string | boolean} コマンドの実行結果を返す。失敗した場合はfalseを返す。
+   * @memberof CallCommand
+   * @todo mac対応
+   */
+  exec( isReturnOnlyBoolean = false): string | boolean{
+
     let callResult:string = "";
     if( this.info.isWindows() ){
       callResult = system.callSystem(`cmd.exe /c \"${this.result} /t\"`); 
+
+      if( isReturnOnlyBoolean ){
+        return true;
+      }
     }
-    return callResult;
+    
+    if( callResult != null && callResult !== "" && isReturnOnlyBoolean === false ){
+      return callResult;
+    }else{
+      return false;
+    }
   }
 
 }
