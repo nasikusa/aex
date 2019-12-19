@@ -4,8 +4,18 @@ import CallCommand from '../base/CallCommand';
 
 export default class OpenWeb {
 
+  /**
+   * urlをセットするための配列
+   *
+   * @type {string[]}
+   * @memberof OpenWeb
+   */
   public urls: string[] = [];
 
+  /**
+   * 初期化時にURLが引数にあれば、それをそのままセットする。なければスルー。
+   * @param inputUrl 
+   */
   constructor(inputUrl: string | string[] | null = null) {
     if( inputUrl != null ){
       if( typeof inputUrl === "string" && _.getType(inputUrl) === "string" ){
@@ -21,29 +31,49 @@ export default class OpenWeb {
    * 一つのURLをセットする
    * @param url 
    */
-  setUrl(url: string): void {
-    this.urls.push(url)
+  setUrl(url: string): OpenWeb {
+    this.urls.push(url);
+    return this;
   }
 
   /**
    * 複数のURLをまとめてセットする
    * @param urlArray 
    */
-  setUrls(urlArray: string[]): void{
+  setUrls(urlArray: string[]): OpenWeb{
     for( const url of urlArray ){
       this.urls.push(url);
     }
+    return this;
   }
 
-  setBlendMonitoring(): void{
-    this.urls.push(URLs.blend);
+  /**
+   *URLsオブジェクトからurlを見つけてセットする
+   *
+   * @param {string} urlObjectName
+   * @memberof OpenWeb
+   * @return {boolean} 成功すればtrue,失敗すればfalse
+   */
+  setUrlByName(urlObjectName: string): boolean{
+    const urlObject = URLs[urlObjectName];
+    if( urlObject != null ){
+      this.urls.push( urlObject.url );
+      return true;
+    }
+    return false;
   }
-  
-  getUrl(order: number): string | boolean{
+
+  /**
+   * 指定の場所のurlを取得する
+   *
+   * @param {number} order
+   * @returns {(string | undefined)}
+   * @memberof OpenWeb
+   */
+  getUrl(order: number): string | undefined{
     if( this.urls[order] != null ){
       return this.urls[order];
     }
-    return false;
   }
 
   /**
@@ -69,7 +99,7 @@ export default class OpenWeb {
    * @param searchStr 検索したい文字
    * @todo 多言語化、UTF8対応、タイプごとの絞り込み、継承して別クラスにしたほうがいい？、Fileでsettingファイルを保存できると楽？（どこだけ開くとか）、サジェスチョン、URLエンコードするとgoogleで検索できなくなる
    */
-  searchReference(searchStr: string){
+  searchReference(searchStr: string): boolean{
 
     this.removeAllUrl();
 
@@ -108,17 +138,36 @@ export default class OpenWeb {
 
     }
 
-    this.open();
+    const isOpenSite = this.open();
+
+    return isOpenSite;
 
   }
 
-  open(): void{
+  /**
+   * webページを開くコマンドを実行する関数
+   *
+   * @returns {boolean} 
+   * @memberof OpenWeb
+   */
+  open(): boolean{
     if( this.urls.length !== 0 ){
+
+      /** 
+       * 一時的にコマンドを入れておくための配列
+       */
+      const CommandArray: string[] = [];
+
       for( let i = 0 ; i < this.urls.length ; i++ ){
-        const callCommand = new CallCommand(`start ${this.urls[i]}`);
-        callCommand.exec();
+        CommandArray.push(`start ${this.urls[i]}`);
       }
+      
+      const callCommand = new CallCommand(CommandArray);
+      const isExecCommand = callCommand.exec(true);
+      //@ts-ignore
+      return isExecCommand;
     }
+    return false;
   }
 
 
