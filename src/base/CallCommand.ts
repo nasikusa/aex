@@ -88,7 +88,7 @@ export default class CallCommand {
    * コマンド文章をセットする
    *
    * @param {(string | string[])} str　コマンドテキスト、もしくはコマンドテキストの配列
-   * @param {boolean} [isUpdateResult=true]
+   * @param {boolean} [isUpdateResult=true] コマンドをセットした後に、最終的に実行されるコマンドも更新するかどうか
    * @returns {string[]} コマンド配列
    * @memberof CallCommand
    */
@@ -114,7 +114,7 @@ export default class CallCommand {
    * @param {boolean} isReturnOnlyBoolean コマンドラインの実行結果を返すのではなく、成否のboolのみを返すか
    * @returns {string | boolean} コマンドの実行結果を返す。失敗した場合はfalseを返す。
    * @memberof CallCommand
-   * @todo mac対応
+   * @todo mac対応 , コマンドの返り値の確認
    */
   exec( isReturnOnlyBoolean = false): string | boolean{
 
@@ -122,15 +122,15 @@ export default class CallCommand {
      * コマンドを実行したあとに、返ってきた文字列をここに格納する
      */
     let callCommandResult:string = "";
-    
+
     if( this.info.isWindows() ){
-      callCommandResult = system.callSystem(`cmd.exe /c \"${this.result} /t\"`); 
+      callCommandResult = system.callSystem(`cmd.exe /c \"${this.result} /t\"`);
 
       if( isReturnOnlyBoolean ){
         return true;
       }
     }
-    
+
     if( callCommandResult != null && callCommandResult !== "" && isReturnOnlyBoolean === false ){
       return callCommandResult;
     }else{
