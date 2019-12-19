@@ -1,3 +1,8 @@
+/**
+ *Effectsオブジェクトの中にある、オブジェクトの定義
+ *
+ * @interface EffectsContent
+ */
 interface EffectsContent {
   q: string;
   en: string;
@@ -11,6 +16,14 @@ interface EffectsContent {
   };
 };
 
+/**
+ * エフェクトオブジェクト。現在は自分がよく使うエフェクトのみ。
+ * キーに関しては xxx_yyy
+ *  xxx -> エフェクトのグループの名前 3文字
+ *  yyy -> エフェクト名の短縮したもの _で区切り。
+ *
+ * @todo エフェクトのプロパティの扱い。ファイル容量が重くならないように配慮する必要あり。
+ */
 export const Effects: {[key:string]: EffectsContent} = {
   "blu_gauss_blur": {
     q: "gb",
@@ -53,19 +66,19 @@ export const Effects: {[key:string]: EffectsContent} = {
     q: "hs",
     en: "Hue/Saturation",
     ja: "色相/彩度",
-    match: "ADBE HUE SATURATION",  
+    match: "ADBE HUE SATURATION",
   },
   "gen_paint": {
     q: "p",
     en: "Paint Bucket",
     ja: "塗りつぶし",
-    match: "ADBE Paint Bucket",  
+    match: "ADBE Paint Bucket",
   },
   "cha_rem_c_mat": {
     q: "rcm",
     en: "Remove Color Matting",
     ja: "カラーマット削除",
-    match: "ADBE Remove Color Matting",  
+    match: "ADBE Remove Color Matting",
   },
   "cha_combine": {
     q: "cc",
@@ -91,84 +104,84 @@ export const Effects: {[key:string]: EffectsContent} = {
     q: "t",
     en: "Transform",
     ja: "トランスフォーム",
-    match: "ADBE Geometry2",  
+    match: "ADBE Geometry2",
   },
   "col_cha_mix": {
     q: "cm",
     en: "Channel Mixer",
     ja: "チャンネルミキサー",
-    match: "ADBE CHANNEL MIXER",  
+    match: "ADBE CHANNEL MIXER",
     type: "color",
   },
   "col_balance": {
     q: "cb",
     en: "Color Balance",
     ja: "カラーバランス",
-    match: "ADBE Color Balance 2",  
+    match: "ADBE Color Balance 2",
   },
   "col_level_i": {
     q: "li",
     en: "Levels (Individual Controls)",
     ja: "	レベル (個々の制御)",
-    match: "ADBE Pro Levels2",  
+    match: "ADBE Pro Levels2",
   },
   "gen_fill": {
     q: "f",
     en: "Fill",
     ja: "塗り",
-    match: "ADBE Fill",  
+    match: "ADBE Fill",
   },
   "col_sel": {
     q: "cs",
     en: "Selective Color",
     ja: "特定色域の選択",
-    match: "ADBE SelectiveColor",  
+    match: "ADBE SelectiveColor",
   },
   "cha_inv": {
     q: "i",
     en: "Invert",
     ja: "反転",
-    match: "ADBE Invert",  
+    match: "ADBE Invert",
   },
   "exp_angle": {
     q: "ea",
     en: "Angle Control",
     ja: "角度制御",
-    match: "ADBE Angle Control",  
+    match: "ADBE Angle Control",
   },
   "exp_check": {
     q: "ech",
     en: "Checkbox Control",
     ja: "チェックボックス制御",
-    match: "ADBE Checkbox Control",  
+    match: "ADBE Checkbox Control",
   },
   "exp_col": {
     q: "eco",
     en: "Color Control",
     ja: "カラー制御",
-    match: "ADBE Color Control",  
+    match: "ADBE Color Control",
   },
   "exp_layer": {
     q: "el",
     en: "Layer Control",
     ja: "レイヤー制御",
-    match: "ADBE Layer Control",  
+    match: "ADBE Layer Control",
   },
   "exp_point": {
     q: "ep",
     en: "Point Control",
     ja: "ポイント制御",
-    match: "ADBE Point Control",  
+    match: "ADBE Point Control",
   },
   "exp_slider": {
     q: "es",
     en: "Slider Control",
     ja: "スライダー制御",
-    match: "ADBE Slider Control",  
+    match: "ADBE Slider Control",
   },
 };
 // "": {
 //   en: "",
 //   ja: "",
-//   match: "",  
+//   match: "",
 // },
