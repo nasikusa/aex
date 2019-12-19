@@ -118,17 +118,18 @@ export default class CallCommand {
    */
   exec( isReturnOnlyBoolean = false): string | boolean{
 
-    let callResult:string = "";
+    let callCommandResult:string = "";
+    
     if( this.info.isWindows() ){
-      callResult = system.callSystem(`cmd.exe /c \"${this.result} /t\"`); 
+      callCommandResult = system.callSystem(`cmd.exe /c \"${this.result} /t\"`); 
 
       if( isReturnOnlyBoolean ){
         return true;
       }
     }
     
-    if( callResult != null && callResult !== "" && isReturnOnlyBoolean === false ){
-      return callResult;
+    if( callCommandResult != null && callCommandResult !== "" && isReturnOnlyBoolean === false ){
+      return callCommandResult;
     }else{
       return false;
     }
