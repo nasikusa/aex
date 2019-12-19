@@ -12,6 +12,7 @@ export default class CallCommand {
   /**
    * 実行するコマンド文章を入れる配列
    *
+   * @protected
    * @type {string[]}
    * @memberof CallCommand
    */
@@ -29,11 +30,11 @@ export default class CallCommand {
   /**
    * OS情報などwin,mac対応のためにベースとなる基礎情報を取得します。
    *
-   * @private
+   * @protected
    * @type {BaseInfo}
    * @memberof CallCommand
    */
-  private info: BaseInfo = new BaseInfo();
+  protected info: BaseInfo = new BaseInfo();
 
   /**
    * 生成時に引数にコマンドがセットされていれば入れる。なければそのまま。
