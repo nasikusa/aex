@@ -87,9 +87,9 @@ export default class CallCommand {
   /**
    * コマンド文章をセットする
    *
-   * @param {(string | string[])} str
+   * @param {(string | string[])} str　コマンドテキスト、もしくはコマンドテキストの配列
    * @param {boolean} [isUpdateResult=true]
-   * @returns {string[]}
+   * @returns {string[]} コマンド配列
    * @memberof CallCommand
    */
   setCommand(str: string | string[] , isUpdateResult: boolean = true): string[]{
@@ -118,6 +118,9 @@ export default class CallCommand {
    */
   exec( isReturnOnlyBoolean = false): string | boolean{
 
+    /**
+     * コマンドを実行したあとに、返ってきた文字列をここに格納する
+     */
     let callCommandResult:string = "";
     
     if( this.info.isWindows() ){
