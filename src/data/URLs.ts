@@ -1,22 +1,29 @@
-interface SeachUrlsContent {
-  type: string;
-  searchType: string;
-  url: string;
-  baseQuery: string;
-  searchQuery: string;
-  expectedLang: string;
+interface URLsContent {
+  readonly url: string;
+}
+
+interface SeachUrlsContent extends URLsContent {
+  readonly type: string;
+  readonly searchType: string;
+  readonly baseQuery: string;
+  readonly searchQuery: string;
+  readonly expectedLang: string;
 };
 
-export const URLs = {
-  "blend": "http://nasikusa.net/blend-monitoring",
-  "colorSelector": "http://nasikusa.net/practice/p39.html",
-  "unsplash": "https://unsplash.com/",
-  "pixabay": "https://pixabay.com/ja/",
-  "twitter": "https://twitter.com/",
-  "aex": "https://github.com/nasikusa/aex",
-  "googleDrive": "https://drive.google.com/drive/my-drive",
+
+export const URLs: {[key: string]: URLsContent} = {
+  "blend-monitoring": {
+    url: "http://nasikusa.net/blend-monitoring"
+  },
+  "colorSelector": {
+    url: "http://nasikusa.net/practice/p39.html"
+  },
 };
 
+/**
+ * リファレンス検索用のURLおよび、その他の情報を貯蓄しておく配列
+ * @todo sketchfabのダウンロード可能などのその他のクエリへの対応
+ */
 export const SeachUrls: {[key: string]: SeachUrlsContent} = {
   "googleImage": {
     type: 'image',
