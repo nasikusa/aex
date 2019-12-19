@@ -74,3 +74,7 @@ export const SeachUrls: {[key: string]: SeachUrlsContent} = {
     expectedLang: "japanese",
   }
 };
+
+export const MusicURLs: {[key: string]: URLsContent} = {
+
+};
