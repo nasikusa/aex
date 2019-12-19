@@ -1,4 +1,4 @@
-import {Template} from '../data/Template';
+import {Template} from '../../data/Template';
 
 export default class {
   protected template: any;

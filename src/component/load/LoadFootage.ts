@@ -1,5 +1,5 @@
-import _ from "../base/_";
-import {ProjectPath} from '../data/Paths';
+import _ from "../../base/_";
+import {ProjectPath} from '../../data/Paths';
 
 export default class LoadFootage{
   public options: ImportOptions[] = [];
@@ -52,7 +52,7 @@ export default class LoadFootage{
    * @param baseRenderName 連番画像のファイル名（１つのみ）
    */
   setSequenceByFolder(basePath: string, folders: string[], baseRenderName: string){
-    
+
     for( let folder of folders ){
       let path: string = "";
       path += basePath;
@@ -68,10 +68,10 @@ export default class LoadFootage{
     this.options = [];
   }
 
-  
+
   load() {
     for( const option of this.options ){
-      app.project.importFile(option);    
+      app.project.importFile(option);
     }
   }
 

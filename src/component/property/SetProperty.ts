@@ -1,4 +1,4 @@
-import _ from '../base/_';
+import _ from '../../base/_';
 export default class SetProperty{
 
   protected selectedLayers: CompItem | null = _.getSelectedLayers();

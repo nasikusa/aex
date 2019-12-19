@@ -1,7 +1,7 @@
-import SetProperty from "./SetProperty";
-import {Effects} from "../data/Effects";
-import EF from "../component/effect/EF";
-import _ from "../base/_";
+import SetProperty from "../property/SetProperty";
+import {Effects} from "../../data/Effects";
+import EF from "./EF";
+import _ from "../../base/_";
 
 export default class SetEffects extends SetProperty {
   constructor(){

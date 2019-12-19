@@ -1,5 +1,5 @@
-import CallCommand from '../base/CallCommand';
-import {Folders} from '../data/Folders';
+import CallCommand from '../../base/CallCommand';
+import {Folders} from '../../data/Folders';
 
 export default class OpenFolder {
 
@@ -19,7 +19,7 @@ export default class OpenFolder {
   }
 
   open(): boolean{
-    
+
     for( let path of this.paths ){
       this.callCommand = new CallCommand(`start ${path}`);
       this.callCommand.exec();

@@ -1,11 +1,11 @@
-import _ from '../base/_';
+import _ from '../../base/_';
 
 export default class CreateLayer {
 
   protected compLayers: LayerCollection | null = _.getActiveItemLayers();
 
   constructor() {
-    
+
   }
 
   setTargetComp() {

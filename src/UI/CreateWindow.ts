@@ -1,4 +1,4 @@
-import OpenWeb from '../component/OpenWeb';
+import OpenWeb from '../component/command/OpenWeb';
 
 interface UIPanel {
   open(window: Window): void | boolean;
