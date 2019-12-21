@@ -10,6 +10,6 @@
       "typings/aftereffects/ae.d.ts"
   ],
   "types": [
-    "types-for-adobe"
+    "types-for-adobe/AfterEffects/2018"
   ]
 }
