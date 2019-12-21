@@ -55,11 +55,22 @@ export default class _ extends Utils{
     const res = app.project.activeItem;
     return res;
   }
+
   /**
    * 選択しているレイヤーをすべて取得する
+   *
+   * @todo selectedLayersの型定義、プロパティが無い？
    */
-  static getSelectedLayers(): CompItem | null{
+  static getSelectedLayers(): LayerCollection | boolean{
     // @ts-ignore
+    const selectedLayers:LayerCollection = app.project.activeItem.selectedLayers;
+    if( selectedLayers.length > 0 ){
+      return selectedLayers;
+    }else{
+      return false;
+    }
+  }
+
   /**
    *レイヤーが選択されているかどうかを判定する
    *
