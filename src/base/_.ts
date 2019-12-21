@@ -64,6 +64,15 @@ export default class _ extends Utils{
     return res;
   }
 
+  static getSelectedItems():  Item[] | false{
+    const selectedItem = app.project.selection;
+    return selectedItem.length > 0 ? selectedItem : false;
+  }
+
+  static isItemSelected(): boolean{
+    return _.getSelectedItems() ? true : false;
+  }
+
   /**
    * 選択しているレイヤーをすべて取得する
    *
