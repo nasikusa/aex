@@ -10,6 +10,10 @@ interface SeachUrlsContent extends URLsContent {
   readonly expectedLang: string
 }
 
+/**
+ * URL保存用のオブジェクト
+ * @todo 役割が曖昧なので解消したい
+ */
 export const URLs: {
   [key: string]: URLsContent
 } = {
