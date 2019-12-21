@@ -117,20 +117,6 @@ export default class _ extends Utils{
     return item.containingComp;
   }
 
-  /**
-   * historyを開始する
-   * @param name history名
-   */
-  static historyStart(name: string = "action"){
-    app.beginUndoGroup(name);
-  }
-  /**
-   * historyを終了する
-   */
-  static historyEnd(){
-    app.endUndoGroup();
-  }
-
     /**
    *ItemCollectionをArrayに変換する関数
    *
