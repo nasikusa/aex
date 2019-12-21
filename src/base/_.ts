@@ -1,7 +1,15 @@
-
 import Utils from './Utils';
+import Debug from '../debug/Debug';
 
+/**
+ *便利関数をあつめたベースとなるクラス
+ *
+ * @export
+ * @class _
+ * @extends {Utils}
+ */
 export default class _ extends Utils{
+
   /**
    * プロジェクトを取得する
    */
@@ -90,8 +98,7 @@ export default class _ extends Utils{
   /**
    * アクティブなコンポジションのレイヤーをすべて取得する
    */
-  static getActiveItemLayers(): LayerCollection | null{
-    
+  static getActiveItemLayers(): LayerCollection | undefined{
     // @ts-ignore
     return app.project.activeItem.layers;
   }
@@ -100,10 +107,10 @@ export default class _ extends Utils{
     // @ts-ignore
     return item.containingComp;
   }
-  
+
   /**
    * historyを開始する
-   * @param name 
+   * @param name history名
    */
   static historyStart(name: string = "action"){
     app.beginUndoGroup(name);
@@ -115,11 +122,29 @@ export default class _ extends Utils{
     app.endUndoGroup();
   }
 
+    /**
+   *ItemCollectionをArrayに変換する関数
+   *
+   * @static
+   * @param {ItemCollection} inputCollection
+   * @returns {Item[]}
+   * @memberof Utils
+   */
+  static Collection2Array(inputCollection: ItemCollection): Item[]{
+    const resultArray: Item[] = [];
+    for( let i = 0 ; i < inputCollection.length ; i++ ){
+      const item = inputCollection[i+1];
+      if( item != null ){
+        resultArray[i] = item;
+      }
+    }
+    return resultArray;
+  }
 
 
   /**
    * プロジェクトを開く
-   * @param name 
+   * @param name
    */
   static openProject(name: string){
     const file = new File(name);
