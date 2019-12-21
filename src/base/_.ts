@@ -8,18 +8,17 @@ import Debug from '../debug/Debug';
  * @class _
  * @extends {Utils}
  */
-export default class _ extends Utils{
-
+export default class _ extends Utils {
   /**
    * プロジェクトを取得する
    */
-  static getProject(): Project | null{
+  static getProject(): Project | null {
     return app.project;
   }
   /**
    * プロジェクトのアイテムをすべて取得する
    */
-  static getItems(): ItemCollection | null{
+  static getItems(): ItemCollection | null {
     return app.project.items;
   }
 
@@ -34,13 +33,13 @@ export default class _ extends Utils{
   static getComps(searchCompName?: string): CompItem[] | boolean {
     const items: ItemCollection | null = _.getItems();
     const compsArray: CompItem[] = [];
-    if( items != null && items.length > 0 ){
+    if (items != null && items.length > 0) {
       const itemsArray: Item[] = _.Collection2Array(items);
       alert(itemsArray.length);
-      for( const item of itemsArray ){
-        if( item instanceof CompItem ){
-          if( searchCompName ){
-            if( item.name === searchCompName ){
+      for (const item of itemsArray) {
+        if (item instanceof CompItem) {
+          if (searchCompName) {
+            if (item.name === searchCompName) {
               compsArray.push(item);
             }
             continue;
@@ -48,7 +47,7 @@ export default class _ extends Utils{
           compsArray.push(item);
         }
       }
-      if( compsArray.length > 0 ){
+      if (compsArray.length > 0) {
         return compsArray;
       }
       return false;
@@ -59,17 +58,17 @@ export default class _ extends Utils{
   /**
    * アクティブなプロジェクトのアイテムを取得する
    */
-  static getActiveItem(): Item | null{
+  static getActiveItem(): Item | null {
     const res = app.project.activeItem;
     return res;
   }
 
-  static getSelectedItems():  Item[] | false{
+  static getSelectedItems(): Item[] | false {
     const selectedItem = app.project.selection;
     return selectedItem.length > 0 ? selectedItem : false;
   }
 
-  static isItemSelected(): boolean{
+  static isItemSelected(): boolean {
     return _.getSelectedItems() ? true : false;
   }
 
@@ -78,12 +77,13 @@ export default class _ extends Utils{
    *
    * @todo selectedLayersの型定義、プロパティが無い？
    */
-  static getSelectedLayers(): LayerCollection | boolean{
-    // @ts-ignore
-    const selectedLayers:LayerCollection = app.project.activeItem.selectedLayers;
-    if( selectedLayers.length > 0 ){
+  static getSelectedLayers(): LayerCollection | boolean {
+    const selectedLayers: LayerCollection =
+      // @ts-ignore
+      app.project.activeItem.selectedLayers;
+    if (selectedLayers.length > 0) {
       return selectedLayers;
-    }else{
+    } else {
       return false;
     }
   }
@@ -95,11 +95,11 @@ export default class _ extends Utils{
    * @returns {boolean}
    * @memberof _
    */
-  static isLayerSelected(): boolean{
+  static isLayerSelected(): boolean {
     return _.getSelectedLayers() ? true : false;
   }
 
-  static getSelectedProps(){
+  static getSelectedProps() {
     // @ts-ignore
     return _.getSelectedLayers().selectedProperties;
   }
@@ -107,17 +107,17 @@ export default class _ extends Utils{
   /**
    * アクティブなコンポジションのレイヤーをすべて取得する
    */
-  static getActiveItemLayers(): LayerCollection | undefined{
+  static getActiveItemLayers(): LayerCollection | undefined {
     // @ts-ignore
     return app.project.activeItem.layers;
   }
 
-  static getContianer(item: CompItem){
+  static getContianer(item: CompItem) {
     // @ts-ignore
     return item.containingComp;
   }
 
-    /**
+  /**
    *ItemCollectionをArrayに変換する関数
    *
    * @static
@@ -125,35 +125,34 @@ export default class _ extends Utils{
    * @returns {Item[]}
    * @memberof Utils
    */
-  static Collection2Array(inputCollection: ItemCollection): Item[]{
+  static Collection2Array(inputCollection: ItemCollection): Item[] {
     const resultArray: Item[] = [];
-    for( let i = 0 ; i < inputCollection.length ; i++ ){
-      const item = inputCollection[i+1];
-      if( item != null ){
+    for (let i = 0; i < inputCollection.length; i++) {
+      const item = inputCollection[i + 1];
+      if (item != null) {
         resultArray[i] = item;
       }
     }
     return resultArray;
   }
 
-
   /**
    * プロジェクトを開く
    * @param name
    */
-  static openProject(name: string){
+  static openProject(name: string) {
     const file = new File(name);
-    if (file.exists){
+    if (file.exists) {
       const new_project = app.open(file);
       return new_project;
     }
   }
 
   static addAdjustmentLayer() {
-    var color = [1,1,1];
-    var  name = "調整レイヤー";
+    var color = [1, 1, 1];
+    var name = '調整レイヤー';
     // @ts-ignore
-    var n =  app.project.item(1).layers.addSolid(color,name,100,100,1,1);
+    var n = app.project.item(1).layers.addSolid(color, name, 100, 100, 1, 1);
     var comp = n.containingComp;
     n.outPoint = comp.duration;
     n.adjustmentLayer = true;
@@ -163,8 +162,8 @@ export default class _ extends Utils{
     return n;
   }
 
-  static getCompInfo(comp: CompItem): {[key: string]: string} {
-    const infoObject:any = {};
+  static getCompInfo(comp: CompItem): { [key: string]: string } {
+    const infoObject: any = {};
     infoObject.duration = comp.duration;
     infoObject.width = comp.width;
     infoObject.height = comp.height;
@@ -180,8 +179,8 @@ export default class _ extends Utils{
    * @returns {boolean}
    * @memberof _
    */
-  static isWindow(): boolean{
-    return Number($.os.toLowerCase().indexOf("windows")) !== -1
+  static isWindow(): boolean {
+    return Number($.os.toLowerCase().indexOf('windows')) !== -1;
   }
 
   /**
@@ -192,21 +191,27 @@ export default class _ extends Utils{
    * @memberof _
    * @todo macで実際に検証
    */
-  static isMac(): boolean{
-    return Number($.os.toLowerCase().indexOf("windows")) === -1
+  static isMac(): boolean {
+    return Number($.os.toLowerCase().indexOf('windows')) === -1;
   }
 
-  static changeFrameRate( framerate:number ,  item:any = _.getActiveItem() ): number{
+  static changeFrameRate(
+    framerate: number,
+    item: any = _.getActiveItem()
+  ): number {
     item.frameRate = framerate;
     return item.frameRate;
   }
 
-  static getFrameRate(item:any = _.getActiveItem()){
+  static getFrameRate(item: any = _.getActiveItem()) {
     return item.frameRate;
   }
 
-  static changeCompDuration( duration ,  item: Item | null = _.getActiveItem() ): number | undefined{
-    if( _.getType(item) === "CompItem" ){
+  static changeCompDuration(
+    duration,
+    item: Item | null = _.getActiveItem()
+  ): number | undefined {
+    if (_.getType(item) === 'CompItem') {
       // @ts-ignore
       item.duration = duration;
       // @ts-ignore
@@ -214,11 +219,12 @@ export default class _ extends Utils{
     }
   }
 
-  static getCompDuration(item: Item | null = _.getActiveItem() ) : number | undefined{
-    if( _.getType(item) === "CompItem" ){
+  static getCompDuration(
+    item: Item | null = _.getActiveItem()
+  ): number | undefined {
+    if (_.getType(item) === 'CompItem') {
       // @ts-ignore
       return item.duration;
     }
   }
-
 }
