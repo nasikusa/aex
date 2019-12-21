@@ -107,6 +107,29 @@ export default class _ extends Utils{
     return infoObject;
   }
 
+  /**
+   *OSがwindowsであるかどうか
+   *
+   * @static
+   * @returns {boolean}
+   * @memberof _
+   */
+  static isWindow(): boolean{
+    return Number($.os.toLowerCase().indexOf("windows")) !== -1
+  }
+
+  /**
+   *OSがmacであるかどうか
+   *
+   * @static
+   * @returns {boolean}
+   * @memberof _
+   * @todo macで実際に検証
+   */
+  static isMac(): boolean{
+    return Number($.os.toLowerCase().indexOf("windows")) === -1
+  }
+
   static changeFrameRate( framerate:number ,  item:any = _.getActiveItem() ): number{
     item.frameRate = framerate;
     return item.frameRate;
