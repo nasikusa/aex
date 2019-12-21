@@ -4,8 +4,15 @@ import EF from "./EF";
 import _ from "../../base/_";
 
 export default class SetEffects extends SetProperty {
+
+  public targetLayers = [];
+
   constructor(){
     super();
+  }
+
+  setLayers(layers){
+
   }
 
   // @ts-ignore
@@ -24,6 +31,10 @@ export default class SetEffects extends SetProperty {
     layer.property("effect").addProperty(EF.byJa("カラーバランス"));
     layer.property("effect").addProperty(EF.byJa("レンズフィルタ"));
     layer.property("effect").addProperty(EF.byJa("色相/彩度"));
+  }
+
+  setEffectByName() {
+
   }
 
 }
