@@ -9,3 +9,24 @@ export default class Utils {
     return toString.call(obj).slice(8, -1).toLowerCase();
   }
 }
+
+  /**
+   *ItemCollectionをArrayに変換する関数
+   *
+   * @static
+   * @param {ItemCollection} inputCollection
+   * @returns {Item[]}
+   * @memberof Utils
+   */
+  static Collection2Array(inputCollection: ItemCollection): Item[]{
+    const resultArray: Item[] = [];
+    for( let i = 0 ; i < inputCollection.length ; i++ ){
+      const item = inputCollection[i+1];
+      if( item != null ){
+        resultArray[i] = item;
+      }
+    }
+    return resultArray;
+  }
+
+}
