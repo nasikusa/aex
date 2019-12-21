@@ -4,12 +4,16 @@
       "skipDefaultLibCheck": true,
       "strictNullChecks": true,
       "noLib": true,
-      "removeComments": true,
+      "removeComments": true
   },
   "files": [
-      "typings/aftereffects/ae.d.ts"
+      "typings/aftereffects/ae.d.ts",
+      "typings/types_for_adobe/JavaScript.d.ts",
+      "typings/types_for_adobe/ScriptUI.d.ts",
+      "typings/types_for_adobe/global.d.ts",
+      "typings/types_for_adobe/AfterEffects.d.ts",
   ],
   "types": [
-    "types-for-adobe/AfterEffects/2018"
+    "types-for-adobe/AfterEffects/2018",
   ]
 }
