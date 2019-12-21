@@ -19,4 +19,35 @@ export default class Utils {
 
   }
 
+  static getRandomFromArray(array: any): any{
+    if( Array.isArray(array) && Utils.getType(array) === 'array' ){
+      return array[Math.floor(Math.random() * array.length)];
+    }
+    return false;
+  }
+
+  static randomMinMax(min: number , max: number){
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  static trim(inputString: string): string{
+    return inputString.replace(/^\s+|\s+$/g, "");
+  }
+
+  static getMinFromArray(inputArray: number[]): number{
+    return Math.min.apply(Math, inputArray)
+  }
+
+  static getMaxFromArray(inputArray: number[]): number{
+    return Math.max.apply(Math, inputArray);
+  }
+
+  static array2Empty(array: any): any{
+    if( Array.isArray(array) && Utils.getType(array) === 'array' ){
+      array.length = 0;
+      return array;
+    }
+    return false;
+  }
+
 }
