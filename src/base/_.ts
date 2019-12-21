@@ -15,11 +15,38 @@ export default class _ extends Utils{
     return app.project.items;
   }
 
-  // static getComps(): CompItem | null | boolean {
-  //   const items: ItemCollection | null = _.getItems();
-  //   if( items.length === 0 || items === null ) return false;;
-  //   const result: CompItem[] = [];
-  // }
+  /**
+   *コンポジションを取得する関数
+   *
+   * @static
+   * @param {string} [searchCompName] 省略可能。探したいコンポジション名を入れる。ない場合はすべてのコンポジションを返す。
+   * @returns {(CompItem[] | boolean)} コンポジションが存在すればコンポジションを、なければfalseを返す
+   * @memberof _
+   */
+  static getComps(searchCompName?: string): CompItem[] | boolean {
+    const items: ItemCollection | null = _.getItems();
+    const compsArray: CompItem[] = [];
+    if( items != null && items.length > 0 ){
+      const itemsArray: Item[] = _.Collection2Array(items);
+      alert(itemsArray.length);
+      for( const item of itemsArray ){
+        if( item instanceof CompItem ){
+          if( searchCompName ){
+            if( item.name === searchCompName ){
+              compsArray.push(item);
+            }
+            continue;
+          }
+          compsArray.push(item);
+        }
+      }
+      if( compsArray.length > 0 ){
+        return compsArray;
+      }
+      return false;
+    }
+    return false;
+  }
 
   /**
    * アクティブなプロジェクトのアイテムを取得する
