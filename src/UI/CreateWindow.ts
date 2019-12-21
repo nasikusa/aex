@@ -1,4 +1,4 @@
-import OpenWeb from '../component/command/OpenWeb';
+import OpenWeb from '../module/command/OpenWeb';
 
 interface UIPanel {
   open(window: Window): void | boolean;
@@ -25,6 +25,35 @@ export default class CreateWindow implements UIPanel {
 
   }
 
+  ex1(){
+
+    var wnd = new Window("palette", "Test Window", [0, 0, 250, 150]);
+    var checkA = wnd.add("checkbox", [30, 10, 220, 30],"入力欄を表示");
+    checkA.value=false;
+    checkA.visible = true;
+    var input: EditText = wnd.add("edittext", [30, 40, 220, 60]);
+    input.visible = false;
+    wnd.center();
+    wnd.show();
+
+    // checkA.addEventListener('')
+
+
+    checkA.onMouseOver = function(){
+      alert('hoge');
+    }
+
+    checkA.onClick = function(){
+        if(checkA.value == true){
+            input.visible = true;
+        }
+        else{
+            input.visible = false;
+        }
+    }
+
+  }
+
   exmaple() {
     var wnd = new Window("palette", "Test Window", [0, 0, 250, 150]);
     var checkA = wnd.add("checkbox", [30, 10, 220, 30],"入力欄を表示");
@@ -41,11 +70,6 @@ export default class CreateWindow implements UIPanel {
         else{
             input.visible = false;
         }
-    }
-
-    input.onEnterKey= function(e){
-      const openWeb = new OpenWeb();
-      openWeb.searchReference(input.text);
     }
 
   }

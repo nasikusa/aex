@@ -34,8 +34,7 @@ export default class _ extends Utils {
     const items: ItemCollection | null = _.getItems();
     const compsArray: CompItem[] = [];
     if (items != null && items.length > 0) {
-      const itemsArray: Item[] = _.Collection2Array(items);
-      alert(itemsArray.length);
+      const itemsArray: Item[] = _.ItemCollection2Array(items);
       for (const item of itemsArray) {
         if (item instanceof CompItem) {
           if (searchCompName) {
@@ -58,16 +57,30 @@ export default class _ extends Utils {
   /**
    * アクティブなプロジェクトのアイテムを取得する
    */
-  static getActiveItem(): Item | null {
-    const res = app.project.activeItem;
-    return res;
+  static getActiveItem(): Item | boolean {
+    const res: Item  | null= app.project.activeItem;
+    return res ? res : false;
   }
 
-  static getSelectedItems(): Item[] | false {
-    const selectedItem = app.project.selection;
+  /**
+   *選択されているプロジェクトアイテムを取得する
+   *
+   * @static
+   * @returns {(Item[] | false)}
+   * @memberof _
+   */
+  static getSelectedItems(isReturnAsArray: boolean = false): Item[] | false {
+    const selectedItem: Item[] = app.project.selection;
     return selectedItem.length > 0 ? selectedItem : false;
   }
 
+  /**
+   *プロジェクトアイテムが選択されているかを返す
+   *
+   * @static
+   * @returns {boolean}
+   * @memberof _
+   */
   static isItemSelected(): boolean {
     return _.getSelectedItems() ? true : false;
   }
@@ -77,12 +90,18 @@ export default class _ extends Utils {
    *
    * @todo selectedLayersの型定義、プロパティが無い？
    */
-  static getSelectedLayers(): LayerCollection | boolean {
+  static getSelectedLayers( returnAsArray: boolean = false ): LayerCollection | Layer[] | boolean {
     const selectedLayers: LayerCollection =
       // @ts-ignore
       app.project.activeItem.selectedLayers;
     if (selectedLayers.length > 0) {
-      return selectedLayers;
+      if( returnAsArray ){
+        const returnedArray = _.LayerCollection2Array(selectedLayers);
+        alert(returnedArray.length);
+        return returnedArray;
+      }else{
+        return selectedLayers;
+      }
     } else {
       return false;
     }
@@ -125,12 +144,45 @@ export default class _ extends Utils {
    * @returns {Item[]}
    * @memberof Utils
    */
-  static Collection2Array(inputCollection: ItemCollection): Item[] {
-    const resultArray: Item[] = [];
+  static Collection2Array(inputCollection: ItemCollection | LayerCollection): Item[] | Layer[] {
+    const resultArray: Item[] | Layer[] = [];
     for (let i = 0; i < inputCollection.length; i++) {
-      const item = inputCollection[i + 1];
+      const item = inputCollection[i];
       if (item != null) {
         resultArray[i] = item;
+      }
+    }
+    return resultArray;
+  }
+
+  static ItemCollection2Array(inputCollection: ItemCollection): Item[]{
+    const returnedArray = _.Collection2Array(inputCollection);
+    const resultArray: Item[] = [];
+    for( const item of returnedArray ){
+      if( item instanceof Item ){
+        resultArray.push(item);
+      }
+    }
+    return resultArray;
+  }
+
+  /**
+   *
+   *
+   * @static
+   * @param {LayerCollection} inputCollection
+   * @returns {Layer[]}
+   * @memberof _
+   * @todo 動いていない
+   */
+  static LayerCollection2Array(inputCollection: LayerCollection): Layer[]{
+    const returnedArray = _.Collection2Array(inputCollection);
+    const resultArray: Layer[] = [];
+    for( const item of returnedArray ){
+
+      alert(`is instanceof compItem ${item instanceof CompItem}`);
+      if( item instanceof Layer ){
+        resultArray.push(item);
       }
     }
     return resultArray;
@@ -140,14 +192,20 @@ export default class _ extends Utils {
    * プロジェクトを開く
    * @param name
    */
-  static openProject(name: string) {
+  static openProject(name: string): Project | boolean {
     const file = new File(name);
-    if (file.exists) {
-      const new_project = app.open(file);
-      return new_project;
+    if (file.exists && file != null) {
+      const new_project: Project | null = app.open(file);
+      if( new_project != null ){
+        return new_project;
+      }else{
+        return false;
+      }
     }
+    return false;
   }
 
+  // temp
   static addAdjustmentLayer() {
     var color = [1, 1, 1];
     var name = '調整レイヤー';
@@ -209,7 +267,7 @@ export default class _ extends Utils {
 
   static changeCompDuration(
     duration,
-    item: Item | null = _.getActiveItem()
+    item: Item | boolean = _.getActiveItem()
   ): number | undefined {
     if (_.getType(item) === 'CompItem') {
       // @ts-ignore
@@ -220,7 +278,7 @@ export default class _ extends Utils {
   }
 
   static getCompDuration(
-    item: Item | null = _.getActiveItem()
+    item: Item | boolean = _.getActiveItem()
   ): number | undefined {
     if (_.getType(item) === 'CompItem') {
       // @ts-ignore

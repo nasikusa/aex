@@ -1,77 +1,45 @@
+/// <reference path="../typings/types_for_adobe/JavaScript.d.ts" />
+/// <reference path="../typings/types_for_adobe/ScriptUI.d.ts" />
+/// <reference path="../typings/types_for_adobe/global.d.ts" />
+/// <reference path="../typings/types_for_adobe/AfterEffects.d.ts" />
+/// <reference path="../typings/aftereffects/ae.d.ts" />
+
 import "extendscript-es5-shim-ts";
 
-import Polyfill from './base/Polyfill';
-import BaseInfo from './base/BaseInfo';
+// import Polyfill from './base/Polyfill';
+// import BaseInfo from './base/BaseInfo';
 import _ from './base/_';
-import OpenWeb from './component/OpenWeb';
-import CreateWindow from './UI/CreateWindow';
-import CreateFolder from './component/CreateFolder';
-import LoadTemplate from './component/LoadTemplate';
-import LoadFootage from './component/LoadFootage';
-import {URLs} from './data/URLs';
-import CallCommand from './base/CallCommand';
-import OpenFolder from './component/OpenFolder';
-import CreateLayer from './component/CreateLayer';
-import SetEffects from './component/SetEffects';
-import EF from './component/effect/EF';
-
-// alert(EF.byQ("l"));
-
-// const se = new SetEffects();
-// // se.dropBlack();
-// se.setColorPreset();
-
-// const cw = new CreateWindow();
-// cw.exmaple();
+// import OpenWeb from './module/command/OpenWeb';
+// import CreateWindow from './UI/CreateWindow';
+// import CreateFolder from './module/CreateFolder';
+// import LoadTemplate from './module/LoadTemplate';
+// import LoadFootage from './module/LoadFootage';
+// import {URLs} from './data/URLs';
+// import CallCommand from './module/command/CallCommand';
+// import OpenPath from './module/command/OpenPath';
+// import CreateLayer from './module/CreateLayer';
+// import SetEffects from './module/SetEffects';
+// import EF from './module/effect/EF';
+// import OpenWebReference from "./module/command/OpenWebReference";
+import Debug from './debug/Debug';
 
 
+// const createWindow = new CreateWindow();
+// createWindow.ex1();
 
+// if( !(res instanceof LayerCollection) && typeof res !== "boolean" ){
+//   alert('init');
+//   for( let val of res ){
+//     alert(val.name);
+//   }
+// }
 
-const openWeb = new OpenWeb();
-openWeb.searchReference("マンタ");
-// const loadFootage = new LoadFootage();
-// loadFootage.load();
-
-// const active = _.getActiveItem();
-// //@ts-ignore
-// active.layers.addNull();
-
-// const createlayer = new CreateLayer();
-// createlayer.createAdjustment();
-
-// const loadfootage = new LoadFootage();
-// loadfootage.setSequenceByProject('fish1');
-// // loadfootage.setSequenceByFolder("D:/googledrive/render/fish1/", ["solid","shadow","line"], "Image0001.png");
-// // loadfootage.setItem("D:/googledrive/render/fish1/line/Image0001.png" , true);
-// // loadfootage.setItem("D:/googledrive/render/fish1/solid/Image0001.png" , true);
-// // loadfootage.setItem("D:/googledrive/render/fish1/shadow/Image0001.png" , true);
-// loadfootage.load();
-
-// const cm = new CallCommand();
-
-// const item = _.getSelectedLayers();
-// // alert(item[0].property("effect")(1)(1).setValue(30));
-// // alert(item[0].property("effect")("ADBE Paint Bucket")("ADBE Paint Bucket-0001").value);
-// alert(item[0].property("effect").addProperty('ADBE Paint Bucket'));
-
-
-// app.project.item(1).layer(1).addProperty("ブラー(ガウス)");
-// app.project.item(1).layer(1)("Effects")("Fast Blur")("Blurriness").setValue(17);
-
-
-// cm.setCommand("dir");
-// const res = cm.exec();
-// alert(res);
-
-// const opf = new OpenFolder();
-// opf.addFolderByName("material-water");
-// opf.open();
-
-
-// _.addAdj();
-// callCommand.open();
-
-// @ts-ignore
-// const options = new ImportOptions(new File("D:/googledrive/render/temp/solid/Image0001.png"));
-// // options.sequence = true;
-// app.project.importFile(options);  
+// const item = _.getItems();
+// if( item != null ){
+//   alert(item.length);
+//   for(let i = 0; i < item.length ; i++){
+//     if( item[i+1] instanceof CompItem ){
+//       alert(item[i+1].name);
+//     }
+//   }
+// }
