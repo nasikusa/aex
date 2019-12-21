@@ -1,6 +1,6 @@
 import {URLs, SeachUrls} from '../../data/URLs';
 import _ from '../../base/_';
-import CallCommand from '../../base/CallCommand';
+import CallCommand from './CallCommand';
 
 export default class OpenWeb {
 

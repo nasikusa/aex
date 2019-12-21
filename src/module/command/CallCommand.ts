@@ -1,5 +1,5 @@
-import _ from '../base/_';
-import BaseInfo from '../base/BaseInfo';
+import _ from '../../base/_';
+import BaseInfo from '../../base/BaseInfo';
 
 /**
  * AEからコマンドラインにコマンドを実行させるためのクラス
@@ -114,7 +114,7 @@ export default class CallCommand {
    * @param {boolean} isReturnOnlyBoolean コマンドラインの実行結果を返すのではなく、成否のboolのみを返すか
    * @returns {string | boolean} コマンドの実行結果を返す。失敗した場合はfalseを返す。
    * @memberof CallCommand
-   * @todo mac対応 , コマンドの返り値の確認
+   * @todo mac対応 , コマンドの返り値の確認 , セキュリティ
    */
   exec( isReturnOnlyBoolean = false): string | boolean{
 

@@ -1,4 +1,4 @@
-import CallCommand from '../../base/CallCommand';
+import CallCommand from './CallCommand';
 import {Folders} from '../../data/Folders';
 import _ from '../../base/_';
 
