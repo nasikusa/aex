@@ -23,4 +23,12 @@ export default class Debug {
     }
   }
 
+  static alertWithTitle(title: string , input: any){
+    alert(`${title} : ${input}`);
+  }
+
+  static at(title: string, input: any){
+    Debug.alertWithTitle(title,input);
+  }
+
 };
