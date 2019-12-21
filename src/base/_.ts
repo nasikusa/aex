@@ -60,7 +60,15 @@ export default class _ extends Utils{
    */
   static getSelectedLayers(): CompItem | null{
     // @ts-ignore
-    return app.project.activeItem.selectedLayers;
+  /**
+   *レイヤーが選択されているかどうかを判定する
+   *
+   * @static
+   * @returns {boolean}
+   * @memberof _
+   */
+  static isLayerSelected(): boolean{
+    return _.getSelectedLayers() ? true : false;
   }
 
   static getSelectedProps(){
