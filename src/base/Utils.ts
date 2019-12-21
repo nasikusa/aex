@@ -50,4 +50,42 @@ export default class Utils {
     return false;
   }
 
+  // https://ics.media/entry/11292/
+  static getAddRandom(): number{
+    return (Math.random() + Math.random()) / 2;
+  }
+
+  static getMultiplyRandom(): number {
+    return Math.random() * Math.random()
+  }
+
+  static getSqrtRandom(): number {
+    return Math.sqrt(Math.random());
+  }
+
+  static getNormalRandom(): number{
+    // 0.0未満、1.0以上になるケースがあるため
+    // その時は再計算を行う
+    var value;
+    while (true) {
+      value = Utils.calcNormal();
+      if (0 <= value && value < 1) {
+        break;
+      }
+    }
+    return value;
+  }
+
+  static calcNormal(): number {
+    // 正規乱数
+    var r1 = Math.random();
+    var r2 = Math.random();
+    var value =
+      Math.sqrt(-2.0 * Math.log(r1)) *
+      Math.sin(2.0 * Math.PI * r2);
+    // 値を0以上1未満になるよう正規化する
+    value = (value + 3) / 6;
+    return value;
+  }
+
 }
