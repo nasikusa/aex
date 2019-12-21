@@ -1,14 +1,17 @@
 const path = require('path');
 const webpack = require("webpack");
-// const TerserPlugin = require('terser-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ENV = process.env.NODE_ENV || 'development'
 
 module.exports = {
-  mode: 'development',
-  entry: "./src/main.ts",
+  mode: ENV,
+  entry: {
+    'main': './src/main.ts',
+    'SearchUnsplash': './src/generate/SearchUnsplash.ts'
+  },
   output: {
     path: path.resolve(__dirname , 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].js'
   },
   module: {
     rules: [
