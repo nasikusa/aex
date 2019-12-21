@@ -1,9 +1,8 @@
-import {URLs, SeachUrls} from '../../data/URLs';
+import { URLs, SeachUrls } from '../../data/URLs';
 import _ from '../../base/_';
 import CallCommand from './CallCommand';
 
 export default class OpenWeb {
-
   /**
    * urlをセットするための配列
    *
@@ -17,11 +16,11 @@ export default class OpenWeb {
    * @param inputUrl
    */
   constructor(inputUrl: string | string[] | null = null) {
-    if( inputUrl != null ){
-      if( typeof inputUrl === "string" && _.getType(inputUrl) === "string" ){
+    if (inputUrl != null) {
+      if (typeof inputUrl === 'string' && _.getType(inputUrl) === 'string') {
         this.setUrl(inputUrl);
       }
-      if( typeof inputUrl === "object" && _.getType(inputUrl) === "array" ){
+      if (typeof inputUrl === 'object' && _.getType(inputUrl) === 'array') {
         this.setUrls(inputUrl);
       }
     }
@@ -40,8 +39,8 @@ export default class OpenWeb {
    * 複数のURLをまとめてセットする
    * @param urlArray
    */
-  setUrls(urlArray: string[]): OpenWeb{
-    for( const url of urlArray ){
+  setUrls(urlArray: string[]): OpenWeb {
+    for (const url of urlArray) {
       this.urls.push(url);
     }
     return this;
@@ -54,10 +53,10 @@ export default class OpenWeb {
    * @memberof OpenWeb
    * @return {boolean} 成功すればtrue,失敗すればfalse
    */
-  setUrlByName(urlObjectName: string): boolean{
+  setUrlByName(urlObjectName: string): boolean {
     const urlObject = URLs[urlObjectName];
-    if( urlObject != null ){
-      this.urls.push( urlObject.url );
+    if (urlObject != null) {
+      this.urls.push(urlObject.url);
       return true;
     }
     return false;
@@ -70,8 +69,8 @@ export default class OpenWeb {
    * @returns {(string | undefined)}
    * @memberof OpenWeb
    */
-  getUrl(order: number): string | undefined{
-    if( this.urls[order] != null ){
+  getUrl(order: number): string | undefined {
+    if (this.urls[order] != null) {
       return this.urls[order];
     }
   }
@@ -79,20 +78,18 @@ export default class OpenWeb {
   /**
    * セットされたURL配列を取得する
    */
-  getUrls():string[] {
+  getUrls(): string[] {
     return this.urls;
   }
 
   /**
    * セットされたすべてのURL配列を削除する
    */
-  removeAllUrl(): void{
+  removeAllUrl(): void {
     this.urls = [];
   }
 
-  search(){
-
-  }
+  search() {}
 
   /**
    * webページを開くコマンドを実行する関数
@@ -100,15 +97,14 @@ export default class OpenWeb {
    * @returns {boolean}
    * @memberof OpenWeb
    */
-  open(): boolean{
-    if( this.urls.length !== 0 ){
-
+  open(): boolean {
+    if (this.urls.length !== 0) {
       /**
        * 一時的にコマンドを入れておくための配列
        */
       const CommandArray: string[] = [];
 
-      for( let i = 0 ; i < this.urls.length ; i++ ){
+      for (let i = 0; i < this.urls.length; i++) {
         CommandArray.push(`start ${this.urls[i]}`);
       }
 
@@ -119,7 +115,4 @@ export default class OpenWeb {
     }
     return false;
   }
-
-
-
 }
