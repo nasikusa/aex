@@ -1,3 +1,9 @@
+/**
+ *ExtendScript由来でない、通常のJS関連のユーティリティ関数をここに格納します。
+ *
+ * @export
+ * @class Utils
+ */
 export default class Utils {
 
   /**
