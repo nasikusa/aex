@@ -1,13 +1,14 @@
 import "extendscript-es5-shim-ts";
 
 export default class BaseInfo{
-  public encoding: string;
-  public version: string;
-  public lang: string;
-  public os: string;
-  public locale: string;
-  public screen: any;
-  public info: {[key:string]: string};
+
+  public readonly encoding: string;
+  public readonly version: string;
+  public readonly lang: string;
+  public readonly os: string;
+  public readonly locale: string;
+  public readonly screen: any;
+  public readonly info: {[key:string]: string};
 
   constructor(){
     this.encoding = $.appEncoding;
