@@ -8,7 +8,6 @@ import BaseInfo from '../../base/BaseInfo';
  * @class CallCommand
  */
 export default class CallCommand {
-
   /**
    * 実行するコマンド文章を入れる配列
    *
@@ -25,7 +24,7 @@ export default class CallCommand {
    * @type {string}
    * @memberof CallCommand
    */
-  protected result: string = "";
+  protected result: string = '';
 
   /**
    * OS情報などwin,mac対応のためにベースとなる基礎情報を取得します。
@@ -41,8 +40,8 @@ export default class CallCommand {
    * @param {(string | string[] | null)} [str=null] コマンド文章
    * @memberof CallCommand
    */
-  constructor(inputComandStr: string | string[] | null = null){
-    if( inputComandStr != null ){
+  constructor(inputComandStr: string | string[] | null = null) {
+    if (inputComandStr != null) {
       this.setCommand(inputComandStr);
       this.setResult();
     }
@@ -55,8 +54,8 @@ export default class CallCommand {
    * @returns {string}
    * @memberof CallCommand
    */
-  getResult( isUpdate: boolean = true ): string{
-    if( isUpdate ){
+  getResult(isUpdate: boolean = true): string {
+    if (isUpdate) {
       this.setResult();
     }
     return this.result;
@@ -68,17 +67,17 @@ export default class CallCommand {
    * @memberof CallCommand
    * @return {boolean} 成功すればtrue , 失敗すればfalse
    */
-  setResult(): boolean{
-    this.result = "";
-    for( let i = 0 ; i < this.command.length; i++ ){
-      if( i === this.command.length - 1 ){
-        this.result += `${this.command[i]}`
+  setResult(): boolean {
+    this.result = '';
+    for (let i = 0; i < this.command.length; i++) {
+      if (i === this.command.length - 1) {
+        this.result += `${this.command[i]}`;
       } else {
         this.result += `${this.command[i]} & `;
       }
     }
 
-    if( this.result != null && this.result === "" ){
+    if (this.result != null && this.result === '') {
       return true;
     }
     return false;
@@ -92,20 +91,19 @@ export default class CallCommand {
    * @returns {string[]} コマンド配列
    * @memberof CallCommand
    */
-  setCommand(str: string | string[] , isUpdateResult: boolean = true): string[]{
+  setCommand(str: string | string[], isUpdateResult: boolean = true): string[] {
     this.command = [];
-    if( _.getType(str) === "string" && typeof str === "string" ){
+    if (_.getType(str) === 'string' && typeof str === 'string') {
       this.command.push(str);
-    } else if(  _.getType(str) === "array" && typeof str === "object" ) {
+    } else if (_.getType(str) === 'array' && typeof str === 'object') {
       this.command = str;
     }
 
-    if(isUpdateResult){
+    if (isUpdateResult) {
       this.setResult();
     }
 
     return this.command;
-
   }
 
   /**
@@ -116,26 +114,28 @@ export default class CallCommand {
    * @memberof CallCommand
    * @todo mac対応 , コマンドの返り値の確認 , セキュリティ
    */
-  exec( isReturnOnlyBoolean = false): string | boolean{
-
+  exec(isReturnOnlyBoolean = false): string | boolean {
     /**
      * コマンドを実行したあとに、返ってきた文字列をここに格納する
      */
-    let callCommandResult:string = "";
+    let callCommandResult: string = '';
 
-    if( this.info.isWindows() ){
+    if (this.info.isWindows()) {
       callCommandResult = system.callSystem(`cmd.exe /c \"${this.result} /t\"`);
 
-      if( isReturnOnlyBoolean ){
+      if (isReturnOnlyBoolean) {
         return true;
       }
     }
 
-    if( callCommandResult != null && callCommandResult !== "" && isReturnOnlyBoolean === false ){
+    if (
+      callCommandResult != null &&
+      callCommandResult !== '' &&
+      isReturnOnlyBoolean === false
+    ) {
       return callCommandResult;
-    }else{
+    } else {
       return false;
     }
   }
-
 }
