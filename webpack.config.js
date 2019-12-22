@@ -26,9 +26,9 @@ module.exports = {
     extensions: [".ts"]
   },
   optimization: {
-    minimize: true,
-    minimizer: [new UglifyJsPlugin({
-      // include: /\.min\.js$/
-    })]
+    minimize: false,
+  //   minimizer: [new UglifyJsPlugin({
+  //     // include: /\.min\.js$/
+  //   })]
   }
 };
