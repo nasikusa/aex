@@ -6,7 +6,8 @@
     "build": "webpack -d",
     "watch": "webpack -w",
     "build-lib": "webpack -w --config webpack.lib.js",
-    "fmt": "prettier --write /src/**/*.ts"
+    "fmt": "prettier --write /src/**/*.ts",
+    "typedoc": "typedoc --out ./docs/ ./src/"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.12.0",
@@ -18,7 +19,7 @@
     "prettier": "^1.19.1",
     "terser-webpack-plugin": "^2.3.0",
     "ts-loader": "^5.4.3",
-    "typescript": "^3.4.4",
+    "typescript": "^3.7.4",
     "typescript-eslint": "0.0.1-alpha.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "webpack": "^4.30.0",
@@ -28,6 +29,7 @@
   "dependencies": {
     "@types/node": "^12.12.11",
     "extendscript-es5-shim-ts": "0.0.1",
+    "typedoc": "^0.15.5",
     "types-for-adobe": "^1.5.0"
   },
   "repository": {
