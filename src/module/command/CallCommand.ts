@@ -1,11 +1,13 @@
 import _ from '../../base/_';
 import BaseInfo from '../../base/BaseInfo';
+import Debug from '../../debug/Debug';
 
 /**
  * AEからコマンドラインにコマンドを実行させるためのクラス
  *
  * @export
  * @class CallCommand
+ * @todo 複数コマンド時のcd & xx で移動できていない？
  */
 export default class CallCommand {
   /**
@@ -36,11 +38,51 @@ export default class CallCommand {
   protected info: BaseInfo = new BaseInfo();
 
   /**
-   * 生成時に引数にコマンドがセットされていれば入れる。なければそのまま。
-   * @param {(string | string[] | null)} [str=null] コマンド文章
+   *使用しているOSの種類を格納する
+   *
+   * @type {string}
    * @memberof CallCommand
    */
-  constructor(inputComandStr: string | string[] | null = null) {
+  public readonly os: string = _.isWindows() ? 'windows' : 'mac';
+
+  /**
+   *OSがwindowsであるか
+   *
+   * @type {boolean}
+   * @memberof CallCommand
+   */
+  public readonly isWindows: boolean = _.isWindows();
+
+  /**
+   *OSがMacであるか
+   *
+   * @type {boolean}
+   * @memberof CallCommand
+   */
+  public readonly isMac: boolean = _.isMac();
+
+  /**
+   *実行時に制限されるコマンドの配列(win)
+   *
+   * @type {string[]}
+   * @memberof CallCommand
+   */
+  public restrictedWinCommandName: string[] = ['del'];
+
+  /**
+   *実行時に制限されるコマンドの配列(mac)
+   *
+   * @type {string[]}
+   * @memberof CallCommand
+   */
+  public restrictedMacCommandName: string[] = ['rm'];
+
+  /**
+   * 生成時に引数にコマンドがセットされていれば入れる。なければそのまま。
+   * @param {(string | string[])} コマンド文章
+   * @memberof CallCommand
+   */
+  constructor(inputComandStr?: string | string[]) {
     if (inputComandStr != null) {
       this.setCommand(inputComandStr);
       this.setResult();
@@ -94,9 +136,13 @@ export default class CallCommand {
   setCommand(str: string | string[], isUpdateResult: boolean = true): string[] {
     this.command = [];
     if (_.getType(str) === 'string' && typeof str === 'string') {
+      str = _.trim(str);
       this.command.push(str);
     } else if (_.getType(str) === 'array' && typeof str === 'object') {
-      this.command = str;
+      for (let commandStr of str) {
+        commandStr = _.trim(commandStr);
+        this.command.push(commandStr);
+      }
     }
 
     if (isUpdateResult) {
@@ -106,26 +152,77 @@ export default class CallCommand {
     return this.command;
   }
 
+  check(): boolean {
+    let restrictedStrings: string[] = [];
+    if (this.isWindows) {
+      restrictedStrings = this.restrictedWinCommandName;
+    } else if (this.isMac) {
+      restrictedStrings = this.restrictedMacCommandName;
+    }
+
+    for (let i = 0; i < restrictedStrings.length; i++) {
+      let rgep = new RegExp(`^${restrictedStrings[i]}`, 'i');
+      for (let j = 0; j < this.command.length; j++) {
+        if (rgep.test(this.command[j])) {
+          return false;
+        }
+      }
+    }
+
+    return true;
+  }
+
+  /**
+   *すべてのセットされたコマンドを削除する
+   *
+   * @return {boolean} 成否
+   * @memberof CallCommand
+   */
+  removeAllCommands(): boolean {
+    this.command.length = 0;
+    if (this.command === []) {
+      return true;
+    }
+    return false;
+  }
+
   /**
    * コマンドを実行する関数
    *
+   * @param {boolean} isRemoveCommandAfterExec コマンドを実行した後に、コマンド配列の中身を削除するかどうか
    * @param {boolean} isReturnOnlyBoolean コマンドラインの実行結果を返すのではなく、成否のboolのみを返すか
+   * @param {boolean} isForceExecRestrictedCommand 制限されたコマンドを強制的に実行するか
    * @returns {string | boolean} コマンドの実行結果を返す。失敗した場合はfalseを返す。
    * @memberof CallCommand
-   * @todo mac対応 , コマンドの返り値の確認 , セキュリティ
+   * @todo mac対応  , セキュリティ
    */
-  exec(isReturnOnlyBoolean = false): string | boolean {
+  exec(
+    isRemoveCommandAfterExec: boolean = true,
+    isReturnOnlyBoolean: boolean = false,
+    isForceExecRestrictedCommand: boolean = false
+  ): string | boolean {
     /**
      * コマンドを実行したあとに、返ってきた文字列をここに格納する
      */
     let callCommandResult: string = '';
 
-    if (this.info.isWindows()) {
+    if (!this.check() && isForceExecRestrictedCommand === false) {
+      return false;
+    }
+
+    if (this.isWindows) {
       callCommandResult = system.callSystem(`cmd.exe /c \"${this.result} /t\"`);
+
+      if (isRemoveCommandAfterExec) {
+        this.removeAllCommands();
+      }
 
       if (isReturnOnlyBoolean) {
         return true;
       }
+    } else if (this.isMac) {
+      alert('現在mac用のコマンド関数は用意されていません。');
+      return false;
     }
 
     if (
