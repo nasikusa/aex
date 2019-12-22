@@ -67,7 +67,7 @@ export default class CallCommand {
    * @type {string[]}
    * @memberof CallCommand
    */
-  public restrictedWinCommandName: string[] = ['del'];
+  protected restrictedWinCommandName: string[] = ['del'];
 
   /**
    *実行時に制限されるコマンドの配列(mac)
@@ -75,7 +75,7 @@ export default class CallCommand {
    * @type {string[]}
    * @memberof CallCommand
    */
-  public restrictedMacCommandName: string[] = ['rm'];
+  protected restrictedMacCommandName: string[] = ['rm'];
 
   /**
    * 生成時に引数にコマンドがセットされていれば入れる。なければそのまま。
@@ -152,6 +152,31 @@ export default class CallCommand {
     return this.command;
   }
 
+  /**
+   *制限コマンドをセットする
+   *
+   * @param {string} commandName コマンド名
+   * @returns {string[]} 制限コマンド配列を返す
+   * @memberof CallCommand
+   */
+  setRestrictedCommand(commandName: string): string[] {
+    if (this.isWindows) {
+      this.restrictedWinCommandName.push(commandName);
+      return this.restrictedWinCommandName;
+    }
+
+    this.restrictedMacCommandName.push(commandName);
+    return this.restrictedMacCommandName;
+  }
+
+  removeRestrictedCommand(commandPosition?: number){
+
+  }
+
+  getRestrictedCommand(){
+
+  }
+
   check(): boolean {
     let restrictedStrings: string[] = [];
     if (this.isWindows) {
@@ -189,12 +214,12 @@ export default class CallCommand {
   /**
    * コマンドを実行する関数
    *
-   * @param {boolean} isRemoveCommandAfterExec コマンドを実行した後に、コマンド配列の中身を削除するかどうか
-   * @param {boolean} isReturnOnlyBoolean コマンドラインの実行結果を返すのではなく、成否のboolのみを返すか
-   * @param {boolean} isForceExecRestrictedCommand 制限されたコマンドを強制的に実行するか
+   * @param {boolean} isRemoveCommandAfterExec       コマンドを実行した後に、コマンド配列の中身を削除するかどうか
+   * @param {boolean} isReturnOnlyBoolean            コマンドラインの実行結果を返すのではなく、成否のboolのみを返すか
+   * @param {boolean} isForceExecRestrictedCommand   制限されたコマンドを強制的に実行するか
    * @returns {string | boolean} コマンドの実行結果を返す。失敗した場合はfalseを返す。
    * @memberof CallCommand
-   * @todo mac対応  , セキュリティ
+   * @todo mac対応
    */
   exec(
     isRemoveCommandAfterExec: boolean = true,
