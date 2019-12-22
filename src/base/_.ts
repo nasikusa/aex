@@ -237,7 +237,7 @@ export default class _ extends Utils {
    * @returns {boolean}
    * @memberof _
    */
-  static isWindow(): boolean {
+  static isWindows(): boolean {
     return Number($.os.toLowerCase().indexOf('windows')) !== -1;
   }
 
