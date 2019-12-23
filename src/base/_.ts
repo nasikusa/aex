@@ -285,4 +285,25 @@ export default class _ extends Utils {
       return item.duration;
     }
   }
+
+  /**
+   *スクリプトにネットワークとファイルへのアクセスができるかどうかを返す
+   *
+   * @returns {boolean}
+   * @memberof _
+   */
+  static hasPermissionToNetworkAccess(): boolean{
+    return app.preferences.getPrefAsLong("Main Pref Section", "Pref_SCRIPTING_FILE_NETWORK_SECURITY") === 1;
+  }
+
+  /**
+   *hasPermissionToNetworkAccess関数の省略形
+   *
+   * @returns {boolean}
+   * @memberof _
+   */
+  static hasAccessScript(): boolean{
+    return _.hasPermissionToNetworkAccess();
+  }
+
 }
