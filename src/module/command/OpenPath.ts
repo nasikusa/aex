@@ -1,15 +1,19 @@
 import CallCommand from './CallCommand';
-import {Folders} from '../../data/Folders';
+import { Folders } from '../../data/Folders';
 import _ from '../../base/_';
 
 export default class OpenPath {
 
+  /**
+   *開くパスの配列
+   *
+   * @type {string[]}
+   * @memberof OpenPath
+   */
   public paths: string[] = [];
 
-  constructor(path: string | string[] | null = null){
-
+  constructor(path?: string | string[]) {
     this.init(path);
-
   }
 
   /**
@@ -18,16 +22,14 @@ export default class OpenPath {
    * @param {(string | string[] | null)} [path=null]
    * @memberof OpenPath
    */
-  init(path: string | string[] | null = null) {
-
-    if( path != null ){
-      if( typeof path === "string" ){
+  init(path?: string | string[]) {
+    if (path != null) {
+      if (typeof path === 'string') {
         this.setPath(path);
-      } else if( typeof path === "object" && _.getType(path) === "array" ){
+      } else if (typeof path === 'object' && _.getType(path) === 'array') {
         this.setPaths(path);
       }
     }
-
   }
 
   /**
@@ -37,7 +39,7 @@ export default class OpenPath {
    * @returns {OpenPath}
    * @memberof OpenPath
    */
-  setPath(pathName: string): OpenPath{
+  setPath(pathName: string): OpenPath {
     this.paths.push(pathName);
     return this;
   }
@@ -49,9 +51,9 @@ export default class OpenPath {
    * @returns {OpenPath}
    * @memberof OpenPath
    */
-  setPaths(pathNameArray: string[]): OpenPath{
-    for( const pathName of pathNameArray ){
-      this.paths.push( pathName );
+  setPaths(pathNameArray: string[]): OpenPath {
+    for (const pathName of pathNameArray) {
+      this.paths.push(pathName);
     }
     return this;
   }
@@ -63,8 +65,8 @@ export default class OpenPath {
    * @returns {(boolean | string)} 失敗の際はfalse , 成功の際はパスを返す
    * @memberof OpenFolder
    */
-  setFolderByName(folderName: string): boolean | string{
-    if( Folders[folderName] != null ){
+  setFolderByName(folderName: string): boolean | string {
+    if (Folders[folderName] != null) {
       this.paths.push(Folders[folderName].path);
       return Folders[folderName].path;
     }
@@ -81,25 +83,23 @@ export default class OpenPath {
   }
 
   /**
-   * フォルダを開くコマンドを実行する
+   * パスを開くコマンドを実行する
    *
    * @returns {boolean}
    * @memberof OpenFolder
    */
-  open(): boolean{
+  open(): boolean {
+    let commandArray: string[] = [];
 
-    let commandArray:string[] = [];
-
-    for( let path of this.paths ){
+    for (let path of this.paths) {
       commandArray.push(`start ${path}`);
     }
 
     const callCommand = new CallCommand(commandArray);
 
-    if( callCommand.exec() ){
+    if (callCommand.exec(true, true)) {
       return true;
     }
     return false;
-
   }
 }
