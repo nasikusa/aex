@@ -1,7 +1,13 @@
-import { URLs, SeachUrls } from '../../data/URLs';
+import { URLs } from '../../data/URLs';
 import _ from '../../base/_';
 import CallCommand from './CallCommand';
 
+/**
+ *AEからWebサイトを開くためのクラス
+ *
+ * @export
+ * @class OpenWeb
+ */
 export default class OpenWeb {
   /**
    * urlをセットするための配列
@@ -15,7 +21,7 @@ export default class OpenWeb {
    * 初期化時にURLが引数にあれば、それをそのままセットする。なければスルー。
    * @param inputUrl
    */
-  constructor(inputUrl: string | string[] | null = null) {
+  constructor(inputUrl?: string | string[]) {
     if (inputUrl != null) {
       if (typeof inputUrl === 'string' && _.getType(inputUrl) === 'string') {
         this.setUrl(inputUrl);
@@ -38,6 +44,7 @@ export default class OpenWeb {
   /**
    * 複数のURLをまとめてセットする
    * @param urlArray
+   * @todo 上とまとめたほうがいい？、基本的なメソッドの形は一定にしたほうがいいのかも？
    */
   setUrls(urlArray: string[]): OpenWeb {
     for (const url of urlArray) {
@@ -109,9 +116,11 @@ export default class OpenWeb {
       }
 
       const callCommand = new CallCommand(CommandArray);
-      const isExecCommand = callCommand.exec(true);
-      //@ts-ignore
-      return isExecCommand;
+      const isExecCommand = callCommand.exec(true, true);
+      if (typeof isExecCommand === 'boolean') {
+        return isExecCommand;
+      }
+      return false;
     }
     return false;
   }
