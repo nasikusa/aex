@@ -1,4 +1,9 @@
-export const Folders = {
+interface FolderContent {
+  path: string;
+  type: string;
+}
+
+export const Folders: { [key: string]: FolderContent } = {
   materialWater: {
     path: 'D:/googledrive/material/water_color/',
     type: 'asset',
@@ -7,7 +12,7 @@ export const Folders = {
     path: 'D:/googledrive/material/',
     type: 'asset',
   },
-  'mateiral-gradation': {
+  mateiralGradation: {
     path: 'D:/googledrive/material/gradation/',
     type: 'asset',
   },
