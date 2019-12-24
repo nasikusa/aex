@@ -97,7 +97,6 @@ export default class _ extends Utils {
     if (selectedLayers.length > 0) {
       if( returnAsArray ){
         const returnedArray = _.LayerCollection2Array(selectedLayers);
-        alert(returnedArray.length);
         return returnedArray;
       }else{
         return selectedLayers;
