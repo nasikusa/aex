@@ -88,4 +88,8 @@ export default class Utils {
     return value;
   }
 
+  static getArrayDividedByLine(inputText: string): string[]{
+    return inputText.split(/\n/);
+  }
+
 }
