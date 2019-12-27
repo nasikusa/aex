@@ -18,21 +18,20 @@ interface AssetsFoldersObject {
   description: string;
 }
 
-
 /**
  *アプリケーションパスの保存用のオブジェクト
  */
 export const AppPath: { [key: string]: AppContent } = {
-  blender: {
+  Blender: {
     path: 'C:/Program Files/Blender Foundation/Blender 2.81/blender.exe',
     type: '3d',
   },
-  blender279: {
+  Blender79: {
     path: 'D:/googledrive/blender/blender-2.79b-windows64/blender.exe',
     type: '3d',
   },
   FotoSketcher: {
-    path: 'C:/Program Files/FotoSketcher',
+    path: 'C:/Program Files/FotoSketcher/FotoSketcher.exe',
     type: 'image',
   },
   AfterFX: {
