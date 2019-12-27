@@ -10,12 +10,12 @@ interface getDirOptionObject {
 }
 
 export default class CommandUtils {
-  public Command: CallCommand = new CallCommand();
+
 
   constructor() {}
 
   /**
-   *
+   *指定したパスのファイルやディレクトリを取得する
    *
    * @param {string} targetPath
    * @param {('F' | 'D' | 'FD')} type
@@ -29,8 +29,10 @@ export default class CommandUtils {
    * @returns {(string | string[])}
    * @memberof CommandUtils
    * @read https://proengineer.internous.co.jp/content/columnfeature/5043
+   * @read https://qiita.com/forty4_jp/items/f8b76b67e6d11f3deeb3
+   * @read https://hacknote.jp/archives/21461/
    */
-  getDir(
+  static getDir(
     targetPath: string,
     type: 'F' | 'D' | 'FD' ,
     optionObject: getDirOptionObject = {
@@ -41,6 +43,7 @@ export default class CommandUtils {
       isReturnAsArray: true,
     }
   ): string | string[] {
+    const callCommand = new CallCommand();
     let command = `dir "${targetPath}" /b`;
     switch(type){
       case 'F':
@@ -56,8 +59,8 @@ export default class CommandUtils {
     if (optionObject.isSearchSub) command += '/S ';
     if (optionObject.isNameOnly) command += '/D ';
     if (optionObject.sortOption != null) command += optionObject.sortOption;
-    this.Command.setCommand(command);
-    const result = this.Command.exec(true);
+    callCommand.setCommand(command);
+    const result = callCommand.exec(true);
     if (typeof result !== 'boolean') {
       if (optionObject.isReturnAsArray) {
         const resultArray = _.getArrayDividedByLine(result);
