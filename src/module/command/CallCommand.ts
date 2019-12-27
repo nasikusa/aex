@@ -61,6 +61,8 @@ export default class CallCommand {
    */
   public readonly isMac: boolean = _.isMac();
 
+  public readonly hasPermission: boolean = _.hasPermissionToNetworkAccess();
+
   /**
    *実行時に制限されるコマンドの配列(win)
    *
@@ -169,13 +171,9 @@ export default class CallCommand {
     return this.restrictedMacCommandName;
   }
 
-  removeRestrictedCommand(commandPosition?: number){
+  removeRestrictedCommand(commandPosition?: number) {}
 
-  }
-
-  getRestrictedCommand(){
-
-  }
+  getRestrictedCommand() {}
 
   check(): boolean {
     let restrictedStrings: string[] = [];
@@ -226,6 +224,15 @@ export default class CallCommand {
     isReturnOnlyBoolean: boolean = false,
     isForceExecRestrictedCommand: boolean = false
   ): string | boolean {
+
+    try{
+      if(!_.hasPermissionToNetworkAccess()){
+        throw new Error('このスクリプトを動かすためには設定画面で「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。');
+      }
+    }catch(e){
+      alert(e.message);
+    }
+
     /**
      * コマンドを実行したあとに、返ってきた文字列をここに格納する
      */
@@ -250,11 +257,7 @@ export default class CallCommand {
       return false;
     }
 
-    if (
-      callCommandResult != null &&
-      callCommandResult !== '' &&
-      isReturnOnlyBoolean === false
-    ) {
+    if (callCommandResult != null && callCommandResult !== '' && isReturnOnlyBoolean === false) {
       return callCommandResult;
     } else {
       return false;
