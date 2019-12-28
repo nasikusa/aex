@@ -1,6 +1,6 @@
-import _ from "../../base/_";
+import _ from "../../src/base/_";
 // import OpenWeb from "../../module/command/OpenWeb";
-import { SeachUrls } from "../../data/URLs";
+import { SeachUrls } from "../../src/data/URLs";
 import Aex from "../Aex.module";
 
 const d = SeachUrls.unsplash;

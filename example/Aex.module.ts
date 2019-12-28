@@ -1,4 +1,4 @@
-import openweb from '../module/command/OpenWeb';
+import openweb from '../src/module/command/OpenWeb';
 
 export default class Aex {
 

@@ -1,6 +1,6 @@
-import _ from "../base/_";
-import OpenWeb from "../module/command/OpenWeb";
-import {SeachUrls} from "../data/URLs";
+import _ from "../src/base/_";
+import OpenWeb from "../src/module/command/OpenWeb";
+import {SeachUrls} from "../src/data/URLs";
 
 const d = SeachUrls.unsplash;
 let url = `${d.url}?${d.searchQuery}=manta`;
