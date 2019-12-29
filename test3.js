@@ -1,3 +1,4 @@
+var globalThis = this;
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -81,7 +82,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -104,7 +105,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 exports.__esModule = true;
-var Utils_1 = __webpack_require__(2);
+var Utils_1 = __webpack_require__(5);
 var _ = (function (_super) {
     __extends(_, _super);
     function _() {
@@ -1643,221 +1644,6 @@ if (!String.prototype.trim) {
 "use strict";
 
 exports.__esModule = true;
-var Utils = (function () {
-    function Utils() {
-    }
-    Utils.getType = function (obj) {
-        var toString = Object.prototype.toString;
-        return toString
-            .call(obj)
-            .slice(8, -1)
-            .toLowerCase();
-    };
-    Utils.joinLine = function (inputArray) { };
-    Utils.getRandomFromArray = function (array) {
-        if (Array.isArray(array) && Utils.getType(array) === 'array') {
-            return array[Math.floor(Math.random() * array.length)];
-        }
-        return false;
-    };
-    Utils.randomMinMax = function (min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-    Utils.trim = function (inputString) {
-        return inputString.replace(/^\s+|\s+$/g, '');
-    };
-    Utils.getMinFromArray = function (inputArray) {
-        return Math.min.apply(Math, inputArray);
-    };
-    Utils.getMaxFromArray = function (inputArray) {
-        return Math.max.apply(Math, inputArray);
-    };
-    Utils.array2Empty = function (array) {
-        array.length = 0;
-        return array;
-    };
-    Utils.getAddRandom = function () {
-        return (Math.random() + Math.random()) / 2;
-    };
-    Utils.getMultiplyRandom = function () {
-        return Math.random() * Math.random();
-    };
-    Utils.getSqrtRandom = function () {
-        return Math.sqrt(Math.random());
-    };
-    Utils.getNormalRandom = function () {
-        var value;
-        while (true) {
-            value = Utils.calcNormal();
-            if (0 <= value && value < 1) {
-                break;
-            }
-        }
-        return value;
-    };
-    Utils.calcNormal = function () {
-        var r1 = Math.random();
-        var r2 = Math.random();
-        var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
-        value = (value + 3) / 6;
-        return value;
-    };
-    Utils.getArrayDividedByLine = function (inputText) {
-        return inputText.split(/\n/);
-    };
-    return Utils;
-}());
-exports["default"] = Utils;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-exports.URLs = {
-    'blend-monitoring': {
-        url: 'http://nasikusa.net/blend-monitoring'
-    },
-    colorSelector: {
-        url: 'http://nasikusa.net/practice/p39.html'
-    }
-};
-exports.SeachUrls = {
-    googleImage: {
-        type: 'image',
-        searchType: 'query',
-        url: 'https://www.google.com/search',
-        baseQuery: 'tbm=isch',
-        searchQuery: 'q',
-        expectedLang: 'all'
-    },
-    youtube: {
-        type: 'video',
-        searchType: 'query',
-        url: 'https://www.youtube.com/results',
-        baseQuery: '',
-        searchQuery: 'search_query',
-        expectedLang: 'all'
-    },
-    vimeo: {
-        type: 'video',
-        searchType: 'query',
-        url: 'https://vimeo.com/search',
-        baseQuery: '',
-        searchQuery: 'q',
-        expectedLang: 'english'
-    },
-    sketchfab: {
-        type: '3d',
-        searchType: 'query',
-        url: 'https://sketchfab.com/search',
-        baseQuery: '',
-        searchQuery: 'q',
-        expectedLang: 'english'
-    },
-    unsplash: {
-        type: 'image',
-        searchType: 'url',
-        url: 'https://unsplash.com/s/photos/',
-        baseQuery: '',
-        searchQuery: '',
-        expectedLang: 'english'
-    },
-    PAKUTASO: {
-        type: 'image',
-        searchType: 'query',
-        url: 'https://www.pakutaso.com/search.html',
-        baseQuery: 'offset=0&limit=20',
-        searchQuery: 'search',
-        expectedLang: 'japanese'
-    }
-};
-exports.MusicURLs = {};
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var URLs_1 = __webpack_require__(3);
-var _1 = __webpack_require__(0);
-var CallCommand_1 = __webpack_require__(5);
-var OpenWeb = (function () {
-    function OpenWeb(inputUrl) {
-        this.urls = [];
-        if (inputUrl != null) {
-            if (typeof inputUrl === 'string' && _1["default"].getType(inputUrl) === 'string') {
-                this.setUrl(inputUrl);
-            }
-            if (typeof inputUrl === 'object' && _1["default"].getType(inputUrl) === 'array') {
-                this.setUrls(inputUrl);
-            }
-        }
-    }
-    OpenWeb.prototype.setUrl = function (url) {
-        this.urls.push(url);
-        return this;
-    };
-    OpenWeb.prototype.setUrls = function (urlArray) {
-        for (var _i = 0, urlArray_1 = urlArray; _i < urlArray_1.length; _i++) {
-            var url = urlArray_1[_i];
-            this.urls.push(url);
-        }
-        return this;
-    };
-    OpenWeb.prototype.setUrlByName = function (urlObjectName) {
-        var urlObject = URLs_1.URLs[urlObjectName];
-        if (urlObject != null) {
-            this.urls.push(urlObject.url);
-            return true;
-        }
-        return false;
-    };
-    OpenWeb.prototype.getUrl = function (order) {
-        if (this.urls[order] != null) {
-            return this.urls[order];
-        }
-    };
-    OpenWeb.prototype.getUrls = function () {
-        return this.urls;
-    };
-    OpenWeb.prototype.removeAllUrl = function () {
-        this.urls = [];
-    };
-    OpenWeb.prototype.search = function () { };
-    OpenWeb.prototype.open = function () {
-        if (this.urls.length !== 0) {
-            var CommandArray = [];
-            for (var i = 0; i < this.urls.length; i++) {
-                CommandArray.push("start " + this.urls[i]);
-            }
-            var callCommand = new CallCommand_1["default"](CommandArray);
-            var isExecCommand = callCommand.exec(true, true);
-            if (typeof isExecCommand === 'boolean') {
-                return isExecCommand;
-            }
-            return false;
-        }
-        return false;
-    };
-    return OpenWeb;
-}());
-exports["default"] = OpenWeb;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
 var _1 = __webpack_require__(0);
 var BaseInfo_1 = __webpack_require__(6);
 var CallCommand = (function () {
@@ -1994,6 +1780,186 @@ exports["default"] = CallCommand;
 
 
 /***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+__webpack_require__(1);
+var OpenPath_1 = __webpack_require__(4);
+var FuzzyOpen_1 = __webpack_require__(9);
+var thisObject = globalThis || {};
+var wnd = (thisObject instanceof Panel) ? thisObject : new Window("palette", "Dockable Script", undefined, { resizeable: true, closeButton: true });
+wnd.margins = 20;
+var st = wnd.add('statictext', { x: 0, y: 0, width: 180, height: 16 }, '');
+var contentsGrp = wnd.add('group', undefined, 'contentsGrp');
+contentsGrp.orientation = 'column';
+var et = wnd.add('edittext', { x: 0, y: 16, width: 180, height: 16 }, 'search txt');
+et.onEnterKey = function () {
+    var fuzzy = new FuzzyOpen_1["default"]('D:/googledrive/material', 'D');
+    var result = fuzzy.search(et.text);
+    if (typeof result !== 'boolean') {
+        var openPath = new OpenPath_1["default"](result[0][1]);
+        openPath.open();
+    }
+};
+et.onChanging = function () {
+    var fuzzy = new FuzzyOpen_1["default"]('D:/googledrive/material', 'D');
+    var result = fuzzy.search(et.text);
+    if (typeof result !== 'boolean') {
+        st.text = result[0][0];
+    }
+};
+wnd.layout.layout(true);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var CallCommand_1 = __webpack_require__(2);
+var Folders_1 = __webpack_require__(7);
+var Paths_1 = __webpack_require__(8);
+var _1 = __webpack_require__(0);
+var OpenPath = (function () {
+    function OpenPath(path) {
+        this.paths = [];
+        this.init(path);
+    }
+    OpenPath.prototype.init = function (path) {
+        if (path != null) {
+            if (typeof path === 'string') {
+                this.setPath(path);
+            }
+            else if (typeof path === 'object' && _1["default"].getType(path) === 'array') {
+                this.setPaths(path);
+            }
+        }
+    };
+    OpenPath.prototype.setPath = function (pathName) {
+        this.paths.push(pathName);
+        return this;
+    };
+    OpenPath.prototype.setPaths = function (pathNameArray) {
+        for (var _i = 0, pathNameArray_1 = pathNameArray; _i < pathNameArray_1.length; _i++) {
+            var pathName = pathNameArray_1[_i];
+            this.paths.push(pathName);
+        }
+        return this;
+    };
+    OpenPath.prototype.setFolderByName = function (folderName) {
+        if (Folders_1.Folders[folderName] != null) {
+            this.paths.push(Folders_1.Folders[folderName].path);
+            return true;
+        }
+        return false;
+    };
+    OpenPath.prototype.setAppByName = function (appName) {
+        if (Paths_1.AppPath[appName] != null) {
+            this.paths.push(" \"" + Paths_1.AppPath[appName].path + "\"");
+            return true;
+        }
+        return false;
+    };
+    OpenPath.prototype.removeAllPath = function () {
+        this.paths = [];
+    };
+    OpenPath.prototype.open = function () {
+        var commandArray = [];
+        for (var _i = 0, _a = this.paths; _i < _a.length; _i++) {
+            var path = _a[_i];
+            commandArray.push("start \"\" \"" + path + "\"");
+        }
+        var callCommand = new CallCommand_1["default"](commandArray);
+        if (callCommand.exec(true, true)) {
+            return true;
+        }
+        return false;
+    };
+    return OpenPath;
+}());
+exports["default"] = OpenPath;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var Utils = (function () {
+    function Utils() {
+    }
+    Utils.getType = function (obj) {
+        var toString = Object.prototype.toString;
+        return toString
+            .call(obj)
+            .slice(8, -1)
+            .toLowerCase();
+    };
+    Utils.joinLine = function (inputArray) { };
+    Utils.getRandomFromArray = function (array) {
+        if (Array.isArray(array) && Utils.getType(array) === 'array') {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+        return false;
+    };
+    Utils.randomMinMax = function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    Utils.trim = function (inputString) {
+        return inputString.replace(/^\s+|\s+$/g, '');
+    };
+    Utils.getMinFromArray = function (inputArray) {
+        return Math.min.apply(Math, inputArray);
+    };
+    Utils.getMaxFromArray = function (inputArray) {
+        return Math.max.apply(Math, inputArray);
+    };
+    Utils.array2Empty = function (array) {
+        array.length = 0;
+        return array;
+    };
+    Utils.getAddRandom = function () {
+        return (Math.random() + Math.random()) / 2;
+    };
+    Utils.getMultiplyRandom = function () {
+        return Math.random() * Math.random();
+    };
+    Utils.getSqrtRandom = function () {
+        return Math.sqrt(Math.random());
+    };
+    Utils.getNormalRandom = function () {
+        var value;
+        while (true) {
+            value = Utils.calcNormal();
+            if (0 <= value && value < 1) {
+                break;
+            }
+        }
+        return value;
+    };
+    Utils.calcNormal = function () {
+        var r1 = Math.random();
+        var r2 = Math.random();
+        var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+        value = (value + 3) / 6;
+        return value;
+    };
+    Utils.getArrayDividedByLine = function (inputText) {
+        return inputText.split(/\n/);
+    };
+    return Utils;
+}());
+exports["default"] = Utils;
+
+
+/***/ }),
 /* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2035,21 +2001,586 @@ exports["default"] = BaseInfo;
 
 
 /***/ }),
-/* 7 */,
-/* 8 */,
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+exports.Folders = {
+    materialWater: {
+        path: 'D:/googledrive/material/water_color/',
+        type: 'asset',
+    },
+    material: {
+        path: 'D:/googledrive/material/',
+        type: 'asset',
+    },
+    mateiralGradation: {
+        path: 'D:/googledrive/material/gradation/',
+        type: 'asset',
+    },
+    render: {
+        path: 'D:/googledrive/render/',
+        type: 'render',
+    },
+    idea: {
+        path: 'D:/googledrive/idea/',
+        type: 'idea',
+    },
+    project: {
+        path: 'D:/googledrive/works/',
+        type: 'project',
+    },
+};
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+exports.AppPath = {
+    Blender: {
+        path: 'C:/Program Files/Blender Foundation/Blender 2.81/blender.exe',
+        type: '3d',
+    },
+    Blender79: {
+        path: 'D:/googledrive/blender/blender-2.79b-windows64/blender.exe',
+        type: '3d',
+    },
+    FotoSketcher: {
+        path: 'C:/Program Files/FotoSketcher/FotoSketcher.exe',
+        type: 'image',
+    },
+    AfterFX: {
+        path: 'C:/Program Files/Adobe After Effects 2020/Support Files/AfterFX.exe',
+        type: 'script',
+    },
+    PhotoShop: {
+        path: 'C:/Program Files/Adobe Photoshop 2020/Photoshop.exe',
+        type: 'image',
+    },
+    MediaEncoder: {
+        path: 'C:/Program Files/Adobe Media Encoder 2020/Adobe Media Encoder.exe',
+        type: 'video',
+    },
+    PureRef: {
+        path: 'C:/Program Files/PureRef/PureRef.exe',
+        type: 'reference',
+    },
+    Evernote: {
+        path: 'C:/Program Files (x86)/Evernote/Evernote/Evernote.exe',
+        type: 'text',
+    },
+    ScreenToGif: {
+        path: 'C:/Program Files (x86)/ScreenToGif/ScreenToGif.exe',
+        type: 'video',
+    },
+    WizTree: {
+        path: 'C:/Program Files (x86)/WizTree',
+        type: 'utility',
+    },
+    AGDRec: {
+        path: 'C:/software_normal/AGDRec_131F/AGDRec64.exe',
+        type: 'video',
+    },
+    fSpy: {
+        path: 'C:/software_normal/fSpy-1.0.3-win/fSpy.exe',
+        type: '3d',
+    },
+    instanceMeshes: {
+        path: 'C:/software_normal/instant-meshes-windows/Instant Meshes.exe',
+        type: '3d',
+    },
+    MagicaVoxel: {
+        path: 'C:/software_normal/MagicaVoxel 0.99/MagicaVoxel.exe',
+        type: '3d',
+    },
+    SpaceSniffer: {
+        path: 'C:/software_normal/spacesniffer_1_3_0_2/SpaceSniffer.exe',
+        type: 'utility',
+    },
+};
+exports.ProjectPath = {
+    fish1: {
+        renderRoot: 'D:/googledrive/render/fish1/',
+        baseRenderName: 'Image0001.png',
+        assetsFolders: [
+            {
+                name: 'solid',
+                isSequence: true,
+                renderName: '',
+                description: '',
+            },
+            {
+                name: 'shadow',
+                isSequence: true,
+                renderName: '',
+                description: '',
+            },
+            {
+                name: 'line',
+                isSequence: true,
+                renderName: '',
+                description: '',
+            },
+        ],
+    },
+};
+
+
+/***/ }),
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 exports.__esModule = true;
-var OpenWeb_1 = __webpack_require__(4);
-var URLs_1 = __webpack_require__(3);
-var d = URLs_1.SeachUrls.unsplash;
-var url = d.url + "?" + d.searchQuery + "=manta";
-var openWeb = new OpenWeb_1["default"]();
-openWeb.setUrl(url);
-openWeb.open();
+var _1 = __webpack_require__(0);
+var CommandUtils_1 = __webpack_require__(10);
+var FuzzyOpen = (function () {
+    function FuzzyOpen(path, type, isSearchRecursive, isReturnFullPath) {
+        if (isSearchRecursive === void 0) { isSearchRecursive = false; }
+        if (isReturnFullPath === void 0) { isReturnFullPath = false; }
+        this.searchArray = [];
+        this.fzy = __webpack_require__(11);
+        if (path != null) {
+            this.setTargetPath(path);
+        }
+        if (type != null) {
+            this.setType(type);
+        }
+        if (this.targetPath != null && this.searchType != null) {
+            this.setSearchArray(isSearchRecursive, isReturnFullPath);
+        }
+    }
+    FuzzyOpen.prototype.setTargetPath = function (path) {
+        this.targetPath = path;
+    };
+    FuzzyOpen.prototype.setType = function (type) {
+        this.searchType = type;
+    };
+    FuzzyOpen.prototype.setSearchArray = function (isSearchRecursive, isReturnFullPath) {
+        if (isSearchRecursive === void 0) { isSearchRecursive = false; }
+        if (isReturnFullPath === void 0) { isReturnFullPath = false; }
+        if (this.targetPath == null || this.searchType == null)
+            return false;
+        var result = CommandUtils_1["default"].getDir(this.targetPath, this.searchType, {
+            isNameOnly: isReturnFullPath,
+            isReturnAsArray: true,
+            isSearchSub: isSearchRecursive,
+        });
+        if (typeof result === 'object' && _1["default"].getType(result) === 'array') {
+            this.searchArray = result;
+            return true;
+        }
+        return false;
+    };
+    FuzzyOpen.prototype.search = function (searchTxt, minScore) {
+        if (minScore === void 0) { minScore = 0.33; }
+        var fuzzyset = this.fzy(this.searchArray);
+        var searchResult = fuzzyset.get(searchTxt, null, minScore);
+        var returnResult = [];
+        if (searchResult != null) {
+            for (var _i = 0, searchResult_1 = searchResult; _i < searchResult_1.length; _i++) {
+                var value = searchResult_1[_i];
+                var fullPath = this.targetPath + "/" + value[1];
+                var returnResultContent = [value[1], fullPath, value[0]];
+                returnResult.push(returnResultContent);
+            }
+            return returnResult;
+        }
+        return false;
+    };
+    FuzzyOpen.prototype.searchOne = function (searchTxt, minScore) {
+        if (minScore === void 0) { minScore = 0.33; }
+        var result = this.search(searchTxt, minScore);
+        if (typeof result === 'boolean') {
+            return false;
+        }
+        else {
+            return result[0];
+        }
+    };
+    return FuzzyOpen;
+}());
+exports["default"] = FuzzyOpen;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var _1 = __webpack_require__(0);
+var CallCommand_1 = __webpack_require__(2);
+var CommandUtils = (function () {
+    function CommandUtils() {
+    }
+    CommandUtils.getDir = function (targetPath, type, optionObject) {
+        if (optionObject === void 0) { optionObject = {
+            isSearchSub: false,
+            isNameOnly: false,
+            sortOption: '',
+            isReverseArray: false,
+            isReturnAsArray: true,
+        }; }
+        var callCommand = new CallCommand_1["default"]();
+        var command = "dir \"" + targetPath + "\" /b";
+        switch (type) {
+            case 'F':
+                command += ' /A-d ';
+                break;
+            case 'D':
+                command += ' /A:d ';
+                break;
+            case 'FD':
+                command += '';
+                break;
+        }
+        if (optionObject.isSearchSub)
+            command += '/S ';
+        if (optionObject.isNameOnly)
+            command += '/D ';
+        if (optionObject.sortOption != null)
+            command += optionObject.sortOption;
+        callCommand.setCommand(command);
+        var result = callCommand.exec(true);
+        if (typeof result !== 'boolean') {
+            if (optionObject.isReturnAsArray) {
+                var resultArray = _1["default"].getArrayDividedByLine(result);
+                if (optionObject.isReverseArray) {
+                    return resultArray.reverse();
+                }
+                else {
+                    return resultArray;
+                }
+            }
+            else {
+                return result;
+            }
+        }
+        return '';
+    };
+    return CommandUtils;
+}());
+exports["default"] = CommandUtils;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(12);
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function() {
+
+var FuzzySet = function(arr, useLevenshtein, gramSizeLower, gramSizeUpper) {
+    var fuzzyset = {
+
+    };
+
+    // default options
+    arr = arr || [];
+    fuzzyset.gramSizeLower = gramSizeLower || 2;
+    fuzzyset.gramSizeUpper = gramSizeUpper || 3;
+    fuzzyset.useLevenshtein = (typeof useLevenshtein !== 'boolean') ? true : useLevenshtein;
+
+    // define all the object functions and attributes
+    fuzzyset.exactSet = {};
+    fuzzyset.matchDict = {};
+    fuzzyset.items = {};
+
+    // helper functions
+    var levenshtein = function(str1, str2) {
+        var current = [], prev, value;
+
+        for (var i = 0; i <= str2.length; i++)
+            for (var j = 0; j <= str1.length; j++) {
+            if (i && j)
+                if (str1.charAt(j - 1) === str2.charAt(i - 1))
+                value = prev;
+                else
+                value = Math.min(current[j], current[j - 1], prev) + 1;
+            else
+                value = i + j;
+
+            prev = current[j];
+            current[j] = value;
+            }
+
+        return current.pop();
+    };
+
+    // return an edit distance from 0 to 1
+    var _distance = function(str1, str2) {
+        if (str1 === null && str2 === null) throw 'Trying to compare two null values';
+        if (str1 === null || str2 === null) return 0;
+        str1 = String(str1); str2 = String(str2);
+
+        var distance = levenshtein(str1, str2);
+        if (str1.length > str2.length) {
+            return 1 - distance / str1.length;
+        } else {
+            return 1 - distance / str2.length;
+        }
+    };
+    var _nonWordRe = /[^a-zA-Z0-9\u00C0-\u00FF, ]+/g;
+
+    var _iterateGrams = function(value, gramSize) {
+        gramSize = gramSize || 2;
+        var simplified = '-' + value.toLowerCase().replace(_nonWordRe, '') + '-',
+            lenDiff = gramSize - simplified.length,
+            results = [];
+        if (lenDiff > 0) {
+            for (var i = 0; i < lenDiff; ++i) {
+                simplified += '-';
+            }
+        }
+        for (var i = 0; i < simplified.length - gramSize + 1; ++i) {
+            results.push(simplified.slice(i, i + gramSize));
+        }
+        return results;
+    };
+
+    var _gramCounter = function(value, gramSize) {
+        // return an object where key=gram, value=number of occurrences
+        gramSize = gramSize || 2;
+        var result = {},
+            grams = _iterateGrams(value, gramSize),
+            i = 0;
+        for (i; i < grams.length; ++i) {
+            if (grams[i] in result) {
+                result[grams[i]] += 1;
+            } else {
+                result[grams[i]] = 1;
+            }
+        }
+        return result;
+    };
+
+    // the main functions
+    fuzzyset.get = function(value, defaultValue, minMatchScore) {
+        // check for value in set, returning defaultValue or null if none found
+        if (minMatchScore === undefined) {
+            minMatchScore = .33
+        }
+        var result = this._get(value, minMatchScore);
+        if (!result && typeof defaultValue !== 'undefined') {
+            return defaultValue;
+        }
+        return result;
+    };
+
+    fuzzyset._get = function(value, minMatchScore) {
+        var normalizedValue = this._normalizeStr(value),
+            result = this.exactSet[normalizedValue];
+        if (result) {
+            return [[1, result]];
+        }
+
+        var results = [];
+        // start with high gram size and if there are no results, go to lower gram sizes
+        for (var gramSize = this.gramSizeUpper; gramSize >= this.gramSizeLower; --gramSize) {
+            results = this.__get(value, gramSize, minMatchScore);
+            if (results && results.length > 0) {
+                return results;
+            }
+        }
+        return null;
+    };
+
+    fuzzyset.__get = function(value, gramSize, minMatchScore) {
+        var normalizedValue = this._normalizeStr(value),
+            matches = {},
+            gramCounts = _gramCounter(normalizedValue, gramSize),
+            items = this.items[gramSize],
+            sumOfSquareGramCounts = 0,
+            gram,
+            gramCount,
+            i,
+            index,
+            otherGramCount;
+
+        for (gram in gramCounts) {
+            gramCount = gramCounts[gram];
+            sumOfSquareGramCounts += Math.pow(gramCount, 2);
+            if (gram in this.matchDict) {
+                for (i = 0; i < this.matchDict[gram].length; ++i) {
+                    index = this.matchDict[gram][i][0];
+                    otherGramCount = this.matchDict[gram][i][1];
+                    if (index in matches) {
+                        matches[index] += gramCount * otherGramCount;
+                    } else {
+                        matches[index] = gramCount * otherGramCount;
+                    }
+                }
+            }
+        }
+
+        function isEmptyObject(obj) {
+            for(var prop in obj) {
+                if(obj.hasOwnProperty(prop))
+                    return false;
+            }
+            return true;
+        }
+
+        if (isEmptyObject(matches)) {
+            return null;
+        }
+
+        var vectorNormal = Math.sqrt(sumOfSquareGramCounts),
+            results = [],
+            matchScore;
+        // build a results list of [score, str]
+        for (var matchIndex in matches) {
+            matchScore = matches[matchIndex];
+            results.push([matchScore / (vectorNormal * items[matchIndex][0]), items[matchIndex][1]]);
+        }
+        var sortDescending = function(a, b) {
+            if (a[0] < b[0]) {
+                return 1;
+            } else if (a[0] > b[0]) {
+                return -1;
+            } else {
+                return 0;
+            }
+        };
+        results.sort(sortDescending);
+        if (this.useLevenshtein) {
+            var newResults = [],
+                endIndex = Math.min(50, results.length);
+            // truncate somewhat arbitrarily to 50
+            for (var i = 0; i < endIndex; ++i) {
+                newResults.push([_distance(results[i][1], normalizedValue), results[i][1]]);
+            }
+            results = newResults;
+            results.sort(sortDescending);
+        }
+        var newResults = [];
+        results.forEach(function(scoreWordPair) {
+            if (scoreWordPair[0] >= minMatchScore) {
+                newResults.push([scoreWordPair[0], this.exactSet[scoreWordPair[1]]]);
+            }
+        }.bind(this))
+        return newResults;
+    };
+
+    fuzzyset.add = function(value) {
+        var normalizedValue = this._normalizeStr(value);
+        if (normalizedValue in this.exactSet) {
+            return false;
+        }
+
+        var i = this.gramSizeLower;
+        for (i; i < this.gramSizeUpper + 1; ++i) {
+            this._add(value, i);
+        }
+    };
+
+    fuzzyset._add = function(value, gramSize) {
+        var normalizedValue = this._normalizeStr(value),
+            items = this.items[gramSize] || [],
+            index = items.length;
+
+        items.push(0);
+        var gramCounts = _gramCounter(normalizedValue, gramSize),
+            sumOfSquareGramCounts = 0,
+            gram, gramCount;
+        for (gram in gramCounts) {
+            gramCount = gramCounts[gram];
+            sumOfSquareGramCounts += Math.pow(gramCount, 2);
+            if (gram in this.matchDict) {
+                this.matchDict[gram].push([index, gramCount]);
+            } else {
+                this.matchDict[gram] = [[index, gramCount]];
+            }
+        }
+        var vectorNormal = Math.sqrt(sumOfSquareGramCounts);
+        items[index] = [vectorNormal, normalizedValue];
+        this.items[gramSize] = items;
+        this.exactSet[normalizedValue] = value;
+    };
+
+    fuzzyset._normalizeStr = function(str) {
+        if (Object.prototype.toString.call(str) !== '[object String]') throw 'Must use a string as argument to FuzzySet functions';
+        return str.toLowerCase();
+    };
+
+    // return length of items in set
+    fuzzyset.length = function() {
+        var count = 0,
+            prop;
+        for (prop in this.exactSet) {
+            if (this.exactSet.hasOwnProperty(prop)) {
+                count += 1;
+            }
+        }
+        return count;
+    };
+
+    // return is set is empty
+    fuzzyset.isEmpty = function() {
+        for (var prop in this.exactSet) {
+            if (this.exactSet.hasOwnProperty(prop)) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    // return list of values loaded into set
+    fuzzyset.values = function() {
+        var values = [],
+            prop;
+        for (prop in this.exactSet) {
+            if (this.exactSet.hasOwnProperty(prop)) {
+                values.push(this.exactSet[prop]);
+            }
+        }
+        return values;
+    };
+
+
+    // initialization
+    var i = fuzzyset.gramSizeLower;
+    for (i; i < fuzzyset.gramSizeUpper + 1; ++i) {
+        fuzzyset.items[i] = [];
+    }
+    // add all the items to the set
+    for (i = 0; i < arr.length; ++i) {
+        fuzzyset.add(arr[i]);
+    }
+
+    return fuzzyset;
+};
+
+var root = this;
+// Export the fuzzyset object for **CommonJS**, with backwards-compatibility
+// for the old `require()` API. If we're not in CommonJS, add `_` to the
+// global object.
+if ( true && module.exports) {
+    module.exports = FuzzySet;
+    if(root)
+    {
+        root.FuzzySet = FuzzySet;
+    }
+} else {
+    root.FuzzySet = FuzzySet;
+}
+
+})();
 
 
 /***/ })

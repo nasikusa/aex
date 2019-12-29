@@ -1,1 +1,2585 @@
-!function(r){var n={};function o(e){if(n[e])return n[e].exports;var t=n[e]={i:e,l:!1,exports:{}};return r[e].call(t.exports,t,t.exports,o),t.l=!0,t.exports}o.m=r,o.c=n,o.d=function(e,t,r){o.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},o.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},o.t=function(t,e){if(1&e&&(t=o(t)),8&e)return t;if(4&e&&"object"==typeof t&&t&&t.__esModule)return t;var r=Object.create(null);if(o.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:t}),2&e&&"string"!=typeof t)for(var n in t)o.d(r,n,function(e){return t[e]}.bind(null,n));return r},o.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return o.d(t,"a",t),t},o.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},o.p="",o(o.s=8)}({1:function(module,exports){function Ka(){}var La;Array.prototype.every||(Array.prototype.every=function(e,t){var r,n;if(null==this)throw new TypeError("Array.prototype.every called on null or undefined");var o=Object(this),i=o.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(r=1<arguments.length?t:void 0,n=0;n<i;){var a;if(n in o)if(a=o[n],!e.call(r,a,n,o))return!1;n++}return!0}),Array.prototype.filter||(Array.prototype.filter=function(e,t){if(null==this)throw new TypeError("Array.prototype.filter called on null or undefined");var r=Object(this),n=r.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var o=[],i=1<arguments.length?t:void 0,a=0;a<n;a++)if(a in r){var c=r[a];e.call(i,c,a,r)&&o.push(c)}return o}),Array.prototype.forEach||(Array.prototype.forEach=function(e,t){if(null==this)throw new TypeError("Array.prototype.forEach called on null or undefined");var r=Object(this),n=r.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var o=1<arguments.length?t:void 0,i=0;i<n;i++){var a;i in r&&(a=r[i],e.call(o,a,i,r))}}),Array.prototype.indexOf||(Array.prototype.indexOf=function(e,t){if(null==this)throw new TypeError("Array.prototype.indexOf called on null or undefined");var r,n=Object(this),o=n.length>>>0;if(0==o)return-1;var i=+t||0;if(Math.abs(i)===1/0&&(i=0),o<=i)return-1;for(r=Math.max(0<=i?i:o-Math.abs(i),0);r<o;){if(r in n&&n[r]===e)return r;r++}return-1}),Array.isArray||(Array.isArray=function(e){return null!=e&&"Array"===e.__class__}),Array.prototype.lastIndexOf||(Array.prototype.lastIndexOf=function(e,t){if(null==this)throw new TypeError("Array.prototype.lastIndexOf called on null or undefined");var r,n,o=Object(this),i=o.length>>>0;if(0==i)return-1;for(r=i-1,1<arguments.length&&((r=Number(t))!=r?r=0:0!=r&&r!=1/0&&r!=-1/0&&(r=(0<r||-1)*Math.floor(Math.abs(r)))),n=0<=r?Math.min(r,i-1):i-Math.abs(r);0<=n;n--)if(n in o&&o[n]===e)return n;return-1}),Array.prototype.map||(Array.prototype.map=function(e,t){var r,n;if(null==this)throw new TypeError("Array.prototype.map called on null or undefined");var o=Object(this),i=o.length>>>0;if("Function"!==e.__class__)throw new TypeError(e+" is not a function");r=1<arguments.length?t:void 0,n=new Array(i);for(var a=0;a<i;a++){var c,l;a in o&&(c=o[a],l=e.call(r,c,a,o),n[a]=l)}return n}),Array.prototype.reduce||(Array.prototype.reduce=function(e,t){if(null==this)throw new TypeError("Array.prototype.reduce called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");var r,n=Object(this),o=n.length>>>0,i=0;if(1<arguments.length)r=t;else{for(;i<o&&!(i in n);)i++;if(o<=i)throw new TypeError("Reduce of empty array with no initial value");r=n[i++]}for(;i<o;i++)i in n&&(r=e(r,n[i],i,n));return r}),Array.prototype.reduceRight||(Array.prototype.reduceRight=function(e,t){if(null==this)throw new TypeError("Array.prototype.reduceRight called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");var r,n=Object(this),o=(n.length>>>0)-1;if(1<arguments.length)r=t;else{for(;0<=o&&!(o in n);)o--;if(o<0)throw new TypeError("Reduce of empty array with no initial value");r=n[o--]}for(;0<=o;o--)o in n&&(r=e(r,n[o],o,n));return r}),Array.prototype.some||(Array.prototype.some=function(e,t){if(null==this)throw new TypeError("Array.prototype.some called on null or undefined");if("Function"!==e.__class__)throw new TypeError(e+" is not a function");for(var r=Object(this),n=r.length>>>0,o=1<arguments.length?t:void 0,i=0;i<n;i++)if(i in r&&e.call(o,r[i],i,r))return!0;return!1}),Function.prototype.bind||(Function.prototype.bind=function(e){if("Function"!==this.__class__)throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");function t(){}function r(){return o.apply(this instanceof t?this:e,n.concat(Array.prototype.slice.call(arguments)))}var n=Array.prototype.slice.call(arguments,1),o=this;return this.prototype&&(t.prototype=this.prototype),r.prototype=new t,r}),Object.create||(Object.create=(La=Object.prototype.hasOwnProperty,function(e){if(Object(e)!==e&&null!==e)throw TypeError("Object prototype may only be an Object or null");Ka.prototype=e;var t=new Ka;if(Ka.prototype=null,1<arguments.length){var r=Object(arguments[1]);for(var n in r)if(La.call(r,n)){var o=r[n];if(Object(o)!==o)throw TypeError(n+"must be an object");if("get"in o||"set"in o)throw new TypeError("getters & setters can not be defined on this javascript engine");"value"in o&&(t[n]=r[n])}}return t})),Object.defineProperties||(Object.defineProperties=function(e,t){function r(e,t){return Object.prototype.hasOwnProperty.call(e,t)}function n(e){if(Object(e)!==e)throw new TypeError("Descriptor can only be an Object.");var t={};if(r(e,"enumerable")&&(t.enumerable=!!e.enumerable),r(e,"configurable")&&(t.configurable=!!e.configurable),r(e,"value")&&(t.value=e.value),r(e,"writable")&&(t.writable=!!e.writable),r(e,"get"))throw new TypeError("getters & setters can not be defined on this javascript engine");if(r(e,"set"))throw new TypeError("getters & setters can not be defined on this javascript engine");return t}if(Object(e)!==e)throw new TypeError("Object.defineProperties can only be called on Objects.");if(Object(t)!==t)throw new TypeError("Properties can only be an Object.");var o=Object(t);for(propName in o)if(hasOwnProperty.call(o,propName)){var i=n(o[propName]);e[propName]=i.value}return e}),Object.defineProperty||(Object.defineProperty=function(e,t,r){if(Object(e)!==e)throw new TypeError("Object.defineProperty can only be called on Objects.");if(Object(r)!==r)throw new TypeError("Property description can only be an Object.");if("get"in r||"set"in r)throw new TypeError("getters & setters can not be defined on this javascript engine");return"value"in r&&(e[t]=r.value),e}),Object.freeze||(Object.freeze=function(e){if(Object(e)!==e)throw new TypeError("Object.freeze can only be called on Objects.");return e}),Object.getOwnPropertyDescriptor||(Object.getOwnPropertyDescriptor=function(e,t){if(Object(e)!==e)throw new TypeError("Object.getOwnPropertyDescriptor can only be called on Objects.");var r;if(!Object.prototype.hasOwnProperty.call(e,t))return r;(r={enumerable:Object.prototype.propertyIsEnumerable.call(e,t),configurable:!0}).value=e[t];var n=e.reflect.find(t).type;return r.writable=!("readonly"===n),r}),Object.getOwnPropertyNames||(Object.getOwnPropertyNames=function(e){if(Object(e)!==e)throw new TypeError("Object.getOwnPropertyNames can only be called on Objects.");var t=[],r=Object.prototype.hasOwnProperty,n=Object.prototype.propertyIsEnumerable;for(var o in e)r.call(e,o)&&t.push(o);for(var i=e.reflect.properties,a=e.reflect.methods.concat(i),c=0;c<a.length;c++){o=a[c].name;r.call(e,o)&&!n.call(e,o)&&t.push(o)}return t}),Object.getPrototypeOf||(Object.getPrototypeOf=function(e){if(Object(e)!==e)throw new TypeError("Object.getPrototypeOf can only be called on Objects.");return e.__proto__}),Object.isExtensible||(Object.isExtensible=function(e){if(Object(e)!==e)throw new TypeError("Object.isExtensible can only be called on Objects.");return!0}),Object.isSealed||(Object.isSealed=function(e){if(Object(e)!==e)throw new TypeError("Object.isSealed can only be called on Objects.");return!1}),Object.isFrozen||(Object.isFrozen=function(e){if(Object(e)!==e)throw new TypeError("Object.isFrozen can only be called on Objects.");return!1}),Object.keys||(Object.keys=function(e){if(Object(e)!==e)throw new TypeError("Object.keys can only be called on Objects.");var t=Object.prototype.hasOwnProperty,r=[];for(var n in e)t.call(e,n)&&r.push(n);return r}),Object.preventExtensions||(Object.preventExtensions=function(e){if(Object(e)!==e)throw new TypeError("Object.preventExtensions can only be called on Objects.");return e}),Object.seal||(Object.seal=function(e){if(Object(e)!==e)throw new TypeError("Object.seal can only be called on Objects.");return e}),"object"!=typeof JSON&&(JSON={}),function(){"use strict";function f(e){return e<10?"0"+e:e}var cx,escapable,gap,indent,meta,rep;function quote(e){return escapable.lastIndex=0,escapable.test(e)?'"'+e.replace(escapable,function(e){var t=meta[e];return"string"==typeof t?t:"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)})+'"':'"'+e+'"'}function str(e,t){var r,n,o,i,a,c=gap,l=t[e];switch(l&&"object"==typeof l&&"function"==typeof l.toJSON&&(l=l.toJSON(e)),"function"==typeof rep&&(l=rep.call(t,e,l)),typeof l){case"string":return quote(l);case"number":return isFinite(l)?String(l):"null";case"boolean":case"null":return String(l);case"object":if(!l)return"null";if(gap+=indent,a=[],"[object Array]"===Object.prototype.toString.apply(l)){for(i=l.length,r=0;r<i;r+=1)a[r]=str(r,l)||"null";return o=0===a.length?"[]":gap?"[\n"+gap+a.join(",\n"+gap)+"\n"+c+"]":"["+a.join(",")+"]",gap=c,o}if(rep&&"object"==typeof rep)for(i=rep.length,r=0;r<i;r+=1)"string"==typeof rep[r]&&(o=str(n=rep[r],l))&&a.push(quote(n)+(gap?": ":":")+o);else for(n in l)Object.prototype.hasOwnProperty.call(l,n)&&(o=str(n,l))&&a.push(quote(n)+(gap?": ":":")+o);return o=0===a.length?"{}":gap?"{\n"+gap+a.join(",\n"+gap)+"\n"+c+"}":"{"+a.join(",")+"}",gap=c,o}}"function"!=typeof Date.prototype.toJSON&&(Date.prototype.toJSON=function(){return isFinite(this.valueOf())?this.getUTCFullYear()+"-"+f(this.getUTCMonth()+1)+"-"+f(this.getUTCDate())+"T"+f(this.getUTCHours())+":"+f(this.getUTCMinutes())+":"+f(this.getUTCSeconds())+"Z":null},String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(){return this.valueOf()}),"function"!=typeof JSON.stringify&&(escapable=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,meta={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"},JSON.stringify=function(e,t,r){var n;if(indent=gap="","number"==typeof r)for(n=0;n<r;n+=1)indent+=" ";else"string"==typeof r&&(indent=r);if((rep=t)&&"function"!=typeof t&&("object"!=typeof t||"number"!=typeof t.length))throw new Error("JSON.stringify");return str("",{"":e})}),"function"!=typeof JSON.parse&&(cx=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,JSON.parse=function(text,reviver){var j;function walk(e,t){var r,n,o=e[t];if(o&&"object"==typeof o)for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(void 0!==(n=walk(o,r))?o[r]=n:delete o[r]);return reviver.call(e,t,o)}if(text=String(text),cx.lastIndex=0,cx.test(text)&&(text=text.replace(cx,function(e){return"\\u"+("0000"+e.charCodeAt(0).toString(16)).slice(-4)})),/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,"@").replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,"]").replace(/(?:^|:|,)(?:\s*\[)+/g,"")))return j=eval("("+text+")"),"function"==typeof reviver?walk({"":j},""):j;throw new SyntaxError("JSON.parse")})}(),String.prototype.trim||(String.prototype.trim=function(){return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,"")})},8:function(e,t,r){"use strict";t.__esModule=!0,r(1)}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+exports.__esModule = true;
+var Utils_1 = __webpack_require__(5);
+var _ = (function (_super) {
+    __extends(_, _super);
+    function _() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    _.getProject = function () {
+        return app.project;
+    };
+    _.getItems = function () {
+        return app.project.items;
+    };
+    _.getComps = function (searchCompName) {
+        var items = _.getItems();
+        var compsArray = [];
+        if (items != null && items.length > 0) {
+            var itemsArray = _.ItemCollection2Array(items);
+            for (var _i = 0, itemsArray_1 = itemsArray; _i < itemsArray_1.length; _i++) {
+                var item = itemsArray_1[_i];
+                if (item instanceof CompItem) {
+                    if (searchCompName) {
+                        if (item.name === searchCompName) {
+                            compsArray.push(item);
+                        }
+                        continue;
+                    }
+                    compsArray.push(item);
+                }
+            }
+            if (compsArray.length > 0) {
+                return compsArray;
+            }
+            return false;
+        }
+        return false;
+    };
+    _.getActiveItem = function () {
+        var res = app.project.activeItem;
+        return res ? res : false;
+    };
+    _.getSelectedItems = function (isReturnAsArray) {
+        if (isReturnAsArray === void 0) { isReturnAsArray = false; }
+        var selectedItem = app.project.selection;
+        return selectedItem.length > 0 ? selectedItem : false;
+    };
+    _.isItemSelected = function () {
+        return _.getSelectedItems() ? true : false;
+    };
+    _.getSelectedLayers = function (returnAsArray) {
+        if (returnAsArray === void 0) { returnAsArray = false; }
+        var selectedLayers = app.project.activeItem.selectedLayers;
+        if (selectedLayers.length > 0) {
+            if (returnAsArray) {
+                var returnedArray = _.LayerCollection2Array(selectedLayers);
+                return returnedArray;
+            }
+            else {
+                return selectedLayers;
+            }
+        }
+        else {
+            return false;
+        }
+    };
+    _.isLayerSelected = function () {
+        return _.getSelectedLayers() ? true : false;
+    };
+    _.getSelectedProps = function () {
+        return _.getSelectedLayers().selectedProperties;
+    };
+    _.getActiveItemLayers = function () {
+        return app.project.activeItem.layers;
+    };
+    _.getContianer = function (item) {
+        return item.containingComp;
+    };
+    _.Collection2Array = function (inputCollection) {
+        var resultArray = [];
+        for (var i = 0; i < inputCollection.length; i++) {
+            var item = inputCollection[i];
+            if (item != null) {
+                resultArray[i] = item;
+            }
+        }
+        return resultArray;
+    };
+    _.ItemCollection2Array = function (inputCollection) {
+        var returnedArray = _.Collection2Array(inputCollection);
+        var resultArray = [];
+        for (var _i = 0, returnedArray_1 = returnedArray; _i < returnedArray_1.length; _i++) {
+            var item = returnedArray_1[_i];
+            if (item instanceof Item) {
+                resultArray.push(item);
+            }
+        }
+        return resultArray;
+    };
+    _.LayerCollection2Array = function (inputCollection) {
+        var returnedArray = _.Collection2Array(inputCollection);
+        var resultArray = [];
+        for (var _i = 0, returnedArray_2 = returnedArray; _i < returnedArray_2.length; _i++) {
+            var item = returnedArray_2[_i];
+            alert("is instanceof compItem " + (item instanceof CompItem));
+            if (item instanceof Layer) {
+                resultArray.push(item);
+            }
+        }
+        return resultArray;
+    };
+    _.openProject = function (name) {
+        var file = new File(name);
+        if (file.exists && file != null) {
+            var new_project = app.open(file);
+            if (new_project != null) {
+                return new_project;
+            }
+            else {
+                return false;
+            }
+        }
+        return false;
+    };
+    _.addAdjustmentLayer = function () {
+        var color = [1, 1, 1];
+        var name = '調整レイヤー';
+        var n = app.project.item(1).layers.addSolid(color, name, 100, 100, 1, 1);
+        var comp = n.containingComp;
+        n.outPoint = comp.duration;
+        n.adjustmentLayer = true;
+        n.source.width = comp.width;
+        n.source.height = comp.height;
+        n.source.pixelAspect = comp.pixelAspect;
+        return n;
+    };
+    _.getCompInfo = function (comp) {
+        var infoObject = {};
+        infoObject.duration = comp.duration;
+        infoObject.width = comp.width;
+        infoObject.height = comp.height;
+        infoObject.pixelAspect = comp.pixelAspect;
+        return infoObject;
+    };
+    _.isWindows = function () {
+        return Number($.os.toLowerCase().indexOf('windows')) !== -1;
+    };
+    _.isMac = function () {
+        return Number($.os.toLowerCase().indexOf('windows')) === -1;
+    };
+    _.changeFrameRate = function (framerate, item) {
+        if (item === void 0) { item = _.getActiveItem(); }
+        item.frameRate = framerate;
+        return item.frameRate;
+    };
+    _.getFrameRate = function (item) {
+        if (item === void 0) { item = _.getActiveItem(); }
+        return item.frameRate;
+    };
+    _.changeCompDuration = function (duration, item) {
+        if (item === void 0) { item = _.getActiveItem(); }
+        if (_.getType(item) === 'CompItem') {
+            item.duration = duration;
+            return item.duration;
+        }
+    };
+    _.getCompDuration = function (item) {
+        if (item === void 0) { item = _.getActiveItem(); }
+        if (_.getType(item) === 'CompItem') {
+            return item.duration;
+        }
+    };
+    _.hasPermissionToNetworkAccess = function () {
+        return app.preferences.getPrefAsLong("Main Pref Section", "Pref_SCRIPTING_FILE_NETWORK_SECURITY") === 1;
+    };
+    _.hasAccessScript = function () {
+        return _.hasPermissionToNetworkAccess();
+    };
+    _.checkAccessToNetwork = function () {
+        if (_.hasPermissionToNetworkAccess()) {
+            alert('このスクリプトを動かすためには設定画面で「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。');
+            return false;
+        }
+        return true;
+    };
+    return _;
+}(Utils_1["default"]));
+exports["default"] = _;
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+//every.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every
+*/
+if (!Array.prototype.every) {
+  Array.prototype.every = function(callback, thisArg) {
+    var T, k;
+
+    if (this === void 0 || this === null) {
+      throw new TypeError('Array.prototype.every called on null or undefined');
+    }
+
+    // 1. Let O be the result of calling ToObject passing the this 
+    //    value as the argument.
+    var O = Object(this);
+
+    // 2. Let lenValue be the result of calling the Get internal method
+    //    of O with the argument "length".
+    // 3. Let len be ToUint32(lenValue).
+    var len = O.length >>> 0;
+
+    // 4. If IsCallable(callback) is false, throw a TypeError exception.
+    if (callback.__class__ !== 'Function') {
+      throw new TypeError(callback + ' is not a function');
+    }
+
+    // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+    T = (arguments.length > 1) ? thisArg : void 0;
+
+    // 6. Let k be 0.
+    k = 0;
+
+    // 7. Repeat, while k < len
+    while (k < len) {
+
+      var kValue;
+
+      // a. Let Pk be ToString(k).
+      //   This is implicit for LHS operands of the in operator
+      // b. Let kPresent be the result of calling the HasProperty internal 
+      //    method of O with argument Pk.
+      //   This step can be combined with c
+      // c. If kPresent is true, then
+      if (k in O) {
+
+        // i. Let kValue be the result of calling the Get internal method
+        //    of O with argument Pk.
+        kValue = O[k];
+
+        // ii. Let testResult be the result of calling the Call internal method
+        //     of callback with T as the this value and argument list 
+        //     containing kValue, k, and O.
+        var testResult = callback.call(T, kValue, k, O);
+
+        // iii. If ToBoolean(testResult) is false, return false.
+        if (!testResult) {
+          return false;
+        }
+      }
+      k++;
+    }
+    return true;
+  };
+}
+//filter.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
+*/
+if (!Array.prototype.filter) {
+  Array.prototype.filter = function(callback, thisArg) {
+
+    if (this === void 0 || this === null) {
+      throw new TypeError('Array.prototype.filter called on null or undefined');
+    }
+
+    var t = Object(this);
+    var len = t.length >>> 0;
+
+    if (callback.__class__ !== 'Function') {
+      throw new TypeError(callback + ' is not a function');
+    }
+
+    var res = [];
+
+    var T = (arguments.length > 1) ? thisArg : void 0;
+    
+    for (var i = 0; i < len; i++) {
+      if (i in t) {
+        var val = t[i];
+
+        // NOTE: Technically this should Object.defineProperty at
+        //       the next index, as push can be affected by
+        //       properties on Object.prototype and Array.prototype.
+        //       But that method's new, and collisions should be
+        //       rare, so use the more-compatible alternative.
+        if (callback.call(T, val, i, t)) {
+          res.push(val);
+        }
+      }
+    }
+
+    return res;
+  };
+}
+//forEach.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+*/
+// Production steps of ECMA-262, Edition 5, 15.4.4.18
+// Reference: http://es5.github.io/#x15.4.4.18
+if (!Array.prototype.forEach) {
+    Array.prototype.forEach = function(callback, thisArg) {
+
+
+        if (this === void 0 || this === null) {
+            throw new TypeError('Array.prototype.forEach called on null or undefined');
+        }
+
+        // 1. Let O be the result of calling toObject() passing the
+        // |this| value as the argument.
+        var O = Object(this);
+
+        // 2. Let lenValue be the result of calling the Get() internal
+        // method of O with the argument "length".
+        // 3. Let len be toUint32(lenValue).
+        var len = O.length >>> 0;
+
+        // 4. If isCallable(callback) is false, throw a TypeError exception. 
+        // See: http://es5.github.com/#x9.11
+        if (callback.__class__ !== 'Function') {
+            throw new TypeError(callback + ' is not a function');
+        }
+
+        // 5. If thisArg was supplied, let T be thisArg; else let
+        // T be undefined.
+        var T = (arguments.length > 1) ? thisArg : void 0;
+
+
+        // 6. Let k be 0
+        //k = 0;
+
+        // 7. Repeat, while k < len
+        for (var k = 0; k < len; k++) {
+            var kValue;
+            // a. Let Pk be ToString(k).
+            //    This is implicit for LHS operands of the in operator
+            // b. Let kPresent be the result of calling the HasProperty
+            //    internal method of O with argument Pk.
+            //    This step can be combined with c
+            // c. If kPresent is true, then
+            if (k in O) {
+                // i. Let kValue be the result of calling the Get internal
+                // method of O with argument Pk.
+                kValue = O[k];
+                // ii. Call the Call internal method of callback with T as
+                // the this value and argument list containing kValue, k, and O.
+                callback.call(T, kValue, k, O);
+            }
+        }
+        // 8. return undefined
+    }
+}
+//indexOf.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf#Polyfill
+*/
+// Production steps of ECMA-262, Edition 5, 15.4.4.14
+// Reference: http://es5.github.io/#x15.4.4.14
+if (!Array.prototype.indexOf) {
+  Array.prototype.indexOf = function(searchElement, fromIndex) {
+
+
+    // 1. Let o be the result of calling ToObject passing
+    //    the this value as the argument.
+    if (this === void 0 || this === null) {
+      throw new TypeError('Array.prototype.indexOf called on null or undefined');
+    }
+
+    var k;
+    var o = Object(this);
+
+    // 2. Let lenValue be the result of calling the Get
+    //    internal method of o with the argument "length".
+    // 3. Let len be ToUint32(lenValue).
+    var len = o.length >>> 0;
+
+    // 4. If len is 0, return -1.
+    if (len === 0) {
+      return -1;
+    }
+
+    // 5. If argument fromIndex was passed let n be
+    //    ToInteger(fromIndex); else let n be 0.
+    var n = +fromIndex || 0;
+
+    if (Math.abs(n) === Infinity) {
+      n = 0;
+    }
+
+    // 6. If n >= len, return -1.
+    if (n >= len) {
+      return -1;
+    }
+
+    // 7. If n >= 0, then Let k be n.
+    // 8. Else, n<0, Let k be len - abs(n).
+    //    If k is less than 0, then let k be 0.
+    k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
+
+    // 9. Repeat, while k < len
+    while (k < len) {
+      // a. Let Pk be ToString(k).
+      //   This is implicit for LHS operands of the in operator
+      // b. Let kPresent be the result of calling the
+      //    HasProperty internal method of o with argument Pk.
+      //   This step can be combined with c
+      // c. If kPresent is true, then
+      //    i.  Let elementK be the result of calling the Get
+      //        internal method of o with the argument ToString(k).
+      //   ii.  Let same be the result of applying the
+      //        Strict Equality Comparison Algorithm to
+      //        searchElement and elementK.
+      //  iii.  If same is true, return k.
+      if (k in o && o[k] === searchElement) {
+        return k;
+      }
+      k++;
+    }
+    return -1;
+  };
+}
+//isArray.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray
+*/
+if (!Array.isArray) {
+  Array.isArray = function(arg) {
+
+    if (arg === void 0 || arg === null) {
+      return false;
+    }
+  	return (arg.__class__ === 'Array');
+  };
+}
+//lastIndexOf.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/lastIndexOf
+*/
+// Production steps of ECMA-262, Edition 5, 15.4.4.15
+// Reference: http://es5.github.io/#x15.4.4.15
+if (!Array.prototype.lastIndexOf) {
+  Array.prototype.lastIndexOf = function(searchElement, fromIndex) {
+
+    if (this === void 0 || this === null) {
+      throw new TypeError('Array.prototype.lastIndexOf called on null or undefined');
+    }
+
+    var n, k,
+      t = Object(this),
+      len = t.length >>> 0;
+    if (len === 0) {
+      return -1;
+    }
+
+    n = len - 1;
+    if (arguments.length > 1) {
+      n = Number(arguments[1]);
+      if (n != n) {
+        n = 0;
+      }
+      else if (n != 0 && n != Infinity && n != -Infinity) {
+        n = (n > 0 || -1) * Math.floor(Math.abs(n));
+      }
+    }
+
+    for (k = n >= 0 ? Math.min(n, len - 1) : len - Math.abs(n); k >= 0; k--) {
+      if (k in t && t[k] === searchElement) {
+        return k;
+      }
+    }
+    return -1;
+  };
+}
+//map.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+*/
+// Production steps of ECMA-262, Edition 5, 15.4.4.19
+// Reference: http://es5.github.io/#x15.4.4.19
+if (!Array.prototype.map) {
+
+  Array.prototype.map = function(callback, thisArg) {
+
+    var T, A, k;
+
+    if (this === void 0 || this === null) {
+      throw new TypeError('Array.prototype.map called on null or undefined');
+    }
+
+    // 1. Let O be the result of calling ToObject passing the |this| 
+    //    value as the argument.
+    var O = Object(this);
+
+    // 2. Let lenValue be the result of calling the Get internal 
+    //    method of O with the argument "length".
+    // 3. Let len be ToUint32(lenValue).
+    var len = O.length >>> 0;
+
+    // 4. If IsCallable(callback) is false, throw a TypeError exception.
+    // See: http://es5.github.com/#x9.11
+    if (callback.__class__ !== 'Function') {
+      throw new TypeError(callback + ' is not a function');
+    }
+
+    // 5. If thisArg was supplied, let T be thisArg; else let T be undefined.
+    T = (arguments.length > 1) ? thisArg : void 0;
+
+    // 6. Let A be a new array created as if by the expression new Array(len) 
+    //    where Array is the standard built-in constructor with that name and 
+    //    len is the value of len.
+    A = new Array(len);
+
+    for (var k = 0; k < len; k++) {
+
+      var kValue, mappedValue;
+
+      // a. Let Pk be ToString(k).
+      //   This is implicit for LHS operands of the in operator
+      // b. Let kPresent be the result of calling the HasProperty internal 
+      //    method of O with argument Pk.
+      //   This step can be combined with c
+      // c. If kPresent is true, then
+      if (k in O) {
+
+        // i. Let kValue be the result of calling the Get internal 
+        //    method of O with argument Pk.
+        kValue = O[k];
+
+        // ii. Let mappedValue be the result of calling the Call internal 
+        //     method of callback with T as the this value and argument 
+        //     list containing kValue, k, and O.
+        mappedValue = callback.call(T, kValue, k, O);
+
+        // iii. Call the DefineOwnProperty internal method of A with arguments
+        // Pk, Property Descriptor
+        // { Value: mappedValue,
+        //   Writable: true,
+        //   Enumerable: true,
+        //   Configurable: true },
+        // and false.
+
+        // In browsers that support Object.defineProperty, use the following:
+        // Object.defineProperty(A, k, {
+        //   value: mappedValue,
+        //   writable: true,
+        //   enumerable: true,
+        //   configurable: true
+        // });
+
+        // For best browser support, use the following:
+        A[k] = mappedValue;
+      }
+    }
+    // 9. return A
+    return A;
+  };
+}
+//reduce.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce
+*/
+// Production steps of ECMA-262, Edition 5, 15.4.4.21
+// Reference: http://es5.github.io/#x15.4.4.21
+if (!Array.prototype.reduce) {
+  Array.prototype.reduce = function(callback, initialValue) {
+
+    if (this === void 0 || this === null) {
+      throw new TypeError('Array.prototype.reduce called on null or undefined');
+    }
+
+    if (callback.__class__ !== 'Function') {
+      throw new TypeError(callback + ' is not a function');
+    }
+
+    var t = Object(this), len = t.length >>> 0, k = 0, value;
+
+    if (arguments.length > 1) 
+      {
+        value = initialValue;
+      } 
+    else 
+      {
+        while (k < len && !(k in t)) {
+          k++; 
+        }
+        if (k >= len) {
+          throw new TypeError('Reduce of empty array with no initial value');
+        }
+        value = t[k++];
+      }
+
+    for (; k < len; k++) {
+      if (k in t) {
+        value = callback(value, t[k], k, t);
+      }
+    }
+    return value;
+  };
+}
+//reduceRight.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/ReduceRight
+*/
+// Production steps of ECMA-262, Edition 5, 15.4.4.22
+// Reference: http://es5.github.io/#x15.4.4.22
+if (!Array.prototype.reduceRight) {
+  Array.prototype.reduceRight = function(callback, initialValue) {
+
+    if (this === void 0 || this === null) {
+      throw new TypeError('Array.prototype.reduceRight called on null or undefined');
+    }
+
+    if (callback.__class__ !== 'Function') {
+      throw new TypeError(callback + ' is not a function');
+    }
+
+    var t = Object(this), len = t.length >>> 0, k = len - 1, value;
+    if (arguments.length > 1) 
+      {
+        value = initialValue;
+      } 
+    else 
+      {
+        while (k >= 0 && !(k in t)) {
+          k--;
+        }
+        if (k < 0) {
+          throw new TypeError('Reduce of empty array with no initial value');
+        }
+        value = t[k--];
+      }
+      
+    for (; k >= 0; k--) {
+      if (k in t) {
+        value = callback(value, t[k], k, t);
+      }
+    }
+    return value;
+  };
+}
+//some.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
+*/
+// Production steps of ECMA-262, Edition 5, 15.4.4.17
+// Reference: http://es5.github.io/#x15.4.4.17
+if (!Array.prototype.some) {
+  Array.prototype.some = function(callback, thisArg) {
+
+    if (this === void 0 || this === null) {
+      throw new TypeError('Array.prototype.some called on null or undefined');
+    }
+
+    if (callback.__class__ !== 'Function') {
+      throw new TypeError(callback + ' is not a function');
+    }
+
+    var t = Object(this);
+    var len = t.length >>> 0;
+
+    var T = arguments.length > 1 ? thisArg : void 0;
+    for (var i = 0; i < len; i++) {
+      if (i in t && callback.call(T, t[i], i, t)) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+}
+//bind.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Polyfill
+
+WARNING! Bound functions used as constructors NOT supported by this polyfill!
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Bound_functions_used_as_constructors
+*/
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function(oThis) {
+    if (this.__class__ !== 'Function') {
+      throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+    }
+
+    var aArgs   = Array.prototype.slice.call(arguments, 1),
+        fToBind = this,
+        fNOP    = function() {},
+        fBound  = function() {
+          return fToBind.apply(this instanceof fNOP
+                 ? this
+                 : oThis,
+                 aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+
+    if (this.prototype) {
+      // Function.prototype doesn't have a prototype property
+      fNOP.prototype = this.prototype; 
+    }
+    fBound.prototype = new fNOP();
+
+    return fBound;
+  };
+}
+//create.js
+if (!Object.create) {
+  // Production steps of ECMA-262, Edition 5, 15.2.3.5
+  // Reference: http://es5.github.io/#x15.2.3.5
+  Object.create = (function() {
+    // To save on memory, use a shared constructor
+    function Temp() {}
+
+    // make a safe reference to Object.prototype.hasOwnProperty
+    var hasOwn = Object.prototype.hasOwnProperty;
+
+    return function(O) {
+      // 1. If Type(O) is not Object or Null throw a TypeError exception.
+      if (Object(O) !== O && O !== null) {
+        throw TypeError('Object prototype may only be an Object or null');
+      }
+
+      // 2. Let obj be the result of creating a new object as if by the
+      //    expression new Object() where Object is the standard built-in
+      //    constructor with that name
+      // 3. Set the [[Prototype]] internal property of obj to O.
+      Temp.prototype = O;
+      var obj = new Temp();
+      Temp.prototype = null; // Let's not keep a stray reference to O...
+
+      // 4. If the argument Properties is present and not undefined, add
+      //    own properties to obj as if by calling the standard built-in
+      //    function Object.defineProperties with arguments obj and
+      //    Properties.
+      if (arguments.length > 1) {
+        // Object.defineProperties does ToObject on its first argument.
+        var Properties = Object(arguments[1]);
+        for (var prop in Properties) {
+          if (hasOwn.call(Properties, prop)) {
+            var descriptor = Properties[prop];
+            if (Object(descriptor) !== descriptor) {
+              throw TypeError(prop + 'must be an object');
+            }
+            if ('get' in descriptor || 'set' in descriptor) {
+              throw new TypeError('getters & setters can not be defined on this javascript engine');
+            }
+            if ('value' in descriptor) {
+              obj[prop] = Properties[prop];
+            }
+
+          }
+        }
+      }
+
+      // 5. Return obj
+      return obj;
+    };
+  })();
+}
+//defineProperties.js
+/*
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperties#Polyfill
+*/
+if (!Object.defineProperties) {
+
+  Object.defineProperties = function(object, props) {
+
+    function hasProperty(obj, prop) {
+      return Object.prototype.hasOwnProperty.call(obj, prop);
+    }
+
+    function convertToDescriptor(desc) {
+
+      if (Object(desc) !== desc) {
+        throw new TypeError('Descriptor can only be an Object.');
+      }
+
+
+      var d = {};
+
+      if (hasProperty(desc, "enumerable")) {
+        d.enumerable = !!desc.enumerable;
+      }
+
+      if (hasProperty(desc, "configurable")) {
+        d.configurable = !!desc.configurable;
+      }
+
+      if (hasProperty(desc, "value")) {
+        d.value = desc.value;
+      }
+
+      if (hasProperty(desc, "writable")) {
+        d.writable = !!desc.writable;
+      }
+
+      if (hasProperty(desc, "get")) {
+        throw new TypeError('getters & setters can not be defined on this javascript engine');
+      }
+
+      if (hasProperty(desc, "set")) {
+        throw new TypeError('getters & setters can not be defined on this javascript engine');
+      }
+
+      return d;
+    }
+
+    if (Object(object) !== object) {
+      throw new TypeError('Object.defineProperties can only be called on Objects.');
+    }
+
+    if (Object(props) !== props) {
+      throw new TypeError('Properties can only be an Object.');
+    }
+
+    var properties = Object(props);
+    for (propName in properties) {
+      if (hasOwnProperty.call(properties, propName)) {
+        var descr = convertToDescriptor(properties[propName]);
+        object[propName] = descr.value;
+      }
+    }
+    return object;
+  }
+}
+//defineProperty.js
+if (!Object.defineProperty) {
+
+    Object.defineProperty = function defineProperty(object, property, descriptor) {
+
+        if (Object(object) !== object) {
+            throw new TypeError('Object.defineProperty can only be called on Objects.');
+        }
+
+        if (Object(descriptor) !== descriptor) {
+            throw new TypeError('Property description can only be an Object.');
+        }
+
+        if ('get' in descriptor || 'set' in descriptor) {
+            throw new TypeError('getters & setters can not be defined on this javascript engine');
+        }
+        // If it's a data property.
+        if ('value' in descriptor) {
+            // fail silently if 'writable', 'enumerable', or 'configurable'
+            // are requested but not supported
+            // can't implement these features; allow true but not false
+            /* if ( 
+                     ('writable' in descriptor && !descriptor.writable) ||
+                     ('enumerable' in descriptor && !descriptor.enumerable) ||
+                     ('configurable' in descriptor && !descriptor.configurable)
+                 )
+                     {
+                         throw new RangeError('This implementation of Object.defineProperty does not support configurable, enumerable, or writable properties SET to FALSE.');
+                     }*/
+
+
+            object[property] = descriptor.value;
+        }
+        return object;
+    }
+}
+//freeze.js
+/*
+https://github.com/es-shims/es5-shim/blob/master/es5-sham.js
+*/
+// ES5 15.2.3.9
+// http://es5.github.com/#x15.2.3.9
+if (!Object.freeze) {
+    Object.freeze = function freeze(object) {
+        if (Object(object) !== object) {
+            throw new TypeError('Object.freeze can only be called on Objects.');
+        }
+        // this is misleading and breaks feature-detection, but
+        // allows "securable" code to "gracefully" degrade to working
+        // but insecure code.
+        return object;
+    };
+}
+//getOwnPropertyDescriptor.js
+if (!Object.getOwnPropertyDescriptor) {
+
+    Object.getOwnPropertyDescriptor = function getOwnPropertyDescriptor(object, property) {
+        if (Object(object) !== object) {
+            throw new TypeError('Object.getOwnPropertyDescriptor can only be called on Objects.');
+        }
+
+        var descriptor;
+        if (!Object.prototype.hasOwnProperty.call(object, property)) {
+            return descriptor;
+        }
+
+        descriptor = {
+            enumerable: Object.prototype.propertyIsEnumerable.call(object, property),
+            configurable: true
+        };
+
+        descriptor.value = object[property];
+
+        var psPropertyType = object.reflect.find(property).type;
+        descriptor.writable = !(psPropertyType === "readonly");
+
+        return descriptor;
+    }
+}
+//getOwnPropertyNames.js
+if (!Object.getOwnPropertyNames) {
+    Object.getOwnPropertyNames = function getOwnPropertyNames(object) {
+
+        if (Object(object) !== object) {
+            throw new TypeError('Object.getOwnPropertyNames can only be called on Objects.');
+        }
+        var names = [];
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
+        var propertyIsEnumerable = Object.prototype.propertyIsEnumerable;
+        for (var prop in object) {
+            if (hasOwnProperty.call(object, prop)) {
+                names.push(prop);
+            }
+        }
+        var properties = object.reflect.properties;
+        var methods = object.reflect.methods;
+        var all = methods.concat(properties);
+        for (var i = 0; i < all.length; i++) {
+            var prop = all[i].name;
+            if (hasOwnProperty.call(object, prop) && !(propertyIsEnumerable.call(object, prop))) {
+                names.push(prop);
+            }
+        }
+        return names;
+    };
+}
+//getPrototypeOf.js
+if (!Object.getPrototypeOf) {
+	Object.getPrototypeOf = function(object) {
+		if (Object(object) !== object) {
+			throw new TypeError('Object.getPrototypeOf can only be called on Objects.');
+		}
+		return object.__proto__;
+	}
+}
+//isExtensible.js
+// ES5 15.2.3.13
+// http://es5.github.com/#x15.2.3.13
+if (!Object.isExtensible) {
+    Object.isExtensible = function isExtensible(object) {
+        if (Object(object) !== object) {
+            throw new TypeError('Object.isExtensible can only be called on Objects.');
+        }
+        return true;
+    };
+}
+//isSealed.js
+/*
+https://github.com/es-shims/es5-shim/blob/master/es5-sham.js
+*/
+// ES5 15.2.3.11
+// http://es5.github.com/#x15.2.3.11
+if (!Object.isSealed) {
+    Object.isSealed = function isSealed(object) {
+        if (Object(object) !== object) {
+            throw new TypeError('Object.isSealed can only be called on Objects.');
+        }
+        return false;
+    };
+}
+//isFrozen.js
+/*
+https://github.com/es-shims/es5-shim/blob/master/es5-sham.js
+*/
+// ES5 15.2.3.12
+// http://es5.github.com/#x15.2.3.12
+if (!Object.isFrozen) {
+    Object.isFrozen = function isFrozen(object) {
+        if (Object(object) !== object) {
+            throw new TypeError('Object.isFrozen can only be called on Objects.');
+        }
+        return false;
+    };
+}
+//keys.js
+if (!Object.keys) {
+    Object.keys = function(object) {
+        if (Object(object) !== object) {
+            throw new TypeError('Object.keys can only be called on Objects.');
+        }
+        var hasOwnProperty = Object.prototype.hasOwnProperty;
+        var result = [];
+        for (var prop in object) {
+            if (hasOwnProperty.call(object, prop)) {
+                result.push(prop);
+            }
+        }
+        return result;
+    };
+}
+//preventExtensions.js
+/*
+https://github.com/es-shims/es5-shim/blob/master/es5-sham.js
+*/
+// ES5 15.2.3.10
+// http://es5.github.com/#x15.2.3.10
+if (!Object.preventExtensions) {
+    Object.preventExtensions = function preventExtensions(object) {
+
+        if (Object(object) !== object) {
+            throw new TypeError('Object.preventExtensions can only be called on Objects.');
+        }
+        // this is misleading and breaks feature-detection, but
+        // allows "securable" code to "gracefully" degrade to working
+        // but insecure code.
+        return object;
+    };
+}
+//seal.js
+/*
+https://github.com/es-shims/es5-shim/blob/master/es5-sham.js
+*/
+// ES5 15.2.3.8
+// http://es5.github.com/#x15.2.3.8
+if (!Object.seal) {
+    Object.seal = function seal(object) {
+        if (Object(object) !== object) {
+            throw new TypeError('Object.seal can only be called on Objects.');
+        }
+        // this is misleading and breaks feature-detection, but
+        // allows "securable" code to "gracefully" degrade to working
+        // but insecure code.
+        return object;
+    };
+}
+//parseAndStringify.js
+/*
+    json2.js
+    2014-02-04
+
+    Public Domain.
+
+    NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.
+
+    See http://www.JSON.org/js.html
+
+
+    This code should be minified before deployment.
+    See http://javascript.crockford.com/jsmin.html
+
+    USE YOUR OWN COPY. IT IS EXTREMELY UNWISE TO LOAD CODE FROM SERVERS YOU DO
+    NOT CONTROL.
+
+
+    This file creates a global JSON object containing two methods: stringify
+    and parse.
+
+        JSON.stringify(value, replacer, space)
+            value       any JavaScript value, usually an object or array.
+
+            replacer    an optional parameter that determines how object
+                        values are stringified for objects. It can be a
+                        function or an array of strings.
+
+            space       an optional parameter that specifies the indentation
+                        of nested structures. If it is omitted, the text will
+                        be packed without extra whitespace. If it is a number,
+                        it will specify the number of spaces to indent at each
+                        level. If it is a string (such as '\t' or '&nbsp;'),
+                        it contains the characters used to indent at each level.
+
+            This method produces a JSON text from a JavaScript value.
+
+            When an object value is found, if the object contains a toJSON
+            method, its toJSON method will be called and the result will be
+            stringified. A toJSON method does not serialize: it returns the
+            value represented by the name/value pair that should be serialized,
+            or undefined if nothing should be serialized. The toJSON method
+            will be passed the key associated with the value, and this will be
+            bound to the value
+
+            For example, this would serialize Dates as ISO strings.
+
+                Date.prototype.toJSON = function (key) {
+                    function f(n) {
+                        // Format integers to have at least two digits.
+                        return n < 10 ? '0' + n : n;
+                    }
+
+                    return this.getUTCFullYear()   + '-' +
+                         f(this.getUTCMonth() + 1) + '-' +
+                         f(this.getUTCDate())      + 'T' +
+                         f(this.getUTCHours())     + ':' +
+                         f(this.getUTCMinutes())   + ':' +
+                         f(this.getUTCSeconds())   + 'Z';
+                };
+
+            You can provide an optional replacer method. It will be passed the
+            key and value of each member, with this bound to the containing
+            object. The value that is returned from your method will be
+            serialized. If your method returns undefined, then the member will
+            be excluded from the serialization.
+
+            If the replacer parameter is an array of strings, then it will be
+            used to select the members to be serialized. It filters the results
+            such that only members with keys listed in the replacer array are
+            stringified.
+
+            Values that do not have JSON representations, such as undefined or
+            functions, will not be serialized. Such values in objects will be
+            dropped; in arrays they will be replaced with null. You can use
+            a replacer function to replace those with JSON values.
+            JSON.stringify(undefined) returns undefined.
+
+            The optional space parameter produces a stringification of the
+            value that is filled with line breaks and indentation to make it
+            easier to read.
+
+            If the space parameter is a non-empty string, then that string will
+            be used for indentation. If the space parameter is a number, then
+            the indentation will be that many spaces.
+
+            Example:
+
+            text = JSON.stringify(['e', {pluribus: 'unum'}]);
+            // text is '["e",{"pluribus":"unum"}]'
+
+
+            text = JSON.stringify(['e', {pluribus: 'unum'}], null, '\t');
+            // text is '[\n\t"e",\n\t{\n\t\t"pluribus": "unum"\n\t}\n]'
+
+            text = JSON.stringify([new Date()], function (key, value) {
+                return this[key] instanceof Date ?
+                    'Date(' + this[key] + ')' : value;
+            });
+            // text is '["Date(---current time---)"]'
+
+
+        JSON.parse(text, reviver)
+            This method parses a JSON text to produce an object or array.
+            It can throw a SyntaxError exception.
+
+            The optional reviver parameter is a function that can filter and
+            transform the results. It receives each of the keys and values,
+            and its return value is used instead of the original value.
+            If it returns what it received, then the structure is not modified.
+            If it returns undefined then the member is deleted.
+
+            Example:
+
+            // Parse the text. Values that look like ISO date strings will
+            // be converted to Date objects.
+
+            myData = JSON.parse(text, function (key, value) {
+                var a;
+                if (typeof value === 'string') {
+                    a =
+/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/.exec(value);
+                    if (a) {
+                        return new Date(Date.UTC(+a[1], +a[2] - 1, +a[3], +a[4],
+                            +a[5], +a[6]));
+                    }
+                }
+                return value;
+            });
+
+            myData = JSON.parse('["Date(09/09/2001)"]', function (key, value) {
+                var d;
+                if (typeof value === 'string' &&
+                        value.slice(0, 5) === 'Date(' &&
+                        value.slice(-1) === ')') {
+                    d = new Date(value.slice(5, -1));
+                    if (d) {
+                        return d;
+                    }
+                }
+                return value;
+            });
+
+
+    This is a reference implementation. You are free to copy, modify, or
+    redistribute.
+*/
+
+/*jslint evil: true, regexp: true */
+
+/*members "", "\b", "\t", "\n", "\f", "\r", "\"", JSON, "\\", apply,
+    call, charCodeAt, getUTCDate, getUTCFullYear, getUTCHours,
+    getUTCMinutes, getUTCMonth, getUTCSeconds, hasOwnProperty, join,
+    lastIndex, length, parse, prototype, push, replace, slice, stringify,
+    test, toJSON, toString, valueOf
+*/
+
+
+// Create a JSON object only if one does not already exist. We create the
+// methods in a closure to avoid creating global variables.
+
+if (typeof JSON !== 'object') {
+  JSON = {};
+}
+
+(function () {
+  'use strict';
+
+  function f(n) {
+      // Format integers to have at least two digits.
+      return n < 10 ? '0' + n : n;
+  }
+
+  if (typeof Date.prototype.toJSON !== 'function') {
+
+      Date.prototype.toJSON = function () {
+
+          return isFinite(this.valueOf())
+              ? this.getUTCFullYear()     + '-' +
+                  f(this.getUTCMonth() + 1) + '-' +
+                  f(this.getUTCDate())      + 'T' +
+                  f(this.getUTCHours())     + ':' +
+                  f(this.getUTCMinutes())   + ':' +
+                  f(this.getUTCSeconds())   + 'Z'
+              : null;
+      };
+
+      String.prototype.toJSON      =
+          Number.prototype.toJSON  =
+          Boolean.prototype.toJSON = function () {
+              return this.valueOf();
+          };
+  }
+
+  var cx,
+      escapable,
+      gap,
+      indent,
+      meta,
+      rep;
+
+
+  function quote(string) {
+
+// If the string contains no control characters, no quote characters, and no
+// backslash characters, then we can safely slap some quotes around it.
+// Otherwise we must also replace the offending characters with safe escape
+// sequences.
+
+      escapable.lastIndex = 0;
+      return escapable.test(string) ? '"' + string.replace(escapable, function (a) {
+          var c = meta[a];
+          return typeof c === 'string'
+              ? c
+              : '\\u' + ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+      }) + '"' : '"' + string + '"';
+  }
+
+
+  function str(key, holder) {
+
+// Produce a string from holder[key].
+
+      var i,          // The loop counter.
+          k,          // The member key.
+          v,          // The member value.
+          length,
+          mind = gap,
+          partial,
+          value = holder[key];
+
+// If the value has a toJSON method, call it to obtain a replacement value.
+
+      if (value && typeof value === 'object' &&
+              typeof value.toJSON === 'function') {
+          value = value.toJSON(key);
+      }
+
+// If we were called with a replacer function, then call the replacer to
+// obtain a replacement value.
+
+      if (typeof rep === 'function') {
+          value = rep.call(holder, key, value);
+      }
+
+// What happens next depends on the value's type.
+
+      switch (typeof value) {
+      case 'string':
+          return quote(value);
+
+      case 'number':
+
+// JSON numbers must be finite. Encode non-finite numbers as null.
+
+          return isFinite(value) ? String(value) : 'null';
+
+      case 'boolean':
+      case 'null':
+
+// If the value is a boolean or null, convert it to a string. Note:
+// typeof null does not produce 'null'. The case is included here in
+// the remote chance that this gets fixed someday.
+
+          return String(value);
+
+// If the type is 'object', we might be dealing with an object or an array or
+// null.
+
+      case 'object':
+
+// Due to a specification blunder in ECMAScript, typeof null is 'object',
+// so watch out for that case.
+
+          if (!value) {
+              return 'null';
+          }
+
+// Make an array to hold the partial results of stringifying this object value.
+
+          gap += indent;
+          partial = [];
+
+// Is the value an array?
+
+          if (Object.prototype.toString.apply(value) === '[object Array]') {
+
+// The value is an array. Stringify every element. Use null as a placeholder
+// for non-JSON values.
+
+              length = value.length;
+              for (i = 0; i < length; i += 1) {
+                  partial[i] = str(i, value) || 'null';
+              }
+
+// Join all of the elements together, separated with commas, and wrap them in
+// brackets.
+
+              v = partial.length === 0
+                  ? '[]'
+                  : gap
+                  ? '[\n' + gap + partial.join(',\n' + gap) + '\n' + mind + ']'
+                  : '[' + partial.join(',') + ']';
+              gap = mind;
+              return v;
+          }
+
+// If the replacer is an array, use it to select the members to be stringified.
+
+          if (rep && typeof rep === 'object') {
+              length = rep.length;
+              for (i = 0; i < length; i += 1) {
+                  if (typeof rep[i] === 'string') {
+                      k = rep[i];
+                      v = str(k, value);
+                      if (v) {
+                          partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                      }
+                  }
+              }
+          } else {
+
+// Otherwise, iterate through all of the keys in the object.
+
+              for (k in value) {
+                  if (Object.prototype.hasOwnProperty.call(value, k)) {
+                      v = str(k, value);
+                      if (v) {
+                          partial.push(quote(k) + (gap ? ': ' : ':') + v);
+                      }
+                  }
+              }
+          }
+
+// Join all of the member texts together, separated with commas,
+// and wrap them in braces.
+
+          v = partial.length === 0
+              ? '{}'
+              : gap
+              ? '{\n' + gap + partial.join(',\n' + gap) + '\n' + mind + '}'
+              : '{' + partial.join(',') + '}';
+          gap = mind;
+          return v;
+      }
+  }
+
+// If the JSON object does not yet have a stringify method, give it one.
+
+  if (typeof JSON.stringify !== 'function') {
+      escapable = /[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+      meta = {    // table of character substitutions
+          '\b': '\\b',
+          '\t': '\\t',
+          '\n': '\\n',
+          '\f': '\\f',
+          '\r': '\\r',
+          '"' : '\\"',
+          '\\': '\\\\'
+      };
+      JSON.stringify = function (value, replacer, space) {
+
+// The stringify method takes a value and an optional replacer, and an optional
+// space parameter, and returns a JSON text. The replacer can be a function
+// that can replace values, or an array of strings that will select the keys.
+// A default replacer method can be provided. Use of the space parameter can
+// produce text that is more easily readable.
+
+          var i;
+          gap = '';
+          indent = '';
+
+// If the space parameter is a number, make an indent string containing that
+// many spaces.
+
+          if (typeof space === 'number') {
+              for (i = 0; i < space; i += 1) {
+                  indent += ' ';
+              }
+
+// If the space parameter is a string, it will be used as the indent string.
+
+          } else if (typeof space === 'string') {
+              indent = space;
+          }
+
+// If there is a replacer, it must be a function or an array.
+// Otherwise, throw an error.
+
+          rep = replacer;
+          if (replacer && typeof replacer !== 'function' &&
+                  (typeof replacer !== 'object' ||
+                  typeof replacer.length !== 'number')) {
+              throw new Error('JSON.stringify');
+          }
+
+// Make a fake root object containing our value under the key of ''.
+// Return the result of stringifying the value.
+
+          return str('', {'': value});
+      };
+  }
+
+
+// If the JSON object does not yet have a parse method, give it one.
+
+  if (typeof JSON.parse !== 'function') {
+      cx = /[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g;
+      JSON.parse = function (text, reviver) {
+
+// The parse method takes a text and an optional reviver function, and returns
+// a JavaScript value if the text is a valid JSON text.
+
+          var j;
+
+          function walk(holder, key) {
+
+// The walk method is used to recursively walk the resulting structure so
+// that modifications can be made.
+
+              var k, v, value = holder[key];
+              if (value && typeof value === 'object') {
+                  for (k in value) {
+                      if (Object.prototype.hasOwnProperty.call(value, k)) {
+                          v = walk(value, k);
+                          if (v !== undefined) {
+                              value[k] = v;
+                          } else {
+                              delete value[k];
+                          }
+                      }
+                  }
+              }
+              return reviver.call(holder, key, value);
+          }
+
+
+// Parsing happens in four stages. In the first stage, we replace certain
+// Unicode characters with escape sequences. JavaScript handles many characters
+// incorrectly, either silently deleting them, or treating them as line endings.
+
+          text = String(text);
+          cx.lastIndex = 0;
+          if (cx.test(text)) {
+              text = text.replace(cx, function (a) {
+                  return '\\u' +
+                      ('0000' + a.charCodeAt(0).toString(16)).slice(-4);
+              });
+          }
+
+// In the second stage, we run the text against regular expressions that look
+// for non-JSON patterns. We are especially concerned with '()' and 'new'
+// because they can cause invocation, and '=' because it can cause mutation.
+// But just to be safe, we want to reject all unexpected forms.
+
+// We split the second stage into 4 regexp operations in order to work around
+// crippling inefficiencies in IE's and Safari's regexp engines. First we
+// replace the JSON backslash pairs with '@' (a non-JSON character). Second, we
+// replace all simple value tokens with ']' characters. Third, we delete all
+// open brackets that follow a colon or comma or that begin the text. Finally,
+// we look to see that the remaining characters are only whitespace or ']' or
+// ',' or ':' or '{' or '}'. If that is so, then the text is safe for eval.
+
+          if (/^[\],:{}\s]*$/
+                  .test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g, '@')
+                      .replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g, ']')
+                      .replace(/(?:^|:|,)(?:\s*\[)+/g, ''))) {
+
+// In the third stage we use the eval function to compile the text into a
+// JavaScript structure. The '{' operator is subject to a syntactic ambiguity
+// in JavaScript: it can begin a block or an object literal. We wrap the text
+// in parens to eliminate the ambiguity.
+
+              j = eval('(' + text + ')');
+
+// In the optional fourth stage, we recursively walk the new structure, passing
+// each name/value pair to a reviver function for possible transformation.
+
+              return typeof reviver === 'function'
+                  ? walk({'': j}, '')
+                  : j;
+          }
+
+// If the text is not JSON parseable, then a SyntaxError is thrown.
+
+          throw new SyntaxError('JSON.parse');
+      };
+  }
+}());
+
+//trim.js
+/*
+https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/String/Trim
+*/
+if (!String.prototype.trim) {
+	// Вырезаем BOM и неразрывный пробел
+	String.prototype.trim = function() {
+		return this.replace(/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, '');
+	};
+}
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var _1 = __webpack_require__(0);
+var BaseInfo_1 = __webpack_require__(6);
+var CallCommand = (function () {
+    function CallCommand(inputComandStr) {
+        this.command = [];
+        this.result = '';
+        this.info = new BaseInfo_1["default"]();
+        this.os = _1["default"].isWindows() ? 'windows' : 'mac';
+        this.isWindows = _1["default"].isWindows();
+        this.isMac = _1["default"].isMac();
+        this.hasPermission = _1["default"].hasPermissionToNetworkAccess();
+        this.restrictedWinCommandName = ['del'];
+        this.restrictedMacCommandName = ['rm'];
+        if (inputComandStr != null) {
+            this.setCommand(inputComandStr);
+            this.setResult();
+        }
+    }
+    CallCommand.prototype.getResult = function (isUpdate) {
+        if (isUpdate === void 0) { isUpdate = true; }
+        if (isUpdate) {
+            this.setResult();
+        }
+        return this.result;
+    };
+    CallCommand.prototype.setResult = function () {
+        this.result = '';
+        for (var i = 0; i < this.command.length; i++) {
+            if (i === this.command.length - 1) {
+                this.result += "" + this.command[i];
+            }
+            else {
+                this.result += this.command[i] + " & ";
+            }
+        }
+        if (this.result != null && this.result === '') {
+            return true;
+        }
+        return false;
+    };
+    CallCommand.prototype.setCommand = function (str, isUpdateResult) {
+        if (isUpdateResult === void 0) { isUpdateResult = true; }
+        this.command = [];
+        if (_1["default"].getType(str) === 'string' && typeof str === 'string') {
+            str = _1["default"].trim(str);
+            this.command.push(str);
+        }
+        else if (_1["default"].getType(str) === 'array' && typeof str === 'object') {
+            for (var _i = 0, str_1 = str; _i < str_1.length; _i++) {
+                var commandStr = str_1[_i];
+                commandStr = _1["default"].trim(commandStr);
+                this.command.push(commandStr);
+            }
+        }
+        if (isUpdateResult) {
+            this.setResult();
+        }
+        return this.command;
+    };
+    CallCommand.prototype.setRestrictedCommand = function (commandName) {
+        if (this.isWindows) {
+            this.restrictedWinCommandName.push(commandName);
+            return this.restrictedWinCommandName;
+        }
+        this.restrictedMacCommandName.push(commandName);
+        return this.restrictedMacCommandName;
+    };
+    CallCommand.prototype.removeRestrictedCommand = function (commandPosition) { };
+    CallCommand.prototype.getRestrictedCommand = function () { };
+    CallCommand.prototype.check = function () {
+        var restrictedStrings = [];
+        if (this.isWindows) {
+            restrictedStrings = this.restrictedWinCommandName;
+        }
+        else if (this.isMac) {
+            restrictedStrings = this.restrictedMacCommandName;
+        }
+        for (var i = 0; i < restrictedStrings.length; i++) {
+            var rgep = new RegExp("^" + restrictedStrings[i], 'i');
+            for (var j = 0; j < this.command.length; j++) {
+                if (rgep.test(this.command[j])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+    CallCommand.prototype.removeAllCommands = function () {
+        this.command.length = 0;
+        if (this.command === []) {
+            return true;
+        }
+        return false;
+    };
+    CallCommand.prototype.exec = function (isRemoveCommandAfterExec, isReturnOnlyBoolean, isForceExecRestrictedCommand) {
+        if (isRemoveCommandAfterExec === void 0) { isRemoveCommandAfterExec = true; }
+        if (isReturnOnlyBoolean === void 0) { isReturnOnlyBoolean = false; }
+        if (isForceExecRestrictedCommand === void 0) { isForceExecRestrictedCommand = false; }
+        try {
+            if (!_1["default"].hasPermissionToNetworkAccess()) {
+                throw new Error('このスクリプトを動かすためには設定画面で「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。');
+            }
+        }
+        catch (e) {
+            alert(e.message);
+        }
+        var callCommandResult = '';
+        if (!this.check() && isForceExecRestrictedCommand === false) {
+            return false;
+        }
+        if (this.isWindows) {
+            callCommandResult = system.callSystem("cmd.exe /c \"" + this.result + " /t\"");
+            if (isRemoveCommandAfterExec) {
+                this.removeAllCommands();
+            }
+            if (isReturnOnlyBoolean) {
+                return true;
+            }
+        }
+        else if (this.isMac) {
+            alert('現在mac用のコマンド関数は用意されていません。');
+            return false;
+        }
+        if (callCommandResult != null && callCommandResult !== '' && isReturnOnlyBoolean === false) {
+            return callCommandResult;
+        }
+        else {
+            return false;
+        }
+    };
+    return CallCommand;
+}());
+exports["default"] = CallCommand;
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+__webpack_require__(1);
+var OpenPath_1 = __webpack_require__(4);
+var FuzzyOpen_1 = __webpack_require__(9);
+var wnd = new Window("palette", "fuzzy search", [0, 0, 200, 500], { resizeable: true, closeButton: true });
+wnd.margins = 20;
+var st = wnd.add('statictext', { x: 0, y: 0, width: 180, height: 16 }, '');
+var contentsGrp = wnd.add('group', undefined, 'contentsGrp');
+contentsGrp.orientation = 'column';
+var et = wnd.add('edittext', { x: 0, y: 16, width: 180, height: 16 }, 'search txt');
+et.onEnterKey = function () {
+    var fuzzy = new FuzzyOpen_1["default"]('D:/googledrive/material', 'D');
+    var result = fuzzy.search(et.text);
+    if (typeof result !== 'boolean') {
+        var openPath = new OpenPath_1["default"](result[0][1]);
+        openPath.open();
+    }
+};
+et.onChanging = function () {
+    var fuzzy = new FuzzyOpen_1["default"]('D:/googledrive/material', 'D');
+    var result = fuzzy.search(et.text);
+    if (typeof result !== 'boolean') {
+        st.text = result[0][0];
+    }
+};
+wnd.layout.layout(true);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var CallCommand_1 = __webpack_require__(2);
+var Folders_1 = __webpack_require__(7);
+var Paths_1 = __webpack_require__(8);
+var _1 = __webpack_require__(0);
+var OpenPath = (function () {
+    function OpenPath(path) {
+        this.paths = [];
+        this.init(path);
+    }
+    OpenPath.prototype.init = function (path) {
+        if (path != null) {
+            if (typeof path === 'string') {
+                this.setPath(path);
+            }
+            else if (typeof path === 'object' && _1["default"].getType(path) === 'array') {
+                this.setPaths(path);
+            }
+        }
+    };
+    OpenPath.prototype.setPath = function (pathName) {
+        this.paths.push(pathName);
+        return this;
+    };
+    OpenPath.prototype.setPaths = function (pathNameArray) {
+        for (var _i = 0, pathNameArray_1 = pathNameArray; _i < pathNameArray_1.length; _i++) {
+            var pathName = pathNameArray_1[_i];
+            this.paths.push(pathName);
+        }
+        return this;
+    };
+    OpenPath.prototype.setFolderByName = function (folderName) {
+        if (Folders_1.Folders[folderName] != null) {
+            this.paths.push(Folders_1.Folders[folderName].path);
+            return true;
+        }
+        return false;
+    };
+    OpenPath.prototype.setAppByName = function (appName) {
+        if (Paths_1.AppPath[appName] != null) {
+            this.paths.push(" \"" + Paths_1.AppPath[appName].path + "\"");
+            return true;
+        }
+        return false;
+    };
+    OpenPath.prototype.removeAllPath = function () {
+        this.paths = [];
+    };
+    OpenPath.prototype.open = function () {
+        var commandArray = [];
+        for (var _i = 0, _a = this.paths; _i < _a.length; _i++) {
+            var path = _a[_i];
+            commandArray.push("start \"\" \"" + path + "\"");
+        }
+        var callCommand = new CallCommand_1["default"](commandArray);
+        if (callCommand.exec(true, true)) {
+            return true;
+        }
+        return false;
+    };
+    return OpenPath;
+}());
+exports["default"] = OpenPath;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var Utils = (function () {
+    function Utils() {
+    }
+    Utils.getType = function (obj) {
+        var toString = Object.prototype.toString;
+        return toString
+            .call(obj)
+            .slice(8, -1)
+            .toLowerCase();
+    };
+    Utils.joinLine = function (inputArray) { };
+    Utils.getRandomFromArray = function (array) {
+        if (Array.isArray(array) && Utils.getType(array) === 'array') {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+        return false;
+    };
+    Utils.randomMinMax = function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    Utils.trim = function (inputString) {
+        return inputString.replace(/^\s+|\s+$/g, '');
+    };
+    Utils.getMinFromArray = function (inputArray) {
+        return Math.min.apply(Math, inputArray);
+    };
+    Utils.getMaxFromArray = function (inputArray) {
+        return Math.max.apply(Math, inputArray);
+    };
+    Utils.array2Empty = function (array) {
+        array.length = 0;
+        return array;
+    };
+    Utils.getAddRandom = function () {
+        return (Math.random() + Math.random()) / 2;
+    };
+    Utils.getMultiplyRandom = function () {
+        return Math.random() * Math.random();
+    };
+    Utils.getSqrtRandom = function () {
+        return Math.sqrt(Math.random());
+    };
+    Utils.getNormalRandom = function () {
+        var value;
+        while (true) {
+            value = Utils.calcNormal();
+            if (0 <= value && value < 1) {
+                break;
+            }
+        }
+        return value;
+    };
+    Utils.calcNormal = function () {
+        var r1 = Math.random();
+        var r2 = Math.random();
+        var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+        value = (value + 3) / 6;
+        return value;
+    };
+    Utils.getArrayDividedByLine = function (inputText) {
+        return inputText.split(/\n/);
+    };
+    return Utils;
+}());
+exports["default"] = Utils;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+__webpack_require__(1);
+var BaseInfo = (function () {
+    function BaseInfo() {
+        this.encoding = $.appEncoding;
+        this.version = app.version;
+        this.lang = app.isoLanguage;
+        this.os = $.os;
+        this.screen = $.screens;
+        this.info = {
+            "Encoding": this.encoding,
+            "Version": this.version,
+            "Language": this.lang,
+            "OS": this.os,
+        };
+    }
+    BaseInfo.prototype.showData = function () {
+        var alertText = "";
+        for (var _i = 0, _a = Object.keys(this.info); _i < _a.length; _i++) {
+            var key = _a[_i];
+            alertText += key + ": " + this.info[key] + " \n";
+        }
+        alert(alertText);
+    };
+    BaseInfo.prototype.isWindows = function () {
+        if (this.os) {
+            return this.os.toLowerCase().indexOf("windows") !== -1;
+        }
+        return false;
+    };
+    return BaseInfo;
+}());
+exports["default"] = BaseInfo;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+exports.Folders = {
+    materialWater: {
+        path: 'D:/googledrive/material/water_color/',
+        type: 'asset',
+    },
+    material: {
+        path: 'D:/googledrive/material/',
+        type: 'asset',
+    },
+    mateiralGradation: {
+        path: 'D:/googledrive/material/gradation/',
+        type: 'asset',
+    },
+    render: {
+        path: 'D:/googledrive/render/',
+        type: 'render',
+    },
+    idea: {
+        path: 'D:/googledrive/idea/',
+        type: 'idea',
+    },
+    project: {
+        path: 'D:/googledrive/works/',
+        type: 'project',
+    },
+};
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+exports.AppPath = {
+    Blender: {
+        path: 'C:/Program Files/Blender Foundation/Blender 2.81/blender.exe',
+        type: '3d',
+    },
+    Blender79: {
+        path: 'D:/googledrive/blender/blender-2.79b-windows64/blender.exe',
+        type: '3d',
+    },
+    FotoSketcher: {
+        path: 'C:/Program Files/FotoSketcher/FotoSketcher.exe',
+        type: 'image',
+    },
+    AfterFX: {
+        path: 'C:/Program Files/Adobe After Effects 2020/Support Files/AfterFX.exe',
+        type: 'script',
+    },
+    PhotoShop: {
+        path: 'C:/Program Files/Adobe Photoshop 2020/Photoshop.exe',
+        type: 'image',
+    },
+    MediaEncoder: {
+        path: 'C:/Program Files/Adobe Media Encoder 2020/Adobe Media Encoder.exe',
+        type: 'video',
+    },
+    PureRef: {
+        path: 'C:/Program Files/PureRef/PureRef.exe',
+        type: 'reference',
+    },
+    Evernote: {
+        path: 'C:/Program Files (x86)/Evernote/Evernote/Evernote.exe',
+        type: 'text',
+    },
+    ScreenToGif: {
+        path: 'C:/Program Files (x86)/ScreenToGif/ScreenToGif.exe',
+        type: 'video',
+    },
+    WizTree: {
+        path: 'C:/Program Files (x86)/WizTree',
+        type: 'utility',
+    },
+    AGDRec: {
+        path: 'C:/software_normal/AGDRec_131F/AGDRec64.exe',
+        type: 'video',
+    },
+    fSpy: {
+        path: 'C:/software_normal/fSpy-1.0.3-win/fSpy.exe',
+        type: '3d',
+    },
+    instanceMeshes: {
+        path: 'C:/software_normal/instant-meshes-windows/Instant Meshes.exe',
+        type: '3d',
+    },
+    MagicaVoxel: {
+        path: 'C:/software_normal/MagicaVoxel 0.99/MagicaVoxel.exe',
+        type: '3d',
+    },
+    SpaceSniffer: {
+        path: 'C:/software_normal/spacesniffer_1_3_0_2/SpaceSniffer.exe',
+        type: 'utility',
+    },
+};
+exports.ProjectPath = {
+    fish1: {
+        renderRoot: 'D:/googledrive/render/fish1/',
+        baseRenderName: 'Image0001.png',
+        assetsFolders: [
+            {
+                name: 'solid',
+                isSequence: true,
+                renderName: '',
+                description: '',
+            },
+            {
+                name: 'shadow',
+                isSequence: true,
+                renderName: '',
+                description: '',
+            },
+            {
+                name: 'line',
+                isSequence: true,
+                renderName: '',
+                description: '',
+            },
+        ],
+    },
+};
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var _1 = __webpack_require__(0);
+var CommandUtils_1 = __webpack_require__(10);
+var FuzzyOpen = (function () {
+    function FuzzyOpen(path, type, isSearchRecursive, isReturnFullPath) {
+        if (isSearchRecursive === void 0) { isSearchRecursive = false; }
+        if (isReturnFullPath === void 0) { isReturnFullPath = false; }
+        this.searchArray = [];
+        this.fzy = __webpack_require__(11);
+        if (path != null) {
+            this.setTargetPath(path);
+        }
+        if (type != null) {
+            this.setType(type);
+        }
+        if (this.targetPath != null && this.searchType != null) {
+            this.setSearchArray(isSearchRecursive, isReturnFullPath);
+        }
+    }
+    FuzzyOpen.prototype.setTargetPath = function (path) {
+        this.targetPath = path;
+    };
+    FuzzyOpen.prototype.setType = function (type) {
+        this.searchType = type;
+    };
+    FuzzyOpen.prototype.setSearchArray = function (isSearchRecursive, isReturnFullPath) {
+        if (isSearchRecursive === void 0) { isSearchRecursive = false; }
+        if (isReturnFullPath === void 0) { isReturnFullPath = false; }
+        if (this.targetPath == null || this.searchType == null)
+            return false;
+        var result = CommandUtils_1["default"].getDir(this.targetPath, this.searchType, {
+            isNameOnly: isReturnFullPath,
+            isReturnAsArray: true,
+            isSearchSub: isSearchRecursive,
+        });
+        if (typeof result === 'object' && _1["default"].getType(result) === 'array') {
+            this.searchArray = result;
+            return true;
+        }
+        return false;
+    };
+    FuzzyOpen.prototype.search = function (searchTxt, minScore) {
+        if (minScore === void 0) { minScore = 0.33; }
+        var fuzzyset = this.fzy(this.searchArray);
+        var searchResult = fuzzyset.get(searchTxt, null, minScore);
+        var returnResult = [];
+        if (searchResult != null) {
+            for (var _i = 0, searchResult_1 = searchResult; _i < searchResult_1.length; _i++) {
+                var value = searchResult_1[_i];
+                var fullPath = this.targetPath + "/" + value[1];
+                var returnResultContent = [value[1], fullPath, value[0]];
+                returnResult.push(returnResultContent);
+            }
+            return returnResult;
+        }
+        return false;
+    };
+    FuzzyOpen.prototype.searchOne = function (searchTxt, minScore) {
+        if (minScore === void 0) { minScore = 0.33; }
+        var result = this.search(searchTxt, minScore);
+        if (typeof result === 'boolean') {
+            return false;
+        }
+        else {
+            return result[0];
+        }
+    };
+    return FuzzyOpen;
+}());
+exports["default"] = FuzzyOpen;
+
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var _1 = __webpack_require__(0);
+var CallCommand_1 = __webpack_require__(2);
+var CommandUtils = (function () {
+    function CommandUtils() {
+    }
+    CommandUtils.getDir = function (targetPath, type, optionObject) {
+        if (optionObject === void 0) { optionObject = {
+            isSearchSub: false,
+            isNameOnly: false,
+            sortOption: '',
+            isReverseArray: false,
+            isReturnAsArray: true,
+        }; }
+        var callCommand = new CallCommand_1["default"]();
+        var command = "dir \"" + targetPath + "\" /b";
+        switch (type) {
+            case 'F':
+                command += ' /A-d ';
+                break;
+            case 'D':
+                command += ' /A:d ';
+                break;
+            case 'FD':
+                command += '';
+                break;
+        }
+        if (optionObject.isSearchSub)
+            command += '/S ';
+        if (optionObject.isNameOnly)
+            command += '/D ';
+        if (optionObject.sortOption != null)
+            command += optionObject.sortOption;
+        callCommand.setCommand(command);
+        var result = callCommand.exec(true);
+        if (typeof result !== 'boolean') {
+            if (optionObject.isReturnAsArray) {
+                var resultArray = _1["default"].getArrayDividedByLine(result);
+                if (optionObject.isReverseArray) {
+                    return resultArray.reverse();
+                }
+                else {
+                    return resultArray;
+                }
+            }
+            else {
+                return result;
+            }
+        }
+        return '';
+    };
+    return CommandUtils;
+}());
+exports["default"] = CommandUtils;
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(12);
+
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+(function() {
+
+var FuzzySet = function(arr, useLevenshtein, gramSizeLower, gramSizeUpper) {
+    var fuzzyset = {
+
+    };
+
+    // default options
+    arr = arr || [];
+    fuzzyset.gramSizeLower = gramSizeLower || 2;
+    fuzzyset.gramSizeUpper = gramSizeUpper || 3;
+    fuzzyset.useLevenshtein = (typeof useLevenshtein !== 'boolean') ? true : useLevenshtein;
+
+    // define all the object functions and attributes
+    fuzzyset.exactSet = {};
+    fuzzyset.matchDict = {};
+    fuzzyset.items = {};
+
+    // helper functions
+    var levenshtein = function(str1, str2) {
+        var current = [], prev, value;
+
+        for (var i = 0; i <= str2.length; i++)
+            for (var j = 0; j <= str1.length; j++) {
+            if (i && j)
+                if (str1.charAt(j - 1) === str2.charAt(i - 1))
+                value = prev;
+                else
+                value = Math.min(current[j], current[j - 1], prev) + 1;
+            else
+                value = i + j;
+
+            prev = current[j];
+            current[j] = value;
+            }
+
+        return current.pop();
+    };
+
+    // return an edit distance from 0 to 1
+    var _distance = function(str1, str2) {
+        if (str1 === null && str2 === null) throw 'Trying to compare two null values';
+        if (str1 === null || str2 === null) return 0;
+        str1 = String(str1); str2 = String(str2);
+
+        var distance = levenshtein(str1, str2);
+        if (str1.length > str2.length) {
+            return 1 - distance / str1.length;
+        } else {
+            return 1 - distance / str2.length;
+        }
+    };
+    var _nonWordRe = /[^a-zA-Z0-9\u00C0-\u00FF, ]+/g;
+
+    var _iterateGrams = function(value, gramSize) {
+        gramSize = gramSize || 2;
+        var simplified = '-' + value.toLowerCase().replace(_nonWordRe, '') + '-',
+            lenDiff = gramSize - simplified.length,
+            results = [];
+        if (lenDiff > 0) {
+            for (var i = 0; i < lenDiff; ++i) {
+                simplified += '-';
+            }
+        }
+        for (var i = 0; i < simplified.length - gramSize + 1; ++i) {
+            results.push(simplified.slice(i, i + gramSize));
+        }
+        return results;
+    };
+
+    var _gramCounter = function(value, gramSize) {
+        // return an object where key=gram, value=number of occurrences
+        gramSize = gramSize || 2;
+        var result = {},
+            grams = _iterateGrams(value, gramSize),
+            i = 0;
+        for (i; i < grams.length; ++i) {
+            if (grams[i] in result) {
+                result[grams[i]] += 1;
+            } else {
+                result[grams[i]] = 1;
+            }
+        }
+        return result;
+    };
+
+    // the main functions
+    fuzzyset.get = function(value, defaultValue, minMatchScore) {
+        // check for value in set, returning defaultValue or null if none found
+        if (minMatchScore === undefined) {
+            minMatchScore = .33
+        }
+        var result = this._get(value, minMatchScore);
+        if (!result && typeof defaultValue !== 'undefined') {
+            return defaultValue;
+        }
+        return result;
+    };
+
+    fuzzyset._get = function(value, minMatchScore) {
+        var normalizedValue = this._normalizeStr(value),
+            result = this.exactSet[normalizedValue];
+        if (result) {
+            return [[1, result]];
+        }
+
+        var results = [];
+        // start with high gram size and if there are no results, go to lower gram sizes
+        for (var gramSize = this.gramSizeUpper; gramSize >= this.gramSizeLower; --gramSize) {
+            results = this.__get(value, gramSize, minMatchScore);
+            if (results && results.length > 0) {
+                return results;
+            }
+        }
+        return null;
+    };
+
+    fuzzyset.__get = function(value, gramSize, minMatchScore) {
+        var normalizedValue = this._normalizeStr(value),
+            matches = {},
+            gramCounts = _gramCounter(normalizedValue, gramSize),
+            items = this.items[gramSize],
+            sumOfSquareGramCounts = 0,
+            gram,
+            gramCount,
+            i,
+            index,
+            otherGramCount;
+
+        for (gram in gramCounts) {
+            gramCount = gramCounts[gram];
+            sumOfSquareGramCounts += Math.pow(gramCount, 2);
+            if (gram in this.matchDict) {
+                for (i = 0; i < this.matchDict[gram].length; ++i) {
+                    index = this.matchDict[gram][i][0];
+                    otherGramCount = this.matchDict[gram][i][1];
+                    if (index in matches) {
+                        matches[index] += gramCount * otherGramCount;
+                    } else {
+                        matches[index] = gramCount * otherGramCount;
+                    }
+                }
+            }
+        }
+
+        function isEmptyObject(obj) {
+            for(var prop in obj) {
+                if(obj.hasOwnProperty(prop))
+                    return false;
+            }
+            return true;
+        }
+
+        if (isEmptyObject(matches)) {
+            return null;
+        }
+
+        var vectorNormal = Math.sqrt(sumOfSquareGramCounts),
+            results = [],
+            matchScore;
+        // build a results list of [score, str]
+        for (var matchIndex in matches) {
+            matchScore = matches[matchIndex];
+            results.push([matchScore / (vectorNormal * items[matchIndex][0]), items[matchIndex][1]]);
+        }
+        var sortDescending = function(a, b) {
+            if (a[0] < b[0]) {
+                return 1;
+            } else if (a[0] > b[0]) {
+                return -1;
+            } else {
+                return 0;
+            }
+        };
+        results.sort(sortDescending);
+        if (this.useLevenshtein) {
+            var newResults = [],
+                endIndex = Math.min(50, results.length);
+            // truncate somewhat arbitrarily to 50
+            for (var i = 0; i < endIndex; ++i) {
+                newResults.push([_distance(results[i][1], normalizedValue), results[i][1]]);
+            }
+            results = newResults;
+            results.sort(sortDescending);
+        }
+        var newResults = [];
+        results.forEach(function(scoreWordPair) {
+            if (scoreWordPair[0] >= minMatchScore) {
+                newResults.push([scoreWordPair[0], this.exactSet[scoreWordPair[1]]]);
+            }
+        }.bind(this))
+        return newResults;
+    };
+
+    fuzzyset.add = function(value) {
+        var normalizedValue = this._normalizeStr(value);
+        if (normalizedValue in this.exactSet) {
+            return false;
+        }
+
+        var i = this.gramSizeLower;
+        for (i; i < this.gramSizeUpper + 1; ++i) {
+            this._add(value, i);
+        }
+    };
+
+    fuzzyset._add = function(value, gramSize) {
+        var normalizedValue = this._normalizeStr(value),
+            items = this.items[gramSize] || [],
+            index = items.length;
+
+        items.push(0);
+        var gramCounts = _gramCounter(normalizedValue, gramSize),
+            sumOfSquareGramCounts = 0,
+            gram, gramCount;
+        for (gram in gramCounts) {
+            gramCount = gramCounts[gram];
+            sumOfSquareGramCounts += Math.pow(gramCount, 2);
+            if (gram in this.matchDict) {
+                this.matchDict[gram].push([index, gramCount]);
+            } else {
+                this.matchDict[gram] = [[index, gramCount]];
+            }
+        }
+        var vectorNormal = Math.sqrt(sumOfSquareGramCounts);
+        items[index] = [vectorNormal, normalizedValue];
+        this.items[gramSize] = items;
+        this.exactSet[normalizedValue] = value;
+    };
+
+    fuzzyset._normalizeStr = function(str) {
+        if (Object.prototype.toString.call(str) !== '[object String]') throw 'Must use a string as argument to FuzzySet functions';
+        return str.toLowerCase();
+    };
+
+    // return length of items in set
+    fuzzyset.length = function() {
+        var count = 0,
+            prop;
+        for (prop in this.exactSet) {
+            if (this.exactSet.hasOwnProperty(prop)) {
+                count += 1;
+            }
+        }
+        return count;
+    };
+
+    // return is set is empty
+    fuzzyset.isEmpty = function() {
+        for (var prop in this.exactSet) {
+            if (this.exactSet.hasOwnProperty(prop)) {
+                return false;
+            }
+        }
+        return true;
+    };
+
+    // return list of values loaded into set
+    fuzzyset.values = function() {
+        var values = [],
+            prop;
+        for (prop in this.exactSet) {
+            if (this.exactSet.hasOwnProperty(prop)) {
+                values.push(this.exactSet[prop]);
+            }
+        }
+        return values;
+    };
+
+
+    // initialization
+    var i = fuzzyset.gramSizeLower;
+    for (i; i < fuzzyset.gramSizeUpper + 1; ++i) {
+        fuzzyset.items[i] = [];
+    }
+    // add all the items to the set
+    for (i = 0; i < arr.length; ++i) {
+        fuzzyset.add(arr[i]);
+    }
+
+    return fuzzyset;
+};
+
+var root = this;
+// Export the fuzzyset object for **CommonJS**, with backwards-compatibility
+// for the old `require()` API. If we're not in CommonJS, add `_` to the
+// global object.
+if ( true && module.exports) {
+    module.exports = FuzzySet;
+    if(root)
+    {
+        root.FuzzySet = FuzzySet;
+    }
+} else {
+    root.FuzzySet = FuzzySet;
+}
+
+})();
+
+
+/***/ })
+/******/ ]);
