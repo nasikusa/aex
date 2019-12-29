@@ -305,4 +305,19 @@ export default class _ extends Utils {
     return _.hasPermissionToNetworkAccess();
   }
 
+  /**
+   *
+   *
+   * @static
+   * @returns {boolean}
+   * @memberof _
+   */
+  static checkAccessToNetwork(): boolean{
+    if(_.hasPermissionToNetworkAccess()){
+      alert('このスクリプトを動かすためには設定画面で「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。');
+      return false;
+    }
+    return true;
+  }
+
 }
