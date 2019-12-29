@@ -1,17 +1,20 @@
 export const RegExp = {
-  "url": {
-    val: "^(http|https)://([\w-]+\.)+[\w-]+(/[\w-./?%&=]*)?$",
+  url: {
+    val: '^(http|https)://([w-]+.)+[w-]+(/[w-./?%&=]*)?$',
   },
-  "num": {
-    val: "^[0-9]*$",
+  num: {
+    val: /^[0-9]*$/,
   },
-  "en": {
-    val: "^[A-Za-z]+$",
+  en: {
+    val: /[A-Za-z]+$/,
   },
-  "enSmall": {
-    val: "^[a-z]+$",
+  enSmall: {
+    val: /^[a-z]+$/,
   },
-  "enBig": {
-    val: "^[A-Z]+$"
+  enBig: {
+    val: /^[A-Z]+$/,
   },
-}
+  image: {
+    val: /.+.(jpg|jpeg|png|webp|bmp|gif)$/,
+  },
+};
