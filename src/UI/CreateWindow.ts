@@ -1,89 +1,49 @@
 import OpenWeb from '../module/command/OpenWeb';
 
-interface UIPanel {
-  open(window: Window): void | boolean;
-  close(window: Window): void | boolean;
-}
+export default class CreateWindow {
 
-export default class CreateWindow implements UIPanel {
+  public panelWidth: number = 200;
+  public panelMargin: number = 10;
+  public panelInnerWidth: number = this.panelWidth - this.panelMargin;
+  public isScriptUIPanel: boolean = false;
+  public wnd: Window;
+  public panelTitle: string;
+  public elementsArray: any[] = [];
+  public ordersArray: any[] = [];
 
-  constructor(){
-    // var wnd = new Window("palette", "Test Window", [0, 0, 250, 150]);
-    // var okBtn = wnd.add("button", [55, 100, 180, 135], "OK");
-    // var cancelBtn = wnd.add("button", [155, 100, 240, 135], "Cancel");
-    // this.toCenter(wnd);
-    // this.open(wnd);
-
-    // okBtn.onClick = function(){
-    //   const ow = new OpenWeb();
-    //   ow.setUrl("https://www.youtube.com/watch?v=v0b7TUVz6lY");
-    //   ow.open();
-    // }
-    // cancelBtn.onClick = function(){
-    //     this.close(wnd);
-    // }
-
+  constructor(isScriptUIPanel: boolean = true, panelWidth: number = 200 , panelTitle: string = ''){
+    this.isScriptUIPanel = isScriptUIPanel;
+    this.panelWidth = panelWidth;
+    this.panelTitle = panelTitle;
+    this.initPanel();
   }
 
-  ex1(){
+  initPanel(){
 
-    var wnd = new Window("palette", "Test Window", [0, 0, 250, 150]);
-    var checkA = wnd.add("checkbox", [30, 10, 220, 30],"入力欄を表示");
-    checkA.value=false;
-    checkA.visible = true;
-    var input: EditText = wnd.add("edittext", [30, 40, 220, 60]);
-    input.visible = false;
-    wnd.center();
-    wnd.show();
-
-    // checkA.addEventListener('')
-
-
-    checkA.onMouseOver = function(){
-      alert('hoge');
+    if( this.isScriptUIPanel ){
+      // this.wnd = (thisObject instanceof Panel) ? thisObject : new Window("palette", "Dockable Script", undefined, {resizeable:true, closeButton: true});
+      this.wnd = new Window("palette", this.panelTitle , undefined, {resizeable:true, closeButton: true});
+    } else {
+      this.wnd = new Window("palette", this.panelTitle , undefined, {resizeable:true, closeButton: true});
     }
-
-    checkA.onClick = function(){
-        if(checkA.value == true){
-            input.visible = true;
-        }
-        else{
-            input.visible = false;
-        }
-    }
+  wnd.margins = 20;
 
   }
 
-  exmaple() {
-    var wnd = new Window("palette", "Test Window", [0, 0, 250, 150]);
-    var checkA = wnd.add("checkbox", [30, 10, 220, 30],"入力欄を表示");
-    checkA.value=false;
-    var input: EditText = wnd.add("edittext", [30, 40, 220, 60]);
-    input.visible = false;
-    wnd.center();
-    wnd.show();
-
-    checkA.onClick = function(){
-        if(checkA.value == true){
-            input.visible = true;
-        }
-        else{
-            input.visible = false;
-        }
-    }
+  addButton(){
 
   }
 
-  toCenter(window: Window): void {
-    window.center();
+  addEditText(){
+    var et = wnd.add('edittext',{x:0,y:100,width:130,height: 30}, 'search txt');
   }
 
-  open(window: Window): void {
-    window.show();
+  createWindow(){
+
   }
 
-  close(window: Window): void {
-    window.close();
+  setEvent(){
+
   }
 
 }
