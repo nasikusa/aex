@@ -1,9 +1,9 @@
 import CallCommand from './CallCommand';
 import { Folders } from '../../data/Folders';
+import { AppPath } from '../../data/Paths';
 import _ from '../../base/_';
 
 export default class OpenPath {
-
   /**
    *開くパスの配列
    *
@@ -19,7 +19,7 @@ export default class OpenPath {
   /**
    *初期化関数
    *
-   * @param {(string | string[] | null)} [path=null]
+   * @param {(string | string[])}
    * @memberof OpenPath
    */
   init(path?: string | string[]) {
@@ -65,10 +65,19 @@ export default class OpenPath {
    * @returns {(boolean | string)} 失敗の際はfalse , 成功の際はパスを返す
    * @memberof OpenFolder
    */
-  setFolderByName(folderName: string): boolean | string {
+  setFolderByName(folderName: string): boolean {
     if (Folders[folderName] != null) {
       this.paths.push(Folders[folderName].path);
-      return Folders[folderName].path;
+      return true;
+    }
+    return false;
+  }
+
+  // TODO: なぜかAE側が固まって動かなくなってしまう（アプリを立ち上げると固まる）
+  setAppByName(appName: string): boolean {
+    if (AppPath[appName] != null) {
+      this.paths.push(` "${AppPath[appName].path}"`);
+      return true;
     }
     return false;
   }
@@ -92,10 +101,10 @@ export default class OpenPath {
     let commandArray: string[] = [];
 
     for (let path of this.paths) {
-      commandArray.push(`start ${path}`);
+      commandArray.push(`start "" "${path}"`);
     }
 
-    const callCommand = new CallCommand(commandArray);
+    const callCommand: CallCommand = new CallCommand(commandArray);
 
     if (callCommand.exec(true, true)) {
       return true;
