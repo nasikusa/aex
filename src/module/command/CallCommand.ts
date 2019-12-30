@@ -231,6 +231,7 @@ export default class CallCommand {
       }
     }catch(e){
       alert(e.message);
+      return false;
     }
 
     /**
@@ -253,8 +254,15 @@ export default class CallCommand {
         return true;
       }
     } else if (this.isMac) {
-      alert('現在mac用のコマンド関数は用意されていません。');
-      return false;
+      callCommandResult = system.callSystem(`${this.result}`);
+
+      if (isRemoveCommandAfterExec) {
+        this.removeAllCommands();
+      }
+
+      if (isReturnOnlyBoolean) {
+        return true;
+      }
     }
 
     if (callCommandResult != null && callCommandResult !== '' && isReturnOnlyBoolean === false) {
