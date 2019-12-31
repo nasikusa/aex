@@ -12,7 +12,7 @@ export default class FuzzyOpen {
    * @type {string}
    * @memberof FuzzyOpen
    */
-  public targetPath: string;
+  protected targetPath: string;
 
   /**
    *対象となるパスの検索対象
@@ -20,7 +20,7 @@ export default class FuzzyOpen {
    * @type {getDirType}
    * @memberof FuzzyOpen
    */
-  public searchType: getDirType;
+  protected searchType: getDirType;
 
   /**
    *検索したディレクトリやファイル情報の結果をここの配列に入れる
@@ -28,7 +28,7 @@ export default class FuzzyOpen {
    * @type {string[]}
    * @memberof FuzzyOpen
    */
-  public searchArray: string[] = [];
+  protected searchArray: string[] = [];
 
   /**
    *fuzzy.js
