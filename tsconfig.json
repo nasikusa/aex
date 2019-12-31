@@ -2,10 +2,14 @@
   "compilerOptions": {
       "target": "es3",
       "skipDefaultLibCheck": true,
-      "strictNullChecks": true,
+      // "strictNullChecks": true,
+      "strict": true,
       "noLib": true,
       "removeComments": true
   },
+  "include": [
+    "./src",
+  ],
   "files": [
       "typings/aftereffects/ae.d.ts",
       "typings/types_for_adobe/JavaScript.d.ts",
