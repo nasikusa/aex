@@ -58,7 +58,7 @@ export default class _ extends Utils {
    * アクティブなプロジェクトのアイテムを取得する
    */
   static getActiveItem(): Item | boolean {
-    const res: Item  | null= app.project.activeItem;
+    const res: Item | null = app.project.activeItem;
     return res ? res : false;
   }
 
@@ -90,15 +90,15 @@ export default class _ extends Utils {
    *
    * @todo selectedLayersの型定義、プロパティが無い？
    */
-  static getSelectedLayers( returnAsArray: boolean = false ): LayerCollection | Layer[] | boolean {
+  static getSelectedLayers(returnAsArray: boolean = false): LayerCollection | Layer[] | boolean {
     const selectedLayers: LayerCollection =
       // @ts-ignore
       app.project.activeItem.selectedLayers;
     if (selectedLayers.length > 0) {
-      if( returnAsArray ){
+      if (returnAsArray) {
         const returnedArray = _.LayerCollection2Array(selectedLayers);
         return returnedArray;
-      }else{
+      } else {
         return selectedLayers;
       }
     } else {
@@ -154,11 +154,11 @@ export default class _ extends Utils {
     return resultArray;
   }
 
-  static ItemCollection2Array(inputCollection: ItemCollection): Item[]{
+  static ItemCollection2Array(inputCollection: ItemCollection): Item[] {
     const returnedArray = _.Collection2Array(inputCollection);
     const resultArray: Item[] = [];
-    for( const item of returnedArray ){
-      if( item instanceof Item ){
+    for (const item of returnedArray) {
+      if (item instanceof Item) {
         resultArray.push(item);
       }
     }
@@ -174,13 +174,12 @@ export default class _ extends Utils {
    * @memberof _
    * @todo 動いていない
    */
-  static LayerCollection2Array(inputCollection: LayerCollection): Layer[]{
+  static LayerCollection2Array(inputCollection: LayerCollection): Layer[] {
     const returnedArray = _.Collection2Array(inputCollection);
     const resultArray: Layer[] = [];
-    for( const item of returnedArray ){
-
+    for (const item of returnedArray) {
       alert(`is instanceof compItem ${item instanceof CompItem}`);
-      if( item instanceof Layer ){
+      if (item instanceof Layer) {
         resultArray.push(item);
       }
     }
@@ -195,9 +194,9 @@ export default class _ extends Utils {
     const file = new File(name);
     if (file.exists && file != null) {
       const new_project: Project | null = app.open(file);
-      if( new_project != null ){
+      if (new_project != null) {
         return new_project;
-      }else{
+      } else {
         return false;
       }
     }
@@ -252,10 +251,7 @@ export default class _ extends Utils {
     return Number($.os.toLowerCase().indexOf('windows')) === -1;
   }
 
-  static changeFrameRate(
-    framerate: number,
-    item: any = _.getActiveItem()
-  ): number {
+  static changeFrameRate(framerate: number, item: any = _.getActiveItem()): number {
     item.frameRate = framerate;
     return item.frameRate;
   }
@@ -275,10 +271,7 @@ export default class _ extends Utils {
     return false;
   }
 
-  static changeCompDuration(
-    duration,
-    item: Item | boolean = _.getActiveItem()
-  ): number | undefined {
+  static changeCompDuration(duration, item: Item | boolean = _.getActiveItem()): number | undefined {
     if (_.getType(item) === 'CompItem') {
       // @ts-ignore
       item.duration = duration;
@@ -287,9 +280,7 @@ export default class _ extends Utils {
     }
   }
 
-  static getCompDuration(
-    item: Item | boolean = _.getActiveItem()
-  ): number | undefined {
+  static getCompDuration(item: Item | boolean = _.getActiveItem()): number | undefined {
     if (_.getType(item) === 'CompItem') {
       // @ts-ignore
       return item.duration;
@@ -302,8 +293,8 @@ export default class _ extends Utils {
    * @returns {boolean}
    * @memberof _
    */
-  static hasPermissionToNetworkAccess(): boolean{
-    return app.preferences.getPrefAsLong("Main Pref Section", "Pref_SCRIPTING_FILE_NETWORK_SECURITY") === 1;
+  static hasPermissionToNetworkAccess(): boolean {
+    return app.preferences.getPrefAsLong('Main Pref Section', 'Pref_SCRIPTING_FILE_NETWORK_SECURITY') === 1;
   }
 
   /**
@@ -312,7 +303,7 @@ export default class _ extends Utils {
    * @returns {boolean}
    * @memberof _
    */
-  static hasAccessScript(): boolean{
+  static hasAccessScript(): boolean {
     return _.hasPermissionToNetworkAccess();
   }
 
