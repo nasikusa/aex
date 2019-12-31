@@ -175,6 +175,12 @@ export default class CallCommand {
 
   getRestrictedCommand() {}
 
+  /**
+   *制限されたコマンドが使用されていないか確認する関数
+   *
+   * @returns {boolean}
+   * @memberof CallCommand
+   */
   check(): boolean {
     let restrictedStrings: string[] = [];
     if (this.isWindows) {
@@ -184,6 +190,10 @@ export default class CallCommand {
     }
 
     for (let i = 0; i < restrictedStrings.length; i++) {
+      /**
+       * チェック用の正規表現オブジェクト
+       *
+       */
       let rgep = new RegExp(`^${restrictedStrings[i]}`, 'i');
       for (let j = 0; j < this.command.length; j++) {
         if (rgep.test(this.command[j])) {
