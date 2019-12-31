@@ -1,6 +1,11 @@
 import _ from '../../base/_';
 import CallCommand from './CallCommand';
 
+/**
+ *getDir関数で使用しているオプションたちのインターフェース
+ *
+ * @interface getDirOptionObject
+ */
 interface getDirOptionObject {
   isSearchSub?: boolean;
   isNameOnly?: boolean;
