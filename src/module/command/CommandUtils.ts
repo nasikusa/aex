@@ -6,7 +6,7 @@ import CallCommand from './CallCommand';
  *
  * @interface getDirOptionObject
  */
-interface getDirOptionObject {
+interface GetDirOptionObject {
   isSearchSub?: boolean;
   isNameOnly?: boolean;
   sortOption?: '/O:d' | '/O:e' | '/O:g' | '/O:n' | '/O:s' | '/O-d' | '/O-e' | '/O-g' | '/O-n' | '/O-s' | '';
@@ -15,8 +15,6 @@ interface getDirOptionObject {
 }
 
 export default class CommandUtils {
-
-
   constructor() {}
 
   /**
@@ -41,7 +39,7 @@ export default class CommandUtils {
   static getDir(
     targetPath: string,
     type: 'F' | 'D' | 'FD',
-    optionObject: getDirOptionObject = {
+    optionObject: GetDirOptionObject = {
       isSearchSub: false,
       isNameOnly: false,
       sortOption: '',
