@@ -1,6 +1,5 @@
 import _ from '../../base/_';
 import BaseInfo from '../../base/BaseInfo';
-import Debug from '../../debug/Debug';
 
 /**
  * AEからコマンドラインにコマンドを実行させるためのクラス
@@ -26,7 +25,7 @@ export default class CallCommand {
    * @type {string}
    * @memberof CallCommand
    */
-  protected result: string = '';
+  protected result = '';
 
   /**
    * OS情報などwin,mac対応のためにベースとなる基礎情報を取得します。
@@ -98,7 +97,7 @@ export default class CallCommand {
    * @returns {string}
    * @memberof CallCommand
    */
-  getResult(isUpdate: boolean = true): string {
+  getResult(isUpdate = true): string {
     if (isUpdate) {
       this.setResult();
     }
@@ -130,12 +129,12 @@ export default class CallCommand {
   /**
    * コマンド文章をセットする
    *
-   * @param {(string | string[])} str　コマンドテキスト、もしくはコマンドテキストの配列
+   * @param {(string | string[])} str コマンドテキスト、もしくはコマンドテキストの配列
    * @param {boolean} [isUpdateResult=true] コマンドをセットした後に、最終的に実行されるコマンドも更新するかどうか
    * @returns {string[]} コマンド配列
    * @memberof CallCommand
    */
-  setCommand(str: string | string[], isUpdateResult: boolean = true): string[] {
+  setCommand(str: string | string[], isUpdateResult = true): string[] {
     this.command = [];
     if (_.getType(str) === 'string' && typeof str === 'string') {
       str = _.trim(str);
@@ -194,7 +193,7 @@ export default class CallCommand {
        * チェック用の正規表現オブジェクト
        *
        */
-      let rgep = new RegExp(`^${restrictedStrings[i]}`, 'i');
+      const rgep = new RegExp(`^${restrictedStrings[i]}`, 'i');
       for (let j = 0; j < this.command.length; j++) {
         if (rgep.test(this.command[j])) {
           return false;
@@ -230,19 +229,18 @@ export default class CallCommand {
    * @todo mac対応
    */
   exec(
-    isRemoveCommandAfterExec: boolean = true,
-    isReturnOnlyBoolean: boolean = false,
-    isForceExecRestrictedCommand: boolean = false
+    isRemoveCommandAfterExec = true,
+    isReturnOnlyBoolean = false,
+    isForceExecRestrictedCommand = false
   ): string | boolean {
-
-    if(!_.checkAccessToNetwork()){
+    if (!_.checkAccessToNetwork()) {
       return false;
     }
 
     /**
      * コマンドを実行したあとに、返ってきた文字列をここに格納する
      */
-    let callCommandResult: string = '';
+    let callCommandResult = '';
 
     if (!this.check() && isForceExecRestrictedCommand === false) {
       return false;
