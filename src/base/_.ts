@@ -331,4 +331,15 @@ export default class _ extends Utils {
     return true;
   }
 
+  /**
+   *設定画面を開く関数
+   *
+   * @static
+   * @memberof _
+   */
+  static openSettingsPanel(): void {
+    app.executeCommand(2359);
+  }
+
+  
 }
