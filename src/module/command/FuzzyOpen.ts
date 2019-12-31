@@ -1,7 +1,5 @@
 import _ from '../../base/_';
-import CallCommand from './CallCommand';
 import CommandUtils from './CommandUtils';
-import OpenPath from './OpenPath';
 
 type getDirType = 'F' | 'D' | 'FD';
 
@@ -19,7 +17,7 @@ export default class FuzzyOpen {
    * @type {string}
    * @memberof FuzzyOpen
    */
-  protected targetPath: string;
+  protected targetPath = '';
 
   /**
    *対象となるパスの検索対象
@@ -27,7 +25,7 @@ export default class FuzzyOpen {
    * @type {getDirType}
    * @memberof FuzzyOpen
    */
-  protected searchType: getDirType;
+  protected searchType: getDirType = 'F';
 
   /**
    *検索したディレクトリやファイル情報の結果をここの配列に入れる
@@ -37,7 +35,7 @@ export default class FuzzyOpen {
    */
   protected searchArray: string[] = [];
 
-  protected searchMinScore: number = 0.33;
+  protected searchMinScore = 0.33;
 
   /**
    *fuzzyset.js
@@ -52,11 +50,11 @@ export default class FuzzyOpen {
    *Creates an instance of FuzzyOpen.
    * @param {string} [path] ターゲットとなるパス
    * @param {getDirType} [type] 対象となるものがディレクトリかファイルか、両方か
-   * @param {boolean} [isSearchRecursive=false]　再帰的に検索するかどうか
-   * @param {boolean} [isReturnFullPath=false]　フルパスで検索結果を返すかどうか
+   * @param {boolean} [isSearchRecursive=false] 再帰的に検索するかどうか
+   * @param {boolean} [isReturnFullPath=false] フルパスで検索結果を返すかどうか
    * @memberof FuzzyOpen
    */
-  constructor(path?: string, type?: getDirType, isSearchRecursive: boolean = false, isReturnFullPath: boolean = false) {
+  constructor(path?: string, type?: getDirType, isSearchRecursive = false, isReturnFullPath = false) {
     if (path != null) {
       this.setTargetPath(path);
     }
@@ -84,7 +82,7 @@ export default class FuzzyOpen {
    * @param {getDirType} type
    * @memberof FuzzyOpen
    */
-  setType(type: getDirType) {
+  setType(type: getDirType): void {
     this.searchType = type;
   }
 
@@ -96,7 +94,7 @@ export default class FuzzyOpen {
    * @returns {boolean}
    * @memberof FuzzyOpen
    */
-  setSearchArray(isSearchRecursive: boolean = false, isReturnFullPath: boolean = false): boolean {
+  setSearchArray(isSearchRecursive = false, isReturnFullPath = false): boolean {
     if (this.targetPath == null || this.searchType == null) return false;
 
     const result: string | string[] = CommandUtils.getDir(this.targetPath, this.searchType, {
@@ -114,9 +112,9 @@ export default class FuzzyOpen {
   /**
    *あいまい検索で検索する関数
    *
-   * @param {string} searchTxt　検索するワード
+   * @param {string} searchTxt 検索するワード
    * @param {number} [minScore=this.searchMinScore] 最低の一致点数
-   * @returns {(boolean | [string, string, number][])}　失敗した場合はfalse , 成功したら配列を返す
+   * @returns {(boolean | [string, string, number][])} 失敗した場合はfalse , 成功したら配列を返す
    * @memberof FuzzyOpen
    */
   search(searchTxt: string, minScore: number = this.searchMinScore): boolean | [string, string, number][] {
@@ -136,7 +134,7 @@ export default class FuzzyOpen {
      * 最終的な検索結果をここに格納するための配列
      * @type {[string, string, number][]}
      */
-    let returnResult: [string, string, number][] = [];
+    const returnResult: [string, string, number][] = [];
 
     if (searchResult != null) {
       for (const value of searchResult) {
@@ -144,10 +142,10 @@ export default class FuzzyOpen {
          * 対象のフルパス
          * @todo / の重複の可能性
          */
-        const fullPath: string = `${this.targetPath}/${value[1]}`;
+        const fullPath = `${this.targetPath}/${value[1]}`;
 
         /**
-         * fuzzyset.jsの返り値の順番だと、少し使いにくかったので順番を変更　＋　フルパス追加の配列
+         * fuzzyset.jsの返り値の順番だと、少し使いにくかったので順番を変更 ＋ フルパス追加の配列
          */
         const returnResultContent: [string, string, number] = [value[1], fullPath, value[0]];
         returnResult.push(returnResultContent);
@@ -156,15 +154,6 @@ export default class FuzzyOpen {
     }
 
     return false;
-
-    // const result = this.fzy.filter(searchTxt, this.searchArray);
-    // const matches = result.map(function(el) {
-    //   return el.string;
-    // });
-    // return matches;
-    // const openPath = new OpenPath();
-    // openPath.setPath(`${this.targetPath}/${String(matches)}`);
-    // openPath.open();
   }
 
   /**
