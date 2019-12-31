@@ -5,6 +5,13 @@ import OpenPath from './OpenPath';
 
 type getDirType = 'F' | 'D' | 'FD';
 
+/**
+ *あいまい検索を活用したクラス
+ *
+ * @export
+ * @class FuzzyOpen
+ * @todo 自動ファイルかディレクトリ読み込み
+ */
 export default class FuzzyOpen {
   /**
    *対象となるパス
@@ -31,13 +38,22 @@ export default class FuzzyOpen {
   protected searchArray: string[] = [];
 
   /**
-   *fuzzy.js
+   *fuzzyset.js
    *
    * @type {*}
    * @memberof FuzzyOpen
+   * @todo importしたい
    */
   public fzy: any = require('fuzzyset.js');
 
+  /**
+   *Creates an instance of FuzzyOpen.
+   * @param {string} [path] ターゲットとなるパス
+   * @param {getDirType} [type] 対象となるものがディレクトリかファイルか、両方か
+   * @param {boolean} [isSearchRecursive=false]　再帰的に検索するかどうか
+   * @param {boolean} [isReturnFullPath=false]　フルパスで検索結果を返すかどうか
+   * @memberof FuzzyOpen
+   */
   constructor(path?: string, type?: getDirType, isSearchRecursive: boolean = false, isReturnFullPath: boolean = false) {
     if (path != null) {
       this.setTargetPath(path);
@@ -93,13 +109,44 @@ export default class FuzzyOpen {
     return false;
   }
 
-  search(searchTxt: string, minScore: number = 0.33): boolean | [string, string, number][] {
+  /**
+   *あいまい検索で検索する関数
+   *
+   * @param {string} searchTxt　検索するワード
+   * @param {number} [minScore=this.searchMinScore] 最低の一致点数
+   * @returns {(boolean | [string, string, number][])}　失敗した場合はfalse , 成功したら配列を返す
+   * @memberof FuzzyOpen
+   */
+  search(searchTxt: string, minScore: number = this.searchMinScore): boolean | [string, string, number][] {
+    /**
+     * fuzzyset.jsを初期化したもの
+     * @todo anyになっている , typeの追加
+     */
     const fuzzyset = this.fzy(this.searchArray);
+
+    /**
+     * fuzzyset.jsでの検索結果
+     * @type {null | [number,string][]}
+     */
     const searchResult: null | [number, string][] = fuzzyset.get(searchTxt, null, minScore);
+
+    /**
+     * 最終的な検索結果をここに格納するための配列
+     * @type {[string, string, number][]}
+     */
     let returnResult: [string, string, number][] = [];
+
     if (searchResult != null) {
       for (const value of searchResult) {
+        /**
+         * 対象のフルパス
+         * @todo / の重複の可能性
+         */
         const fullPath: string = `${this.targetPath}/${value[1]}`;
+
+        /**
+         * fuzzyset.jsの返り値の順番だと、少し使いにくかったので順番を変更　＋　フルパス追加の配列
+         */
         const returnResultContent: [string, string, number] = [value[1], fullPath, value[0]];
         returnResult.push(returnResultContent);
       }
@@ -118,9 +165,14 @@ export default class FuzzyOpen {
     // openPath.open();
   }
 
-  searchOne(searchTxt: string, minScore: number = 0.33):boolean | [string, string, number] {
-    const result = this.search(searchTxt,minScore);
-    if(typeof result === 'boolean'){
+  /**
+   *一番一致度の高いもののみを返すsearch関数
+   *
+   * @param {string} searchTxt
+   * @param {number} [minScore=this.searchMinScore]
+   * @returns {(boolean | [string, string, number])}
+   * @memberof FuzzyOpen
+   */
       return false;
     }else{
       return result[0];
