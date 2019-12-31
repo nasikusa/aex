@@ -1,10 +1,10 @@
 const path = require('path');
 const webpack = require("webpack");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const ENV = process.env.NODE_ENV || 'development'
+const ENV = process.env.NODE_ENV || 'development';
 
-module.exports = {
-  mode: 'production',
+const ts = {
+  mode: ENV,
   entry: {
     'main': './src/main.ts',
   },
@@ -24,9 +24,8 @@ module.exports = {
     extensions: [".ts"]
   },
   optimization: {
-    minimize: false,
-  //   minimizer: [new UglifyJsPlugin({
-  //     // include: /\.min\.js$/
-  //   })]
-  }
+    minimize: ENV === 'production',
+  },
 };
+
+module.exports = [ts];
