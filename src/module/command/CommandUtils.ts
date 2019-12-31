@@ -31,10 +31,11 @@ export default class CommandUtils {
    * @read https://proengineer.internous.co.jp/content/columnfeature/5043
    * @read https://qiita.com/forty4_jp/items/f8b76b67e6d11f3deeb3
    * @read https://hacknote.jp/archives/21461/
+   * @todo macで動かないオプションの修正 , macでディレクトリ取得の際に / が末尾につくので削除したい
    */
   static getDir(
     targetPath: string,
-    type: 'F' | 'D' | 'FD' ,
+    type: 'F' | 'D' | 'FD',
     optionObject: getDirOptionObject = {
       isSearchSub: false,
       isNameOnly: false,
@@ -44,26 +45,65 @@ export default class CommandUtils {
     }
   ): string | string[] {
     const callCommand = new CallCommand();
-    let command = `dir "${targetPath}" /b`;
-    switch(type){
-      case 'F':
-        command += ' /A-d ';
-        break;
-      case 'D':
-        command += ' /A:d ';
-        break;
-      case 'FD':
-        command += '';
-        break;
+    let command = '';
+
+    if (_.isWindows()) {
+      command += `dir "${targetPath}" /b`;
+      switch (type) {
+        case 'F':
+          command += ' /A-d ';
+          break;
+        case 'D':
+          command += ' /A:d ';
+          break;
+        case 'FD':
+          command += '';
+          break;
+      }
+      if (optionObject.isSearchSub) command += '/S ';
+      if (optionObject.isNameOnly) command += '/D ';
+      if (optionObject.sortOption != null) command += optionObject.sortOption;
+    } else if (_.isMac()) {
+      command += `ls `;
+      switch (type) {
+        case 'F':
+          command += ` -F ${targetPath} | grep -v / `;
+          break;
+        case 'D':
+          command += ` -F ${targetPath} | grep / `;
+          break;
+        case 'FD':
+          command += '';
+          break;
+      }
+
+      // TODO: lsコマンドで再帰的に検索する方法を調べたい
+      // if (optionObject.isSearchSub) command += '/S ';
+      // TODO: 現在ソートオプションは他で使っていないけども、余裕があれば作りたい
+      // if (optionObject.sortOption != null) command += optionObject.sortOption;
+    } else {
+      return '';
     }
-    if (optionObject.isSearchSub) command += '/S ';
-    if (optionObject.isNameOnly) command += '/D ';
-    if (optionObject.sortOption != null) command += optionObject.sortOption;
+
     callCommand.setCommand(command);
-    const result = callCommand.exec(true);
+
+    /**
+     * コマンドの返り値
+     */
+    const result: string | boolean = callCommand.exec(true);
     if (typeof result !== 'boolean') {
       if (optionObject.isReturnAsArray) {
+        /**
+         * コマンドラインから得た、改行付きのリストを配列に変換したもの
+         */
         const resultArray = _.getArrayDividedByLine(result);
+
+        if (_.isMac() && optionObject.isNameOnly === false) {
+          resultArray.forEach((value, index) => {
+            resultArray[index] = `${targetPath}/${value}`;
+          });
+        }
+
         if (optionObject.isReverseArray) {
           return resultArray.reverse();
         } else {
