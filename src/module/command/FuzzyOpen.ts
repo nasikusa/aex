@@ -37,6 +37,8 @@ export default class FuzzyOpen {
    */
   protected searchArray: string[] = [];
 
+  protected searchMinScore: number = 0.33;
+
   /**
    *fuzzyset.js
    *
