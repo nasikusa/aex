@@ -175,11 +175,12 @@ export default class FuzzyOpen {
    * @returns {(boolean | [string, string, number])}
    * @memberof FuzzyOpen
    */
+  searchOne(searchTxt: string, minScore: number = this.searchMinScore): boolean | [string, string, number] {
+    const result = this.search(searchTxt, minScore);
+    if (typeof result === 'boolean') {
       return false;
-    }else{
+    } else {
       return result[0];
     }
   }
-
-
 }
