@@ -225,12 +225,7 @@ export default class CallCommand {
     isForceExecRestrictedCommand: boolean = false
   ): string | boolean {
 
-    try{
-      if(!_.hasPermissionToNetworkAccess()){
-        throw new Error('このスクリプトを動かすためには設定画面で「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。');
-      }
-    }catch(e){
-      alert(e.message);
+    if(!_.checkAccessToNetwork()){
       return false;
     }
 
