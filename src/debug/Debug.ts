@@ -60,4 +60,24 @@ export default class Debug {
     Debug.alertWithTitle(title,input);
   }
 
+  /**
+   *スクリプト読み込み画面を開く
+   *
+   * @static
+   * @memberof Debug
+   */
+  static openScript(){
+    app.executeCommand(8000);
+  }
+
+  /**
+   *スクリプトエディターを開く
+   *
+   * @static
+   * @memberof Debug
+   */
+  static openScriptEditor(){
+    app.executeCommand(8001);
+  }
+
 };
