@@ -317,15 +317,37 @@ export default class _ extends Utils {
   }
 
   /**
-   *
+   *AEスクリプトのネットワークや書き込みアクセスを確認して、それに対してアクションする関数
    *
    * @static
    * @returns {boolean}
    * @memberof _
    */
-  static checkAccessToNetwork(): boolean{
-    if(_.hasPermissionToNetworkAccess()){
-      alert('このスクリプトを動かすためには設定画面で「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。');
+  static checkAccessToNetwork(isInduceSettings: boolean = true, ErrorMessage?: string): boolean {
+
+    /**
+     * エラーメッセージのベーステキスト
+     */
+    let ERRMessageBase: string =
+      'このスクリプトを動かすためには「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。';
+
+    /**
+     * 最終的に表示されるエラーテキスト
+     */
+    let ERRMessage: string = ErrorMessage || ERRMessageBase;
+
+    if (isInduceSettings) {
+      ERRMessage += '\n設定画面を開きますか？';
+    }
+
+    if (!_.hasPermissionToNetworkAccess()) {
+      const confirmResult = confirm(ERRMessage, false);
+      if (confirmResult) {
+        _.openSettingsPanel();
+      }
+      if (!isInduceSettings) {
+        alert(ERRMessage);
+      }
       return false;
     }
     return true;
