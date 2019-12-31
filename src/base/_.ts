@@ -260,8 +260,19 @@ export default class _ extends Utils {
     return item.frameRate;
   }
 
-  static getFrameRate(item: any = _.getActiveItem()) {
-    return item.frameRate;
+  /**
+   *アイテムのフレームレートを取得する。何も指定していなければアクティブのコンポジションのフレームレートを取得する。
+   *
+   * @static
+   * @param {(boolean | Item)} [item=_.getActiveItem()]
+   * @returns {(boolean | number)}
+   * @memberof _
+   */
+  static getFrameRate(item: boolean | Item = _.getActiveItem()): boolean | number {
+    if (item instanceof CompItem) {
+      return item.frameRate;
+    }
+    return false;
   }
 
   static changeCompDuration(
