@@ -1,27 +1,27 @@
-import "extendscript-es5-shim-ts";
+import 'extendscript-es5-shim-ts';
 
-export default class BaseInfo{
-
+export default class BaseInfo {
   public readonly encoding: string;
   public readonly version: string;
   public readonly lang: string;
   public readonly os: string;
   public readonly locale: string;
-  public readonly screen: any;
-  public readonly info: {[key:string]: string};
+  // public readonly screen: any;
+  public readonly info: { [key: string]: string };
 
-  constructor(){
+  constructor() {
     this.encoding = $.appEncoding;
     this.version = app.version;
     this.lang = app.isoLanguage;
     this.os = $.os;
-    this.screen = $.screens ;
+    // this.screen = $.screens;
+    this.locale = $.locale;
 
     this.info = {
-      "Encoding": this.encoding,
-      "Version": this.version,
-      "Language": this.lang,
-      "OS": this.os,
+      Encoding: this.encoding,
+      Version: this.version,
+      Language: this.lang,
+      OS: this.os,
     };
   }
 
@@ -30,9 +30,9 @@ export default class BaseInfo{
    * @todo スクリーン情報
    */
   showData(): void {
-    let alertText: string = "";
+    let alertText = '';
 
-    for( let key of Object.keys(this.info) ){
+    for (const key of Object.keys(this.info)) {
       alertText += `${key}: ${this.info[key]} \n`;
     }
     alert(alertText);
