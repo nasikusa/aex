@@ -15,7 +15,7 @@ export default class BaseInfo {
     this.lang = app.isoLanguage;
     this.os = $.os;
     // this.screen = $.screens;
-    this.locale = $.locale;
+    this.locale = app.isoLanguage;
 
     this.info = {
       Encoding: this.encoding,
