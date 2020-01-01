@@ -4,11 +4,52 @@
  * @interface EffectsContent
  */
 export interface EffectsContent {
+  /**
+   *クイックサーチ用のショートカットテキスト
+   *
+   * @type {string}
+   * @memberof EffectsContent
+   */
   q: string;
+  /**
+   *英語のエフェクト名
+   *
+   * @type {string}
+   * @memberof EffectsContent
+   */
   en: string;
+  /**
+   *日本語のエフェクト名
+   *
+   * @type {string}
+   * @memberof EffectsContent
+   */
   ja: string;
+  /**
+   *マッチネームのエフェクト名
+   *
+   * @type {string}
+   * @memberof EffectsContent
+   */
   match: string;
+  /**
+   *エフェクトのカテゴリ名
+   *
+   * @type {string}
+   * @memberof EffectsContent
+   */
   type?: string;
+  /**
+   *エフェクトのプロパティ
+   *
+   * @type {{
+   *     [key: string]: {
+   *       [key: string]: string;
+   *     };
+   *   }}
+   * @memberof EffectsContent
+   * @todo 現在仕様決定中です。
+   */
   props?: {
     [key: string]: {
       [key: string]: string;
