@@ -39,11 +39,27 @@ export default class BaseInfo{
   }
 
   /**
-   * OSがWindowsであるかどうか判定する
+   *OSがWindowsであるかどうかを判定する
+   *
+   * @returns {boolean}
+   * @memberof BaseInfo
    */
   isWindows(): boolean {
-    if( this.os ){
-      return this.os.toLowerCase().indexOf("windows") !== -1;
+    if (this.os) {
+      return this.os.toLowerCase().indexOf('windows') !== -1;
+    }
+    return false;
+  }
+
+  /**
+   *OSがmacであるかどうかを判定する
+   *
+   * @returns {boolean}
+   * @memberof BaseInfo
+   */
+  isMac(): boolean {
+    if (this.os) {
+      return this.os.toLowerCase().indexOf('windows') === -1;
     }
     return false;
   }
