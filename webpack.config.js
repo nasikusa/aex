@@ -1,28 +1,31 @@
 const path = require('path');
-const ENV = process.env.NODE_ENV || 'development';
+const ENV = process.env.NODE_ENV || 'production';
+const MINIMIZE = process.env.NODE_WEBPACK_MINIMIZE || false;
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 const ts = {
   mode: ENV,
   entry: {
-    'main': './src/main.ts',
+    main: './src/main.ts',
   },
   output: {
-    path: path.resolve(__dirname , 'dist'),
-    filename: '[name].js'
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].js',
   },
   module: {
     rules: [
       {
         test: /\.ts$/,
-        use: "ts-loader"
-      }
-    ]
+        use: 'ts-loader',
+      },
+    ],
   },
   resolve: {
-    extensions: [".ts"]
+    extensions: ['.ts'],
   },
   optimization: {
-    minimize: ENV === 'production',
+    minimize: MINIMIZE === 'yes',
+    minimizer: [new UglifyJsPlugin()]
   },
 };
 
