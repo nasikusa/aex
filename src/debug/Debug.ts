@@ -1,7 +1,6 @@
-import _ from "../base/_";
+import _ from '../base/_';
 
 export default class Debug {
-
   /**
    *typeofで返される値を表示させる
    *
@@ -9,7 +8,7 @@ export default class Debug {
    * @param {*} input
    * @memberof Debug
    */
-  static typeof(input: any){
+  static typeof(input: any): void {
     alert(typeof input);
   }
 
@@ -21,14 +20,18 @@ export default class Debug {
    * @param {number} [maxNum=-1]
    * @memberof Debug
    */
-  static objectKeys(obj: unknown, maxNum: number = -1): void{
-    let count:number = 0;
-    let resultText: string = "";
-    if( typeof obj === 'object' && _.getType(obj) !== 'array' && obj != null ){
-      for( let key of Object.keys(obj) ){
-        resultText += `${key}\n`;
+  static objectKeys(obj: unknown, maxNum = -1): void {
+    let count = 0;
+    let resultText = '';
+    if (typeof obj === 'object' && _.getType(obj) !== 'array' && obj != null) {
+      for (const key of Object.keys(obj)) {
+        resultText += `${key}`;
+
+        // const type: string = _.getType(obj[key]);
+
+        resultText += `\n`;
         count += 1;
-        if(count > maxNum && maxNum !== -1){
+        if (count > maxNum && maxNum !== -1) {
           break;
         }
       }
@@ -44,7 +47,7 @@ export default class Debug {
    * @param {*} input
    * @memberof Debug
    */
-  static alertWithTitle(title: string , input: any){
+  static alertWithTitle(title: string, input: any): void {
     alert(`${title} : ${input}`);
   }
 
@@ -56,8 +59,8 @@ export default class Debug {
    * @param {*} input
    * @memberof Debug
    */
-  static at(title: string, input: any){
-    Debug.alertWithTitle(title,input);
+  static at(title: string, input: any): void {
+    Debug.alertWithTitle(title, input);
   }
 
   /**
@@ -66,7 +69,7 @@ export default class Debug {
    * @static
    * @memberof Debug
    */
-  static openScript(){
+  static openScript(): void {
     app.executeCommand(8000);
   }
 
@@ -76,8 +79,7 @@ export default class Debug {
    * @static
    * @memberof Debug
    */
-  static openScriptEditor(){
+  static openScriptEditor(): void {
     app.executeCommand(8001);
   }
-
-};
+}
