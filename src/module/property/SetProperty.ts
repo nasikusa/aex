@@ -1,17 +1,16 @@
-import _ from '../../base/_';
-export default class SetProperty{
+// import _ from '../../base/_';
+// export default class SetProperty{
 
-  protected selectedLayers: CompItem | null = _.getSelectedLayers();
+//   protected selectedLayers: CompItem | null = _.getSelectedLayers();
 
-  constructor() {
-  }
+//   constructor() {
+//   }
 
-  updateSelected(){
-    this.selectedLayers = _.getSelectedLayers();
-  }
+//   updateSelected(){
+//     this.selectedLayers = _.getSelectedLayers();
+//   }
 
-
-};
+// };
 
 // const item = _.getSelectedLayers();
 // // alert(item[0].property("effect")(1)(1).setValue(30));
