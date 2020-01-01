@@ -1,6 +1,4 @@
 const path = require('path');
-const webpack = require("webpack");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ENV = process.env.NODE_ENV || 'development';
 
 const ts = {
