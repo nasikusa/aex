@@ -17,6 +17,11 @@ interface EffectsContent {
 };
 
 /**
+ * エフェクト検索用のタイプを選択するためのstring型たち
+ */
+export type EffectsSearchContent = 'q' | 'en' | 'ja' | 'match';
+
+/**
  * エフェクトオブジェクト。現在は自分がよく使うエフェクトのみ。
  * キーに関しては xxx_yyy
  *  xxx -> エフェクトのグループの名前 3文字

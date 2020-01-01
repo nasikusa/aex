@@ -1,4 +1,4 @@
-import {Effects} from '../../data/Effects';
+import { Effects, EffectsContent, EffectsSearchContent } from '../../data/Effects';
 
 /**
  * エフェクト名の変換用のクラス。日本語エフェクト名から、matchNameの取得など。
@@ -7,32 +7,36 @@ import {Effects} from '../../data/Effects';
  * @class EF
  */
 export default class EF {
-
   /**
-   *Effectsオブジェクトのキーからデータを取得する
+   *Effectsオブジェクトのキーからデータオブジェクトを取得する
    *
    * @static
    * @param {string} name エフェクト名（キー基準）
-   * @returns
+   * @returns {EffectsContent}
    * @memberof EF
    */
-  static getDataByName(name: string){
-    return Effects[name];
+  static getDataByName(name: string): EffectsContent | boolean {
+    const result = Effects[name];
+    if (result) {
+      return result;
+    } else {
+      return false;
+    }
   }
 
   /**
-   *
+   *タイプからエフェクトオブジェクトを検索して探す関数
    *
    * @static
    * @param {string} name エフェクト名(type基準)
-   * @param {string} type 取得したいタイプ (ja , en , q)
+   * @param {string} type 取得したいタイプ (ja | en | q)
    * @returns
    * @memberof EF
    */
-  static getDataHasName(name: string , type: string){
-    for( let key of Object.keys(Effects) ){
-      if( !Effects[key][type] ) continue;
-      if( Effects[key][type] === name ){
+  static getDataHasName(name: string, type: EffectsSearchContent): EffectsContent | boolean {
+    for (const key of Object.keys(Effects)) {
+      if (!Effects[key][type]) continue;
+      if (Effects[key][type] === name) {
         return Effects[key];
       }
     }
@@ -47,7 +51,7 @@ export default class EF {
    * @returns
    * @memberof EF
    */
-  static has(name: string){
+  static has(name: string): EffectsContent | boolean {
     return EF.getDataByName(name);
   }
 
@@ -59,20 +63,24 @@ export default class EF {
    * @returns
    * @memberof EF
    */
-  static by(name: string): string{
-    return EF.getDataByName(name).match;
+  static by(name: string): string | boolean {
+    const result: boolean | EffectsContent = EF.getDataByName(name);
+    if (typeof result !== 'boolean') {
+      return result.match;
+    }
+    return false;
   }
 
   /**
    *英語キーワードからURLオブジェクトを取得する
    *
    * @static
-   * @param {string} englishName　英語エフェクト名
+   * @param {string} englishName 英語エフェクト名
    * @returns {boolean | EffectsContent}
    * @memberof EF
    */
-  static hasEn(englishName: string){
-    return EF.getDataHasName(englishName , "en");
+  static hasEn(englishName: string): boolean | EffectsContent {
+    return EF.getDataHasName(englishName, 'en');
   }
 
   /**
@@ -83,8 +91,8 @@ export default class EF {
    * @returns {boolean | EffectsContent}
    * @memberof EF
    */
-  static hasJa(janeneseName: string){
-    return EF.getDataHasName(janeneseName , "ja");
+  static hasJa(janeneseName: string): boolean | EffectsContent {
+    return EF.getDataHasName(janeneseName, 'ja');
   }
 
   /**
@@ -92,11 +100,11 @@ export default class EF {
    *
    * @static
    * @param {string} quickName
-   * @returns　{boolean | EffectsContent}
+   * @returns {boolean | EffectsContent}
    * @memberof EF
    */
-  static hasQ(quickName: string){
-    return EF.getDataHasName(quickName , "q");
+  static hasQ(quickName: string): boolean | EffectsContent {
+    return EF.getDataHasName(quickName, 'q');
   }
 
   /**
@@ -107,8 +115,8 @@ export default class EF {
    * @returns
    * @memberof EF
    */
-  static hasM(matchName: string){
-    return EF.getDataHasName(matchName , "match");
+  static hasM(matchName: string): boolean | EffectsContent {
+    return EF.getDataHasName(matchName, 'match');
   }
 
   /**
@@ -119,9 +127,9 @@ export default class EF {
    * @returns {string}
    * @memberof EF
    */
-  static byEn(englishName: string): string | undefined{
+  static byEn(englishName: string): string | undefined {
     const URLObject = EF.hasEn(englishName);
-    if( typeof URLObject === "object"){
+    if (typeof URLObject === 'object') {
       return URLObject.match;
     }
   }
@@ -134,11 +142,12 @@ export default class EF {
    * @returns {string}
    * @memberof EF
    */
-  static byJa(japaneseName: string){
+  static byJa(japaneseName: string): string | boolean {
     const URLObject = EF.hasJa(japaneseName);
-    if( typeof URLObject === "object"){
+    if (typeof URLObject === 'object') {
       return URLObject.match;
     }
+    return false;
   }
 
   /**
@@ -149,11 +158,11 @@ export default class EF {
    * @returns {string}
    * @memberof EF
    */
-  static byQ(quickName: string){
+  static byQ(quickName: string): string | boolean {
     const URLObject = EF.hasQ(quickName);
-    if( typeof URLObject === "object"){
+    if (typeof URLObject === 'object') {
       return URLObject.match;
     }
+    return false;
   }
-
 }
