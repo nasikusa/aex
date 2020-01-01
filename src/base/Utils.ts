@@ -9,7 +9,7 @@ export default class Utils {
    * 型情報を取得する
    * @param obj
    */
-  static getType(obj: any) {
+  static getType(obj: any): string {
     const toString = Object.prototype.toString;
     return toString
       .call(obj)
@@ -17,16 +17,33 @@ export default class Utils {
       .toLowerCase();
   }
 
-  static joinLine(inputArray: any[]) {}
+  // static joinLine(inputArray: any[]) {}
 
-  static getRandomFromArray(array: any): any {
+  /**
+   *配列の中からランダムに値を取得する
+   *
+   * @static
+   * @param {any[]} array
+   * @returns {*}
+   * @memberof Utils
+   */
+  static getRandomFromArray(array: any[]): any {
     if (Array.isArray(array) && Utils.getType(array) === 'array') {
       return array[Math.floor(Math.random() * array.length)];
     }
     return false;
   }
 
-  static randomMinMax(min: number, max: number) {
+  /**
+   *最大最小値を決めた中でのランダム値を得る
+   *
+   * @static
+   * @param {number} min
+   * @param {number} max
+   * @returns
+   * @memberof Utils
+   */
+  static randomMinMax(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
@@ -51,7 +68,7 @@ export default class Utils {
    * @memberof Utils
    */
   static getMinFromArray(inputArray: number[]): number {
-    return Math.min.apply(Math, inputArray);
+    return Math.min(...inputArray);
   }
 
   /**
@@ -63,7 +80,7 @@ export default class Utils {
    * @memberof Utils
    */
   static getMaxFromArray(inputArray: number[]): number {
-    return Math.max.apply(Math, inputArray);
+    return Math.max(...inputArray);
   }
 
   /**
@@ -123,7 +140,7 @@ export default class Utils {
   static getNormalRandom(): number {
     // 0.0未満、1.0以上になるケースがあるため
     // その時は再計算を行う
-    var value;
+    let value;
     while (true) {
       value = Utils.calcNormal();
       if (0 <= value && value < 1) {
@@ -133,16 +150,31 @@ export default class Utils {
     return value;
   }
 
+  /**
+   *正規分布用の計算を行う
+   *
+   * @static
+   * @returns {number}
+   * @memberof Utils
+   */
   static calcNormal(): number {
     // 正規乱数
-    var r1 = Math.random();
-    var r2 = Math.random();
-    var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+    const r1 = Math.random();
+    const r2 = Math.random();
+    let value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
     // 値を0以上1未満になるよう正規化する
     value = (value + 3) / 6;
     return value;
   }
 
+  /**
+   *文字を改行ごとに区切って文字配列を作成する
+   *
+   * @static
+   * @param {string} inputText
+   * @returns {string[]}
+   * @memberof Utils
+   */
   static getArrayDividedByLine(inputText: string): string[] {
     return inputText.split(/\n/);
   }
