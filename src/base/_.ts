@@ -113,9 +113,16 @@ export default class _ extends Utils {
     return _.getSelectedLayers() ? true : false;
   }
 
-  static getSelectedProps() {
-    // @ts-ignore
-    return _.getSelectedLayers().selectedProperties;
+  static getSelectedProps(): PropertyBase[][] | boolean {
+    const selectedLayers = _.getSelectedLayers();
+    const selectedProps: PropertyBase[][] = [];
+    if (typeof selectedLayers !== 'boolean') {
+      for (const value of selectedLayers) {
+        selectedProps.push(value.selectedProperties);
+      }
+      return selectedProps;
+    }
+    return false;
   }
 
   /**
