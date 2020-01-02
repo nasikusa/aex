@@ -271,21 +271,20 @@ export default class _ extends Utils {
     return false;
   }
 
-  static changeCompDuration(duration, item: Item | boolean = _.getActiveItem()): number | undefined {
-    if (_.getType(item) === 'CompItem') {
-      // @ts-ignore
-      item.duration = duration;
-      // @ts-ignore
-      return item.duration;
-    }
-  }
+  // static changeCompDuration(duration, item: Item | boolean = _.getActiveItem()): number | undefined {
+  //   if (_.getType(item) === 'CompItem') {
+  //     // @ts-ignore
+  //     item.duration = duration;
+  //     // @ts-ignore
+  //     return item.duration;
+  //   }
+  // }
 
-  static getCompDuration(item: Item | boolean = _.getActiveItem()): number | undefined {
-    if (_.getType(item) === 'CompItem') {
-      // @ts-ignore
-      return item.duration;
-    }
-  }
+  // static getCompDuration(item: Item | boolean = _.getActiveItem()): number | undefined {
+  //   if(typeof item !== 'boolean'){
+  //     return item.duration;
+  //   }
+  // }
 
   /**
    *スクリプトにネットワークとファイルへのアクセスができるかどうかを返す
