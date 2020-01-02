@@ -89,20 +89,17 @@ export default class _ extends Utils {
    *
    * @todo selectedLayersの型定義、プロパティが無い？
    */
-  static getSelectedLayers(returnAsArray = false): LayerCollection | Layer[] | boolean {
-    const selectedLayers: LayerCollection =
-      // @ts-ignore
-      app.project.activeItem.selectedLayers;
-    if (selectedLayers.length > 0) {
-      if (returnAsArray) {
-        const returnedArray = _.LayerCollection2Array(selectedLayers);
-        return returnedArray;
-      } else {
+  static getSelectedLayers(): Layer[] | boolean {
+    const selected: Item | null = app.project.activeItem;
+    if (selected != null && selected instanceof CompItem) {
+      const selectedLayers: Layer[] = selected.selectedLayers;
+      if (selectedLayers.length > 0) {
         return selectedLayers;
+      } else {
+        return false;
       }
-    } else {
-      return false;
     }
+    return false;
   }
 
   /**
