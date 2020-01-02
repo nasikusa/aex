@@ -6,7 +6,8 @@
     "build": "cross-env NODE_WEBPACK_MINIMIZE=yes webpack",
     "watch": "cross-env NODE_WEBPACK_MINIMIZE=no webpack --watch",
     "fmt": "prettier --write /src/**/*.ts",
-    "typedoc": "typedoc --out ./docs/ ./src/"
+    "typedoc": "typedoc --mode file --out doc ./src/main.ts",
+    "gendocs": "typedoc --out ./docs/ --target ES3 --tsconfig ./tsconfig.json --exclude node_modules --ignoreCompilerErrors src/"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.12.0",
