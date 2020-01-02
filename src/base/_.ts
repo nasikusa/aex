@@ -1,5 +1,4 @@
 import Utils from './Utils';
-import Debug from '../debug/Debug';
 
 /**
  *便利関数をあつめたベースとなるクラス
@@ -69,7 +68,7 @@ export default class _ extends Utils {
    * @returns {(Item[] | false)}
    * @memberof _
    */
-  static getSelectedItems(isReturnAsArray: boolean = false): Item[] | false {
+  static getSelectedItems(isReturnAsArray = false): Item[] | false {
     const selectedItem: Item[] = app.project.selection;
     return selectedItem.length > 0 ? selectedItem : false;
   }
@@ -90,7 +89,7 @@ export default class _ extends Utils {
    *
    * @todo selectedLayersの型定義、プロパティが無い？
    */
-  static getSelectedLayers(returnAsArray: boolean = false): LayerCollection | Layer[] | boolean {
+  static getSelectedLayers(returnAsArray = false): LayerCollection | Layer[] | boolean {
     const selectedLayers: LayerCollection =
       // @ts-ignore
       app.project.activeItem.selectedLayers;
@@ -313,14 +312,13 @@ export default class _ extends Utils {
    * @returns {boolean}
    * @memberof _
    */
-  static checkAccessToNetwork(isInduceSettings: boolean = true, ErrorMessage?: string): boolean {
-
+  static checkAccessToNetwork(isInduceSettings = true, ErrorMessage?: string): boolean {
     /**
      * エラーメッセージのベーステキスト
      */
-    let ERRMessageBase: string =
+    const ERRMessageBase =
       'このスクリプトを動かすためには「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。';
-
+Ï
     /**
      * 最終的に表示されるエラーテキスト
      */
@@ -352,6 +350,4 @@ export default class _ extends Utils {
   static openSettingsPanel(): void {
     app.executeCommand(2359);
   }
-
-  
 }
