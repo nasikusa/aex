@@ -17,6 +17,23 @@ export default class Utils {
       .toLowerCase();
   }
 
+  /**
+   *文字列を１文字ずつの配列に変換するか、もしくは特定の区切り文字によって配列に変換する
+   *
+   * @static
+   * @param {string} word
+   * @returns {string[]}
+   * @memberof Utils
+   */
+  static str2Array(word: string, breakWord?: string): string[] {
+    const splitBy: string = breakWord || '';
+    const splitedArray: string[] = word.split(splitBy);
+    const resultArray = splitedArray.map(value => {
+      return _.trim(value);
+    });
+    return resultArray;
+  }
+
   // static joinLine(inputArray: any[]) {}
 
   /**
