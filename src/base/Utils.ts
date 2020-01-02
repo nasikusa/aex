@@ -100,19 +100,6 @@ export default class Utils {
     return Math.max(...inputArray);
   }
 
-  /**
-   *配列を空にする
-   *
-   * @static
-   * @param {any[]} array
-   * @returns {any[]}
-   * @memberof Utils
-   */
-  static array2Empty(array: any[]): any[] {
-    array.length = 0;
-    return array;
-  }
-
   // https://ics.media/entry/11292/
   /**
    *加算ランダム値を得る
