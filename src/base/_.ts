@@ -68,7 +68,7 @@ export default class _ extends Utils {
    * @returns {(Item[] | false)}
    * @memberof _
    */
-  static getSelectedItems(isReturnAsArray = false): Item[] | false {
+  static getSelectedItems(): Item[] | false {
     const selectedItem: Item[] = app.project.selection;
     return selectedItem.length > 0 ? selectedItem : false;
   }
