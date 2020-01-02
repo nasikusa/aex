@@ -1,7 +1,6 @@
 import 'extendscript-es5-shim-ts';
 
 export default class BaseInfo {
-  public readonly encoding: string;
   public readonly version: string;
   public readonly lang: string;
   public readonly os: string;
@@ -10,7 +9,6 @@ export default class BaseInfo {
   public readonly info: { [key: string]: string };
 
   constructor() {
-    this.encoding = $.appEncoding;
     this.version = app.version;
     this.lang = app.isoLanguage;
     this.os = $.os;
@@ -18,7 +16,6 @@ export default class BaseInfo {
     this.locale = app.isoLanguage;
 
     this.info = {
-      Encoding: this.encoding,
       Version: this.version,
       Language: this.lang,
       OS: this.os,
