@@ -113,6 +113,13 @@ export default class _ extends Utils {
     return _.getSelectedLayers() ? true : false;
   }
 
+  /**
+   *選択しているプロパティを返す
+   *
+   * @static
+   * @returns {(PropertyBase[][] | boolean)}
+   * @memberof _
+   */
   static getSelectedProps(): PropertyBase[][] | boolean {
     const selectedLayers = _.getSelectedLayers();
     const selectedProps: PropertyBase[][] = [];
