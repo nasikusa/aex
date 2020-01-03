@@ -1,9 +1,3 @@
-/// <reference path="../typings/types_for_adobe/JavaScript.d.ts" />
-/// <reference path="../typings/types_for_adobe/ScriptUI.d.ts" />
-/// <reference path="../typings/types_for_adobe/global.d.ts" />
-/// <reference path="../typings/types_for_adobe/AfterEffects.d.ts" />
-/// <reference path="../typings/aftereffects/ae.d.ts" />
-
 import 'extendscript-es5-shim-ts';
 
 // import Polyfill from './base/Polyfill';
