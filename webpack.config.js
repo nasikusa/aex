@@ -25,7 +25,11 @@ const ts = {
   },
   optimization: {
     minimize: MINIMIZE === 'yes',
-    minimizer: [new UglifyJsPlugin()]
+    minimizer: [new UglifyJsPlugin({
+      uglifyOptions: {
+        output: {comments: /^\**!|@preserve|@license|@cc_on/},
+      },
+    })]
   },
 };
 

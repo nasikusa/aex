@@ -135,10 +135,13 @@ export default class _ extends Utils {
   /**
    * アクティブなコンポジションのレイヤーをすべて取得する
    */
-  static getActiveItemLayers(): LayerCollection | undefined {
-    // @ts-ignore
-    return app.project.activeItem.layers;
-  }
+  // static getActiveItemLayers(): LayerCollection | boolean {
+  //   const activeItem = _.getActiveItem();
+  //   if (typeof activeItem !== 'boolean' && activeItem instanceof CompItem) {
+  //     return activeItem.layers;
+  //   }
+  //   return false;
+  // }
 
   static getContianer(item: CompItem) {
     // @ts-ignore
@@ -329,7 +332,6 @@ export default class _ extends Utils {
      */
     const ERRMessageBase =
       'このスクリプトを動かすためには「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。';
-Ï
     /**
      * 最終的に表示されるエラーテキスト
      */

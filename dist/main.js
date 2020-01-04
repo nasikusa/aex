@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -144,38 +144,40 @@ var _ = (function (_super) {
         var res = app.project.activeItem;
         return res ? res : false;
     };
-    _.getSelectedItems = function (isReturnAsArray) {
-        if (isReturnAsArray === void 0) { isReturnAsArray = false; }
+    _.getSelectedItems = function () {
         var selectedItem = app.project.selection;
         return selectedItem.length > 0 ? selectedItem : false;
     };
     _.isItemSelected = function () {
         return _.getSelectedItems() ? true : false;
     };
-    _.getSelectedLayers = function (returnAsArray) {
-        if (returnAsArray === void 0) { returnAsArray = false; }
-        var selectedLayers = app.project.activeItem.selectedLayers;
-        if (selectedLayers.length > 0) {
-            if (returnAsArray) {
-                var returnedArray = _.LayerCollection2Array(selectedLayers);
-                return returnedArray;
-            }
-            else {
+    _.getSelectedLayers = function () {
+        var selected = app.project.activeItem;
+        if (selected != null && selected instanceof CompItem) {
+            var selectedLayers = selected.selectedLayers;
+            if (selectedLayers.length > 0) {
                 return selectedLayers;
             }
+            else {
+                return false;
+            }
         }
-        else {
-            return false;
-        }
+        return false;
     };
     _.isLayerSelected = function () {
         return _.getSelectedLayers() ? true : false;
     };
     _.getSelectedProps = function () {
-        return _.getSelectedLayers().selectedProperties;
-    };
-    _.getActiveItemLayers = function () {
-        return app.project.activeItem.layers;
+        var selectedLayers = _.getSelectedLayers();
+        var selectedProps = [];
+        if (typeof selectedLayers !== 'boolean') {
+            for (var _i = 0, selectedLayers_1 = selectedLayers; _i < selectedLayers_1.length; _i++) {
+                var value = selectedLayers_1[_i];
+                selectedProps.push(value.selectedProperties);
+            }
+            return selectedProps;
+        }
+        return false;
     };
     _.getContianer = function (item) {
         return item.containingComp;
@@ -259,33 +261,38 @@ var _ = (function (_super) {
     };
     _.getFrameRate = function (item) {
         if (item === void 0) { item = _.getActiveItem(); }
-        return item.frameRate;
-    };
-    _.changeCompDuration = function (duration, item) {
-        if (item === void 0) { item = _.getActiveItem(); }
-        if (_.getType(item) === 'CompItem') {
-            item.duration = duration;
-            return item.duration;
+        if (item instanceof CompItem) {
+            return item.frameRate;
         }
-    };
-    _.getCompDuration = function (item) {
-        if (item === void 0) { item = _.getActiveItem(); }
-        if (_.getType(item) === 'CompItem') {
-            return item.duration;
-        }
+        return false;
     };
     _.hasPermissionToNetworkAccess = function () {
-        return app.preferences.getPrefAsLong("Main Pref Section", "Pref_SCRIPTING_FILE_NETWORK_SECURITY") === 1;
+        return app.preferences.getPrefAsLong('Main Pref Section', 'Pref_SCRIPTING_FILE_NETWORK_SECURITY') === 1;
     };
     _.hasAccessScript = function () {
         return _.hasPermissionToNetworkAccess();
     };
-    _.checkAccessToNetwork = function () {
-        if (_.hasPermissionToNetworkAccess()) {
-            alert('このスクリプトを動かすためには設定画面で「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。');
+    _.checkAccessToNetwork = function (isInduceSettings, ErrorMessage) {
+        if (isInduceSettings === void 0) { isInduceSettings = true; }
+        var ERRMessageBase = 'このスクリプトを動かすためには「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。';
+        var ERRMessage = ErrorMessage || ERRMessageBase;
+        if (isInduceSettings) {
+            ERRMessage += '\n設定画面を開きますか？';
+        }
+        if (!_.hasPermissionToNetworkAccess()) {
+            var confirmResult = confirm(ERRMessage, false);
+            if (confirmResult) {
+                _.openSettingsPanel();
+            }
+            if (!isInduceSettings) {
+                alert(ERRMessage);
+            }
             return false;
         }
         return true;
+    };
+    _.openSettingsPanel = function () {
+        app.executeCommand(2359);
     };
     return _;
 }(Utils_1["default"]));
@@ -294,6 +301,385 @@ exports["default"] = _;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+__webpack_require__(8);
+var OpenPath_1 = __webpack_require__(3);
+var HistoryManager_1 = __webpack_require__(6);
+HistoryManager_1["default"].start('example');
+var openpath = new OpenPath_1["default"]();
+openpath.setPath('/Users/toganomasahiro/Google ドライブ/idea/');
+openpath.open();
+HistoryManager_1["default"].end();
+
+
+/***/ }),
+/* 2 */,
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var CallCommand_1 = __webpack_require__(4);
+var Folders_1 = __webpack_require__(9);
+var _1 = __webpack_require__(0);
+var OpenPath = (function () {
+    function OpenPath(path) {
+        this.paths = [];
+        this.init(path);
+    }
+    OpenPath.prototype.init = function (path) {
+        if (path != null) {
+            if (typeof path === 'string') {
+                this.setPath(path);
+            }
+            else if (typeof path === 'object' && _1["default"].getType(path) === 'array') {
+                this.setPaths(path);
+            }
+        }
+    };
+    OpenPath.prototype.setPath = function (pathName) {
+        this.paths.push(pathName);
+        return this;
+    };
+    OpenPath.prototype.setPaths = function (pathNameArray) {
+        for (var _i = 0, pathNameArray_1 = pathNameArray; _i < pathNameArray_1.length; _i++) {
+            var pathName = pathNameArray_1[_i];
+            this.paths.push(pathName);
+        }
+        return this;
+    };
+    OpenPath.prototype.setFolderByName = function (folderName) {
+        if (Folders_1.Folders[folderName] != null) {
+            this.paths.push(Folders_1.Folders[folderName].path);
+            return true;
+        }
+        return false;
+    };
+    OpenPath.prototype.removeAllPath = function () {
+        this.paths = [];
+    };
+    OpenPath.prototype.open = function () {
+        var commandArray = [];
+        if (_1["default"].isWindows()) {
+            for (var _i = 0, _a = this.paths; _i < _a.length; _i++) {
+                var path = _a[_i];
+                commandArray.push("start \"\" \"" + path + "\"");
+            }
+        }
+        else if (_1["default"].isMac()) {
+            for (var _b = 0, _c = this.paths; _b < _c.length; _b++) {
+                var path = _c[_b];
+                commandArray.push("open \"" + path + "\"");
+            }
+        }
+        else {
+            return false;
+        }
+        var callCommand = new CallCommand_1["default"](commandArray);
+        if (callCommand.exec(true, true)) {
+            return true;
+        }
+        return false;
+    };
+    return OpenPath;
+}());
+exports["default"] = OpenPath;
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var _1 = __webpack_require__(0);
+var BaseInfo_1 = __webpack_require__(7);
+var CallCommand = (function () {
+    function CallCommand(inputComandStr) {
+        this.command = [];
+        this.result = '';
+        this.info = new BaseInfo_1["default"]();
+        this.os = _1["default"].isWindows() ? 'windows' : 'mac';
+        this.isWindows = _1["default"].isWindows();
+        this.isMac = _1["default"].isMac();
+        this.hasPermission = _1["default"].hasPermissionToNetworkAccess();
+        this.restrictedWinCommandName = ['del'];
+        this.restrictedMacCommandName = ['rm'];
+        if (inputComandStr != null) {
+            this.setCommand(inputComandStr);
+            this.setResult();
+        }
+    }
+    CallCommand.prototype.getResult = function (isUpdate) {
+        if (isUpdate === void 0) { isUpdate = true; }
+        if (isUpdate) {
+            this.setResult();
+        }
+        return this.result;
+    };
+    CallCommand.prototype.setResult = function () {
+        this.result = '';
+        for (var i = 0; i < this.command.length; i++) {
+            if (i === this.command.length - 1) {
+                this.result += "" + this.command[i];
+            }
+            else {
+                this.result += this.command[i] + " & ";
+            }
+        }
+        if (this.result != null && this.result === '') {
+            return true;
+        }
+        return false;
+    };
+    CallCommand.prototype.setCommand = function (str, isUpdateResult) {
+        if (isUpdateResult === void 0) { isUpdateResult = true; }
+        this.command = [];
+        if (_1["default"].getType(str) === 'string' && typeof str === 'string') {
+            str = _1["default"].trim(str);
+            this.command.push(str);
+        }
+        else if (_1["default"].getType(str) === 'array' && typeof str === 'object') {
+            for (var _i = 0, str_1 = str; _i < str_1.length; _i++) {
+                var commandStr = str_1[_i];
+                commandStr = _1["default"].trim(commandStr);
+                this.command.push(commandStr);
+            }
+        }
+        if (isUpdateResult) {
+            this.setResult();
+        }
+        return this.command;
+    };
+    CallCommand.prototype.setRestrictedCommand = function (commandName) {
+        if (this.isWindows) {
+            this.restrictedWinCommandName.push(commandName);
+            return this.restrictedWinCommandName;
+        }
+        this.restrictedMacCommandName.push(commandName);
+        return this.restrictedMacCommandName;
+    };
+    CallCommand.prototype.removeRestrictedCommand = function (commandPosition) { };
+    CallCommand.prototype.getRestrictedCommand = function () { };
+    CallCommand.prototype.check = function () {
+        var restrictedStrings = [];
+        if (this.isWindows) {
+            restrictedStrings = this.restrictedWinCommandName;
+        }
+        else if (this.isMac) {
+            restrictedStrings = this.restrictedMacCommandName;
+        }
+        for (var i = 0; i < restrictedStrings.length; i++) {
+            var rgep = new RegExp("^" + restrictedStrings[i], 'i');
+            for (var j = 0; j < this.command.length; j++) {
+                if (rgep.test(this.command[j])) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+    CallCommand.prototype.removeAllCommands = function () {
+        this.command.length = 0;
+        if (this.command === []) {
+            return true;
+        }
+        return false;
+    };
+    CallCommand.prototype.exec = function (isRemoveCommandAfterExec, isReturnOnlyBoolean, isForceExecRestrictedCommand) {
+        if (isRemoveCommandAfterExec === void 0) { isRemoveCommandAfterExec = true; }
+        if (isReturnOnlyBoolean === void 0) { isReturnOnlyBoolean = false; }
+        if (isForceExecRestrictedCommand === void 0) { isForceExecRestrictedCommand = false; }
+        if (!_1["default"].checkAccessToNetwork()) {
+            return false;
+        }
+        var callCommandResult = '';
+        if (!this.check() && isForceExecRestrictedCommand === false) {
+            return false;
+        }
+        if (this.isWindows) {
+            callCommandResult = system.callSystem("cmd.exe /c \"" + this.result + " /t\"");
+            if (isRemoveCommandAfterExec) {
+                this.removeAllCommands();
+            }
+            if (isReturnOnlyBoolean) {
+                return true;
+            }
+        }
+        else if (this.isMac) {
+            callCommandResult = system.callSystem("" + this.result);
+            if (isRemoveCommandAfterExec) {
+                this.removeAllCommands();
+            }
+            if (isReturnOnlyBoolean) {
+                return true;
+            }
+        }
+        if (callCommandResult != null && callCommandResult !== '' && isReturnOnlyBoolean === false) {
+            return callCommandResult;
+        }
+        else {
+            return false;
+        }
+    };
+    return CallCommand;
+}());
+exports["default"] = CallCommand;
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var _1 = __webpack_require__(0);
+var Utils = (function () {
+    function Utils() {
+    }
+    Utils.getType = function (obj) {
+        var toString = Object.prototype.toString;
+        return toString
+            .call(obj)
+            .slice(8, -1)
+            .toLowerCase();
+    };
+    Utils.str2Array = function (word, breakWord) {
+        var splitBy = breakWord || '';
+        var splitedArray = word.split(splitBy);
+        var resultArray = splitedArray.map(function (value) {
+            return _1["default"].trim(value);
+        });
+        return resultArray;
+    };
+    Utils.getRandomFromArray = function (array) {
+        if (Array.isArray(array) && Utils.getType(array) === 'array') {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+        return false;
+    };
+    Utils.randomMinMax = function (min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
+    Utils.trim = function (inputString) {
+        return inputString.replace(/^\s+|\s+$/g, '');
+    };
+    Utils.getMinFromArray = function (inputArray) {
+        return Math.min.apply(Math, inputArray);
+    };
+    Utils.getMaxFromArray = function (inputArray) {
+        return Math.max.apply(Math, inputArray);
+    };
+    Utils.getAddRandom = function () {
+        return (Math.random() + Math.random()) / 2;
+    };
+    Utils.getMultiplyRandom = function () {
+        return Math.random() * Math.random();
+    };
+    Utils.getSqrtRandom = function () {
+        return Math.sqrt(Math.random());
+    };
+    Utils.getNormalRandom = function () {
+        var value;
+        while (true) {
+            value = Utils.calcNormal();
+            if (0 <= value && value < 1) {
+                break;
+            }
+        }
+        return value;
+    };
+    Utils.calcNormal = function () {
+        var r1 = Math.random();
+        var r2 = Math.random();
+        var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
+        value = (value + 3) / 6;
+        return value;
+    };
+    Utils.getArrayDividedByLine = function (inputText) {
+        return inputText.split('\n');
+    };
+    return Utils;
+}());
+exports["default"] = Utils;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+var HistoryManager = (function () {
+    function HistoryManager() {
+    }
+    HistoryManager.start = function (name) {
+        if (name === void 0) { name = 'action'; }
+        app.beginUndoGroup(name);
+    };
+    HistoryManager.end = function () {
+        app.endUndoGroup();
+    };
+    return HistoryManager;
+}());
+exports["default"] = HistoryManager;
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+exports.__esModule = true;
+__webpack_require__(8);
+var BaseInfo = (function () {
+    function BaseInfo() {
+        this.version = app.version;
+        this.lang = app.isoLanguage;
+        this.os = $.os;
+        this.locale = app.isoLanguage;
+        this.info = {
+            Version: this.version,
+            Language: this.lang,
+            OS: this.os,
+        };
+    }
+    BaseInfo.prototype.showData = function () {
+        var alertText = '';
+        for (var _i = 0, _a = Object.keys(this.info); _i < _a.length; _i++) {
+            var key = _a[_i];
+            alertText += key + ": " + this.info[key] + " \n";
+        }
+        alert(alertText);
+    };
+    BaseInfo.prototype.isWindows = function () {
+        if (this.os) {
+            return this.os.toLowerCase().indexOf('windows') !== -1;
+        }
+        return false;
+    };
+    BaseInfo.prototype.isMac = function () {
+        if (this.os) {
+            return this.os.toLowerCase().indexOf('windows') === -1;
+        }
+        return false;
+    };
+    return BaseInfo;
+}());
+exports["default"] = BaseInfo;
+
+
+/***/ }),
+/* 8 */
 /***/ (function(module, exports) {
 
 //every.js
@@ -1637,369 +2023,7 @@ if (!String.prototype.trim) {
 
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var _1 = __webpack_require__(0);
-var BaseInfo_1 = __webpack_require__(6);
-var CallCommand = (function () {
-    function CallCommand(inputComandStr) {
-        this.command = [];
-        this.result = '';
-        this.info = new BaseInfo_1["default"]();
-        this.os = _1["default"].isWindows() ? 'windows' : 'mac';
-        this.isWindows = _1["default"].isWindows();
-        this.isMac = _1["default"].isMac();
-        this.hasPermission = _1["default"].hasPermissionToNetworkAccess();
-        this.restrictedWinCommandName = ['del'];
-        this.restrictedMacCommandName = ['rm'];
-        if (inputComandStr != null) {
-            this.setCommand(inputComandStr);
-            this.setResult();
-        }
-    }
-    CallCommand.prototype.getResult = function (isUpdate) {
-        if (isUpdate === void 0) { isUpdate = true; }
-        if (isUpdate) {
-            this.setResult();
-        }
-        return this.result;
-    };
-    CallCommand.prototype.setResult = function () {
-        this.result = '';
-        for (var i = 0; i < this.command.length; i++) {
-            if (i === this.command.length - 1) {
-                this.result += "" + this.command[i];
-            }
-            else {
-                this.result += this.command[i] + " & ";
-            }
-        }
-        if (this.result != null && this.result === '') {
-            return true;
-        }
-        return false;
-    };
-    CallCommand.prototype.setCommand = function (str, isUpdateResult) {
-        if (isUpdateResult === void 0) { isUpdateResult = true; }
-        this.command = [];
-        if (_1["default"].getType(str) === 'string' && typeof str === 'string') {
-            str = _1["default"].trim(str);
-            this.command.push(str);
-        }
-        else if (_1["default"].getType(str) === 'array' && typeof str === 'object') {
-            for (var _i = 0, str_1 = str; _i < str_1.length; _i++) {
-                var commandStr = str_1[_i];
-                commandStr = _1["default"].trim(commandStr);
-                this.command.push(commandStr);
-            }
-        }
-        if (isUpdateResult) {
-            this.setResult();
-        }
-        return this.command;
-    };
-    CallCommand.prototype.setRestrictedCommand = function (commandName) {
-        if (this.isWindows) {
-            this.restrictedWinCommandName.push(commandName);
-            return this.restrictedWinCommandName;
-        }
-        this.restrictedMacCommandName.push(commandName);
-        return this.restrictedMacCommandName;
-    };
-    CallCommand.prototype.removeRestrictedCommand = function (commandPosition) { };
-    CallCommand.prototype.getRestrictedCommand = function () { };
-    CallCommand.prototype.check = function () {
-        var restrictedStrings = [];
-        if (this.isWindows) {
-            restrictedStrings = this.restrictedWinCommandName;
-        }
-        else if (this.isMac) {
-            restrictedStrings = this.restrictedMacCommandName;
-        }
-        for (var i = 0; i < restrictedStrings.length; i++) {
-            var rgep = new RegExp("^" + restrictedStrings[i], 'i');
-            for (var j = 0; j < this.command.length; j++) {
-                if (rgep.test(this.command[j])) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    };
-    CallCommand.prototype.removeAllCommands = function () {
-        this.command.length = 0;
-        if (this.command === []) {
-            return true;
-        }
-        return false;
-    };
-    CallCommand.prototype.exec = function (isRemoveCommandAfterExec, isReturnOnlyBoolean, isForceExecRestrictedCommand) {
-        if (isRemoveCommandAfterExec === void 0) { isRemoveCommandAfterExec = true; }
-        if (isReturnOnlyBoolean === void 0) { isReturnOnlyBoolean = false; }
-        if (isForceExecRestrictedCommand === void 0) { isForceExecRestrictedCommand = false; }
-        try {
-            if (!_1["default"].hasPermissionToNetworkAccess()) {
-                throw new Error('このスクリプトを動かすためには設定画面で「スクリプトによるファイルの書き込みとネットワークへのアクセスを許可」を有効にする必要があります。');
-            }
-        }
-        catch (e) {
-            alert(e.message);
-        }
-        var callCommandResult = '';
-        if (!this.check() && isForceExecRestrictedCommand === false) {
-            return false;
-        }
-        if (this.isWindows) {
-            callCommandResult = system.callSystem("cmd.exe /c \"" + this.result + " /t\"");
-            if (isRemoveCommandAfterExec) {
-                this.removeAllCommands();
-            }
-            if (isReturnOnlyBoolean) {
-                return true;
-            }
-        }
-        else if (this.isMac) {
-            alert('現在mac用のコマンド関数は用意されていません。');
-            return false;
-        }
-        if (callCommandResult != null && callCommandResult !== '' && isReturnOnlyBoolean === false) {
-            return callCommandResult;
-        }
-        else {
-            return false;
-        }
-    };
-    return CallCommand;
-}());
-exports["default"] = CallCommand;
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-__webpack_require__(1);
-var OpenPath_1 = __webpack_require__(4);
-var FuzzyOpen_1 = __webpack_require__(9);
-var wnd = new Window("palette", "fuzzy search", [0, 0, 200, 500], { resizeable: true, closeButton: true });
-wnd.margins = 20;
-var st = wnd.add('statictext', { x: 0, y: 0, width: 180, height: 16 }, '');
-var contentsGrp = wnd.add('group', undefined, 'contentsGrp');
-contentsGrp.orientation = 'column';
-var et = wnd.add('edittext', { x: 0, y: 16, width: 180, height: 16 }, 'search txt');
-et.onEnterKey = function () {
-    var fuzzy = new FuzzyOpen_1["default"]('D:/googledrive/material', 'D');
-    var result = fuzzy.search(et.text);
-    if (typeof result !== 'boolean') {
-        var openPath = new OpenPath_1["default"](result[0][1]);
-        openPath.open();
-    }
-};
-et.onChanging = function () {
-    var fuzzy = new FuzzyOpen_1["default"]('D:/googledrive/material', 'D');
-    var result = fuzzy.search(et.text);
-    if (typeof result !== 'boolean') {
-        st.text = result[0][0];
-    }
-};
-wnd.layout.layout(true);
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var CallCommand_1 = __webpack_require__(2);
-var Folders_1 = __webpack_require__(7);
-var Paths_1 = __webpack_require__(8);
-var _1 = __webpack_require__(0);
-var OpenPath = (function () {
-    function OpenPath(path) {
-        this.paths = [];
-        this.init(path);
-    }
-    OpenPath.prototype.init = function (path) {
-        if (path != null) {
-            if (typeof path === 'string') {
-                this.setPath(path);
-            }
-            else if (typeof path === 'object' && _1["default"].getType(path) === 'array') {
-                this.setPaths(path);
-            }
-        }
-    };
-    OpenPath.prototype.setPath = function (pathName) {
-        this.paths.push(pathName);
-        return this;
-    };
-    OpenPath.prototype.setPaths = function (pathNameArray) {
-        for (var _i = 0, pathNameArray_1 = pathNameArray; _i < pathNameArray_1.length; _i++) {
-            var pathName = pathNameArray_1[_i];
-            this.paths.push(pathName);
-        }
-        return this;
-    };
-    OpenPath.prototype.setFolderByName = function (folderName) {
-        if (Folders_1.Folders[folderName] != null) {
-            this.paths.push(Folders_1.Folders[folderName].path);
-            return true;
-        }
-        return false;
-    };
-    OpenPath.prototype.setAppByName = function (appName) {
-        if (Paths_1.AppPath[appName] != null) {
-            this.paths.push(" \"" + Paths_1.AppPath[appName].path + "\"");
-            return true;
-        }
-        return false;
-    };
-    OpenPath.prototype.removeAllPath = function () {
-        this.paths = [];
-    };
-    OpenPath.prototype.open = function () {
-        var commandArray = [];
-        for (var _i = 0, _a = this.paths; _i < _a.length; _i++) {
-            var path = _a[_i];
-            commandArray.push("start \"\" \"" + path + "\"");
-        }
-        var callCommand = new CallCommand_1["default"](commandArray);
-        if (callCommand.exec(true, true)) {
-            return true;
-        }
-        return false;
-    };
-    return OpenPath;
-}());
-exports["default"] = OpenPath;
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var Utils = (function () {
-    function Utils() {
-    }
-    Utils.getType = function (obj) {
-        var toString = Object.prototype.toString;
-        return toString
-            .call(obj)
-            .slice(8, -1)
-            .toLowerCase();
-    };
-    Utils.joinLine = function (inputArray) { };
-    Utils.getRandomFromArray = function (array) {
-        if (Array.isArray(array) && Utils.getType(array) === 'array') {
-            return array[Math.floor(Math.random() * array.length)];
-        }
-        return false;
-    };
-    Utils.randomMinMax = function (min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    };
-    Utils.trim = function (inputString) {
-        return inputString.replace(/^\s+|\s+$/g, '');
-    };
-    Utils.getMinFromArray = function (inputArray) {
-        return Math.min.apply(Math, inputArray);
-    };
-    Utils.getMaxFromArray = function (inputArray) {
-        return Math.max.apply(Math, inputArray);
-    };
-    Utils.array2Empty = function (array) {
-        array.length = 0;
-        return array;
-    };
-    Utils.getAddRandom = function () {
-        return (Math.random() + Math.random()) / 2;
-    };
-    Utils.getMultiplyRandom = function () {
-        return Math.random() * Math.random();
-    };
-    Utils.getSqrtRandom = function () {
-        return Math.sqrt(Math.random());
-    };
-    Utils.getNormalRandom = function () {
-        var value;
-        while (true) {
-            value = Utils.calcNormal();
-            if (0 <= value && value < 1) {
-                break;
-            }
-        }
-        return value;
-    };
-    Utils.calcNormal = function () {
-        var r1 = Math.random();
-        var r2 = Math.random();
-        var value = Math.sqrt(-2.0 * Math.log(r1)) * Math.sin(2.0 * Math.PI * r2);
-        value = (value + 3) / 6;
-        return value;
-    };
-    Utils.getArrayDividedByLine = function (inputText) {
-        return inputText.split(/\n/);
-    };
-    return Utils;
-}());
-exports["default"] = Utils;
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-__webpack_require__(1);
-var BaseInfo = (function () {
-    function BaseInfo() {
-        this.encoding = $.appEncoding;
-        this.version = app.version;
-        this.lang = app.isoLanguage;
-        this.os = $.os;
-        this.screen = $.screens;
-        this.info = {
-            "Encoding": this.encoding,
-            "Version": this.version,
-            "Language": this.lang,
-            "OS": this.os,
-        };
-    }
-    BaseInfo.prototype.showData = function () {
-        var alertText = "";
-        for (var _i = 0, _a = Object.keys(this.info); _i < _a.length; _i++) {
-            var key = _a[_i];
-            alertText += key + ": " + this.info[key] + " \n";
-        }
-        alert(alertText);
-    };
-    BaseInfo.prototype.isWindows = function () {
-        if (this.os) {
-            return this.os.toLowerCase().indexOf("windows") !== -1;
-        }
-        return false;
-    };
-    return BaseInfo;
-}());
-exports["default"] = BaseInfo;
-
-
-/***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2031,554 +2055,6 @@ exports.Folders = {
         type: 'project',
     },
 };
-
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-exports.AppPath = {
-    Blender: {
-        path: 'C:/Program Files/Blender Foundation/Blender 2.81/blender.exe',
-        type: '3d',
-    },
-    Blender79: {
-        path: 'D:/googledrive/blender/blender-2.79b-windows64/blender.exe',
-        type: '3d',
-    },
-    FotoSketcher: {
-        path: 'C:/Program Files/FotoSketcher/FotoSketcher.exe',
-        type: 'image',
-    },
-    AfterFX: {
-        path: 'C:/Program Files/Adobe After Effects 2020/Support Files/AfterFX.exe',
-        type: 'script',
-    },
-    PhotoShop: {
-        path: 'C:/Program Files/Adobe Photoshop 2020/Photoshop.exe',
-        type: 'image',
-    },
-    MediaEncoder: {
-        path: 'C:/Program Files/Adobe Media Encoder 2020/Adobe Media Encoder.exe',
-        type: 'video',
-    },
-    PureRef: {
-        path: 'C:/Program Files/PureRef/PureRef.exe',
-        type: 'reference',
-    },
-    Evernote: {
-        path: 'C:/Program Files (x86)/Evernote/Evernote/Evernote.exe',
-        type: 'text',
-    },
-    ScreenToGif: {
-        path: 'C:/Program Files (x86)/ScreenToGif/ScreenToGif.exe',
-        type: 'video',
-    },
-    WizTree: {
-        path: 'C:/Program Files (x86)/WizTree',
-        type: 'utility',
-    },
-    AGDRec: {
-        path: 'C:/software_normal/AGDRec_131F/AGDRec64.exe',
-        type: 'video',
-    },
-    fSpy: {
-        path: 'C:/software_normal/fSpy-1.0.3-win/fSpy.exe',
-        type: '3d',
-    },
-    instanceMeshes: {
-        path: 'C:/software_normal/instant-meshes-windows/Instant Meshes.exe',
-        type: '3d',
-    },
-    MagicaVoxel: {
-        path: 'C:/software_normal/MagicaVoxel 0.99/MagicaVoxel.exe',
-        type: '3d',
-    },
-    SpaceSniffer: {
-        path: 'C:/software_normal/spacesniffer_1_3_0_2/SpaceSniffer.exe',
-        type: 'utility',
-    },
-};
-exports.ProjectPath = {
-    fish1: {
-        renderRoot: 'D:/googledrive/render/fish1/',
-        baseRenderName: 'Image0001.png',
-        assetsFolders: [
-            {
-                name: 'solid',
-                isSequence: true,
-                renderName: '',
-                description: '',
-            },
-            {
-                name: 'shadow',
-                isSequence: true,
-                renderName: '',
-                description: '',
-            },
-            {
-                name: 'line',
-                isSequence: true,
-                renderName: '',
-                description: '',
-            },
-        ],
-    },
-};
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var _1 = __webpack_require__(0);
-var CommandUtils_1 = __webpack_require__(10);
-var FuzzyOpen = (function () {
-    function FuzzyOpen(path, type, isSearchRecursive, isReturnFullPath) {
-        if (isSearchRecursive === void 0) { isSearchRecursive = false; }
-        if (isReturnFullPath === void 0) { isReturnFullPath = false; }
-        this.searchArray = [];
-        this.fzy = __webpack_require__(11);
-        if (path != null) {
-            this.setTargetPath(path);
-        }
-        if (type != null) {
-            this.setType(type);
-        }
-        if (this.targetPath != null && this.searchType != null) {
-            this.setSearchArray(isSearchRecursive, isReturnFullPath);
-        }
-    }
-    FuzzyOpen.prototype.setTargetPath = function (path) {
-        this.targetPath = path;
-    };
-    FuzzyOpen.prototype.setType = function (type) {
-        this.searchType = type;
-    };
-    FuzzyOpen.prototype.setSearchArray = function (isSearchRecursive, isReturnFullPath) {
-        if (isSearchRecursive === void 0) { isSearchRecursive = false; }
-        if (isReturnFullPath === void 0) { isReturnFullPath = false; }
-        if (this.targetPath == null || this.searchType == null)
-            return false;
-        var result = CommandUtils_1["default"].getDir(this.targetPath, this.searchType, {
-            isNameOnly: isReturnFullPath,
-            isReturnAsArray: true,
-            isSearchSub: isSearchRecursive,
-        });
-        if (typeof result === 'object' && _1["default"].getType(result) === 'array') {
-            this.searchArray = result;
-            return true;
-        }
-        return false;
-    };
-    FuzzyOpen.prototype.search = function (searchTxt, minScore) {
-        if (minScore === void 0) { minScore = 0.33; }
-        var fuzzyset = this.fzy(this.searchArray);
-        var searchResult = fuzzyset.get(searchTxt, null, minScore);
-        var returnResult = [];
-        if (searchResult != null) {
-            for (var _i = 0, searchResult_1 = searchResult; _i < searchResult_1.length; _i++) {
-                var value = searchResult_1[_i];
-                var fullPath = this.targetPath + "/" + value[1];
-                var returnResultContent = [value[1], fullPath, value[0]];
-                returnResult.push(returnResultContent);
-            }
-            return returnResult;
-        }
-        return false;
-    };
-    FuzzyOpen.prototype.searchOne = function (searchTxt, minScore) {
-        if (minScore === void 0) { minScore = 0.33; }
-        var result = this.search(searchTxt, minScore);
-        if (typeof result === 'boolean') {
-            return false;
-        }
-        else {
-            return result[0];
-        }
-    };
-    return FuzzyOpen;
-}());
-exports["default"] = FuzzyOpen;
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-var _1 = __webpack_require__(0);
-var CallCommand_1 = __webpack_require__(2);
-var CommandUtils = (function () {
-    function CommandUtils() {
-    }
-    CommandUtils.getDir = function (targetPath, type, optionObject) {
-        if (optionObject === void 0) { optionObject = {
-            isSearchSub: false,
-            isNameOnly: false,
-            sortOption: '',
-            isReverseArray: false,
-            isReturnAsArray: true,
-        }; }
-        var callCommand = new CallCommand_1["default"]();
-        var command = "dir \"" + targetPath + "\" /b";
-        switch (type) {
-            case 'F':
-                command += ' /A-d ';
-                break;
-            case 'D':
-                command += ' /A:d ';
-                break;
-            case 'FD':
-                command += '';
-                break;
-        }
-        if (optionObject.isSearchSub)
-            command += '/S ';
-        if (optionObject.isNameOnly)
-            command += '/D ';
-        if (optionObject.sortOption != null)
-            command += optionObject.sortOption;
-        callCommand.setCommand(command);
-        var result = callCommand.exec(true);
-        if (typeof result !== 'boolean') {
-            if (optionObject.isReturnAsArray) {
-                var resultArray = _1["default"].getArrayDividedByLine(result);
-                if (optionObject.isReverseArray) {
-                    return resultArray.reverse();
-                }
-                else {
-                    return resultArray;
-                }
-            }
-            else {
-                return result;
-            }
-        }
-        return '';
-    };
-    return CommandUtils;
-}());
-exports["default"] = CommandUtils;
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(12);
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-(function() {
-
-var FuzzySet = function(arr, useLevenshtein, gramSizeLower, gramSizeUpper) {
-    var fuzzyset = {
-
-    };
-
-    // default options
-    arr = arr || [];
-    fuzzyset.gramSizeLower = gramSizeLower || 2;
-    fuzzyset.gramSizeUpper = gramSizeUpper || 3;
-    fuzzyset.useLevenshtein = (typeof useLevenshtein !== 'boolean') ? true : useLevenshtein;
-
-    // define all the object functions and attributes
-    fuzzyset.exactSet = {};
-    fuzzyset.matchDict = {};
-    fuzzyset.items = {};
-
-    // helper functions
-    var levenshtein = function(str1, str2) {
-        var current = [], prev, value;
-
-        for (var i = 0; i <= str2.length; i++)
-            for (var j = 0; j <= str1.length; j++) {
-            if (i && j)
-                if (str1.charAt(j - 1) === str2.charAt(i - 1))
-                value = prev;
-                else
-                value = Math.min(current[j], current[j - 1], prev) + 1;
-            else
-                value = i + j;
-
-            prev = current[j];
-            current[j] = value;
-            }
-
-        return current.pop();
-    };
-
-    // return an edit distance from 0 to 1
-    var _distance = function(str1, str2) {
-        if (str1 === null && str2 === null) throw 'Trying to compare two null values';
-        if (str1 === null || str2 === null) return 0;
-        str1 = String(str1); str2 = String(str2);
-
-        var distance = levenshtein(str1, str2);
-        if (str1.length > str2.length) {
-            return 1 - distance / str1.length;
-        } else {
-            return 1 - distance / str2.length;
-        }
-    };
-    var _nonWordRe = /[^a-zA-Z0-9\u00C0-\u00FF, ]+/g;
-
-    var _iterateGrams = function(value, gramSize) {
-        gramSize = gramSize || 2;
-        var simplified = '-' + value.toLowerCase().replace(_nonWordRe, '') + '-',
-            lenDiff = gramSize - simplified.length,
-            results = [];
-        if (lenDiff > 0) {
-            for (var i = 0; i < lenDiff; ++i) {
-                simplified += '-';
-            }
-        }
-        for (var i = 0; i < simplified.length - gramSize + 1; ++i) {
-            results.push(simplified.slice(i, i + gramSize));
-        }
-        return results;
-    };
-
-    var _gramCounter = function(value, gramSize) {
-        // return an object where key=gram, value=number of occurrences
-        gramSize = gramSize || 2;
-        var result = {},
-            grams = _iterateGrams(value, gramSize),
-            i = 0;
-        for (i; i < grams.length; ++i) {
-            if (grams[i] in result) {
-                result[grams[i]] += 1;
-            } else {
-                result[grams[i]] = 1;
-            }
-        }
-        return result;
-    };
-
-    // the main functions
-    fuzzyset.get = function(value, defaultValue, minMatchScore) {
-        // check for value in set, returning defaultValue or null if none found
-        if (minMatchScore === undefined) {
-            minMatchScore = .33
-        }
-        var result = this._get(value, minMatchScore);
-        if (!result && typeof defaultValue !== 'undefined') {
-            return defaultValue;
-        }
-        return result;
-    };
-
-    fuzzyset._get = function(value, minMatchScore) {
-        var normalizedValue = this._normalizeStr(value),
-            result = this.exactSet[normalizedValue];
-        if (result) {
-            return [[1, result]];
-        }
-
-        var results = [];
-        // start with high gram size and if there are no results, go to lower gram sizes
-        for (var gramSize = this.gramSizeUpper; gramSize >= this.gramSizeLower; --gramSize) {
-            results = this.__get(value, gramSize, minMatchScore);
-            if (results && results.length > 0) {
-                return results;
-            }
-        }
-        return null;
-    };
-
-    fuzzyset.__get = function(value, gramSize, minMatchScore) {
-        var normalizedValue = this._normalizeStr(value),
-            matches = {},
-            gramCounts = _gramCounter(normalizedValue, gramSize),
-            items = this.items[gramSize],
-            sumOfSquareGramCounts = 0,
-            gram,
-            gramCount,
-            i,
-            index,
-            otherGramCount;
-
-        for (gram in gramCounts) {
-            gramCount = gramCounts[gram];
-            sumOfSquareGramCounts += Math.pow(gramCount, 2);
-            if (gram in this.matchDict) {
-                for (i = 0; i < this.matchDict[gram].length; ++i) {
-                    index = this.matchDict[gram][i][0];
-                    otherGramCount = this.matchDict[gram][i][1];
-                    if (index in matches) {
-                        matches[index] += gramCount * otherGramCount;
-                    } else {
-                        matches[index] = gramCount * otherGramCount;
-                    }
-                }
-            }
-        }
-
-        function isEmptyObject(obj) {
-            for(var prop in obj) {
-                if(obj.hasOwnProperty(prop))
-                    return false;
-            }
-            return true;
-        }
-
-        if (isEmptyObject(matches)) {
-            return null;
-        }
-
-        var vectorNormal = Math.sqrt(sumOfSquareGramCounts),
-            results = [],
-            matchScore;
-        // build a results list of [score, str]
-        for (var matchIndex in matches) {
-            matchScore = matches[matchIndex];
-            results.push([matchScore / (vectorNormal * items[matchIndex][0]), items[matchIndex][1]]);
-        }
-        var sortDescending = function(a, b) {
-            if (a[0] < b[0]) {
-                return 1;
-            } else if (a[0] > b[0]) {
-                return -1;
-            } else {
-                return 0;
-            }
-        };
-        results.sort(sortDescending);
-        if (this.useLevenshtein) {
-            var newResults = [],
-                endIndex = Math.min(50, results.length);
-            // truncate somewhat arbitrarily to 50
-            for (var i = 0; i < endIndex; ++i) {
-                newResults.push([_distance(results[i][1], normalizedValue), results[i][1]]);
-            }
-            results = newResults;
-            results.sort(sortDescending);
-        }
-        var newResults = [];
-        results.forEach(function(scoreWordPair) {
-            if (scoreWordPair[0] >= minMatchScore) {
-                newResults.push([scoreWordPair[0], this.exactSet[scoreWordPair[1]]]);
-            }
-        }.bind(this))
-        return newResults;
-    };
-
-    fuzzyset.add = function(value) {
-        var normalizedValue = this._normalizeStr(value);
-        if (normalizedValue in this.exactSet) {
-            return false;
-        }
-
-        var i = this.gramSizeLower;
-        for (i; i < this.gramSizeUpper + 1; ++i) {
-            this._add(value, i);
-        }
-    };
-
-    fuzzyset._add = function(value, gramSize) {
-        var normalizedValue = this._normalizeStr(value),
-            items = this.items[gramSize] || [],
-            index = items.length;
-
-        items.push(0);
-        var gramCounts = _gramCounter(normalizedValue, gramSize),
-            sumOfSquareGramCounts = 0,
-            gram, gramCount;
-        for (gram in gramCounts) {
-            gramCount = gramCounts[gram];
-            sumOfSquareGramCounts += Math.pow(gramCount, 2);
-            if (gram in this.matchDict) {
-                this.matchDict[gram].push([index, gramCount]);
-            } else {
-                this.matchDict[gram] = [[index, gramCount]];
-            }
-        }
-        var vectorNormal = Math.sqrt(sumOfSquareGramCounts);
-        items[index] = [vectorNormal, normalizedValue];
-        this.items[gramSize] = items;
-        this.exactSet[normalizedValue] = value;
-    };
-
-    fuzzyset._normalizeStr = function(str) {
-        if (Object.prototype.toString.call(str) !== '[object String]') throw 'Must use a string as argument to FuzzySet functions';
-        return str.toLowerCase();
-    };
-
-    // return length of items in set
-    fuzzyset.length = function() {
-        var count = 0,
-            prop;
-        for (prop in this.exactSet) {
-            if (this.exactSet.hasOwnProperty(prop)) {
-                count += 1;
-            }
-        }
-        return count;
-    };
-
-    // return is set is empty
-    fuzzyset.isEmpty = function() {
-        for (var prop in this.exactSet) {
-            if (this.exactSet.hasOwnProperty(prop)) {
-                return false;
-            }
-        }
-        return true;
-    };
-
-    // return list of values loaded into set
-    fuzzyset.values = function() {
-        var values = [],
-            prop;
-        for (prop in this.exactSet) {
-            if (this.exactSet.hasOwnProperty(prop)) {
-                values.push(this.exactSet[prop]);
-            }
-        }
-        return values;
-    };
-
-
-    // initialization
-    var i = fuzzyset.gramSizeLower;
-    for (i; i < fuzzyset.gramSizeUpper + 1; ++i) {
-        fuzzyset.items[i] = [];
-    }
-    // add all the items to the set
-    for (i = 0; i < arr.length; ++i) {
-        fuzzyset.add(arr[i]);
-    }
-
-    return fuzzyset;
-};
-
-var root = this;
-// Export the fuzzyset object for **CommonJS**, with backwards-compatibility
-// for the old `require()` API. If we're not in CommonJS, add `_` to the
-// global object.
-if ( true && module.exports) {
-    module.exports = FuzzySet;
-    if(root)
-    {
-        root.FuzzySet = FuzzySet;
-    }
-} else {
-    root.FuzzySet = FuzzySet;
-}
-
-})();
 
 
 /***/ })
