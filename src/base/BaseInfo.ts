@@ -1,9 +1,38 @@
 import 'extendscript-es5-shim-ts';
+// import 'es5-shim';
 
 export default class BaseInfo {
+  /**
+   *AEのバージョン
+   *
+   * @type {string}
+   * @memberof BaseInfo
+   */
   public readonly version: string;
+
+  /**
+   *使用している言語
+   *
+   * @type {string}
+   * @memberof BaseInfo
+   * @example ja_JP
+   */
   public readonly lang: string;
+
+  /**
+   *OS情報
+   *
+   * @type {string}
+   * @memberof BaseInfo
+   */
   public readonly os: string;
+
+  /**
+   *ロケール情報
+   *
+   * @type {string}
+   * @memberof BaseInfo
+   */
   public readonly locale: string;
   // public readonly screen: any;
   public readonly info: { [key: string]: string };
@@ -24,7 +53,7 @@ export default class BaseInfo {
 
   /**
    * alertで情報を表示させます。
-   * @todo スクリーン情報
+   * @todo スクリーン情報の追加
    */
   showData(): void {
     let alertText = '';
