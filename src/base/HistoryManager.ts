@@ -4,27 +4,20 @@
  * @export
  * @class HistoryManager
  */
-export default class HistoryManager{
-  constructor(){
-
-  }
-
+export default class HistoryManager {
   /**
    * historyを開始する
    * @param name history名
+   * @return {void}
    */
-  static start(name: string = "action"){
+  static start(name = 'action'): void {
     app.beginUndoGroup(name);
   }
   /**
    * historyを終了する
+   * @return {void}
    */
-  static end(){
+  static end(): void {
     app.endUndoGroup();
   }
-
-  static try(){
-
-  }
-
 }

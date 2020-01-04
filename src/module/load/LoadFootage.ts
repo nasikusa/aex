@@ -1,25 +1,23 @@
-import _ from "../../base/_";
-import {ProjectPath} from '../../data/Paths';
+import _ from '../../base/_';
+import { ProjectPath } from '../../data/Paths';
 
-export default class LoadFootage{
+export default class LoadFootage {
   public options: ImportOptions[] = [];
 
-  constructor() {
-
-  }
+  constructor() {}
 
   /**
    * ロードするファイルを設定します。
    * @param path ファイルのパス
    * @param isSequence 連番ファイルであるかどうか
    */
-  setItem(path: string , isSequence: boolean = false) {
+  setItem(path: string, isSequence = false): void {
     const option = new ImportOptions();
     option.file = new File(path);
-    if( isSequence ){
+    if (isSequence) {
       option.sequence = true;
     }
-    this.options.push( option );
+    this.options.push(option);
   }
 
   /**
@@ -28,21 +26,16 @@ export default class LoadFootage{
    */
   setSequenceByProject(projectName: string): boolean {
     const projectData = ProjectPath[projectName];
-    if( !projectData ) return false;
+    if (!projectData) return false;
     const folders = projectData.assetsFolders;
     const fileName = projectData.baseRenderName;
-    let FolderNamesArray = folders.map(function(val){
+    const FolderNamesArray = folders.map(function(val) {
       return val.name;
     });
 
-    this.setSequenceByFolder(
-      projectData.renderRoot,
-      FolderNamesArray,
-      fileName,
-    );
+    this.setSequenceByFolder(projectData.renderRoot, FolderNamesArray, fileName);
 
     return true;
-
   }
 
   /**
@@ -51,10 +44,9 @@ export default class LoadFootage{
    * @param folders 取得したい連番画像のあるフォルダ
    * @param baseRenderName 連番画像のファイル名（１つのみ）
    */
-  setSequenceByFolder(basePath: string, folders: string[], baseRenderName: string){
-
-    for( let folder of folders ){
-      let path: string = "";
+  setSequenceByFolder(basePath: string, folders: string[], baseRenderName: string) {
+    for (const folder of folders) {
+      let path = '';
       path += basePath;
       path += `${folder}/${baseRenderName}`;
       this.setItem(path, true);
@@ -68,11 +60,9 @@ export default class LoadFootage{
     this.options = [];
   }
 
-
   load() {
-    for( const option of this.options ){
+    for (const option of this.options) {
       app.project.importFile(option);
     }
   }
-
 }

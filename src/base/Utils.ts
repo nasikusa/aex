@@ -1,3 +1,5 @@
+import _ from './_';
+
 /**
  *ExtendScript由来でない、通常のJS関連のユーティリティ関数をここに格納します。
  *
@@ -8,6 +10,7 @@ export default class Utils {
   /**
    * 型情報を取得する
    * @param obj
+   * @returns {string}
    */
   static getType(obj: any): string {
     const toString = Object.prototype.toString;
@@ -180,6 +183,6 @@ export default class Utils {
    * @memberof Utils
    */
   static getArrayDividedByLine(inputText: string): string[] {
-    return inputText.split(/\n/);
+    return inputText.split('\n');
   }
 }
