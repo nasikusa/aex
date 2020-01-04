@@ -103,6 +103,14 @@ export default class OpenPath {
     for (let path of this.paths) {
       commandArray.push(`start "" "${path}"`);
     }
+    } else if (_.isMac()) {
+      for (const path of this.paths) {
+        // alert(`open "${path}"`);
+        commandArray.push(`open "${path}"`);
+      }
+    } else {
+      return false;
+    }
 
     const callCommand: CallCommand = new CallCommand(commandArray);
 
