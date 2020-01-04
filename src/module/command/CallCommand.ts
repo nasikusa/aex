@@ -247,6 +247,8 @@ export default class CallCommand {
     }
 
     if (this.isWindows) {
+      // const system = new System();
+      //@ts-ignore
       callCommandResult = system.callSystem(`cmd.exe /c \"${this.result} /t\"`);
 
       if (isRemoveCommandAfterExec) {
@@ -257,6 +259,8 @@ export default class CallCommand {
         return true;
       }
     } else if (this.isMac) {
+      // const system = new System();
+      // @ts-ignore
       callCommandResult = system.callSystem(`${this.result}`);
 
       if (isRemoveCommandAfterExec) {
