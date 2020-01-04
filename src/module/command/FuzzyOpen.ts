@@ -1,5 +1,6 @@
 import _ from '../../base/_';
 import CommandUtils from './CommandUtils';
+// import { FuzzySet } from 'fuzzyset.js';
 
 type getDirType = 'F' | 'D' | 'FD';
 
@@ -45,6 +46,7 @@ export default class FuzzyOpen {
    * @todo importしたい
    */
   public fzy: any = require('fuzzyset.js');
+  // public fzy: any = FuzzySet;
 
   /**
    *Creates an instance of FuzzyOpen.
