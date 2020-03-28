@@ -12,5 +12,3 @@
 
 ### LICENSE
 MIT License
-
-![image](https://pbs.twimg.com/media/EUJrFDoX0Ak8lyZ.jpg)
